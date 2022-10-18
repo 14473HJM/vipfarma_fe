@@ -10,5 +10,16 @@ import { healthInsurancePlan } from 'src/interfaces/healthInsurancePlan';
 })
 export class HealthInsurancePlanService {
 
+  private apiUrlBase: string = environment.healthInsurancePlanBaseUrl;
+
   constructor(private http: HttpClient, private router: Router) { }
+
+  gethealthInsurancePlans(): Observable<healthInsurancePlan[]>{
+    return this.http.get<healthInsurancePlan[]>(this.apiUrlBase);
+  }
+
+  gethealthInsurancePlan(id: string): Observable<healthInsurancePlan>{
+    return this.http.get<healthInsurancePlan>(this.apiUrlBase + "/" + id);
+  }
+
 }
