@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  userBaseUrl: "http://localhost:8080/user" 
+  userBaseUrl: "http://localhost:8080/user",
+  customerBaseUrl: "http://localhost:8080/customers",
+  healthInsuranceBaseUrl: "http://localhost:8080/healthInsurance",
+  healthInsurancePlanBaseUrl: "http://localhost:8080/healthInsurancePlan"
+
 };
 
 /*
