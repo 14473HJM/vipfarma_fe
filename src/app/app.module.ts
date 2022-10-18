@@ -8,13 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegistroUsuarioComponent } from './usuarios/registro-usuario/registro-usuario.component';
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home/home.component';
+import { SearchProductsComponent } from './products/search-products/search-products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistroUsuarioComponent,
-    HomeComponent
+    HomeComponent,
+    SearchProductsComponent
   ],
   imports: [
     BrowserModule,
