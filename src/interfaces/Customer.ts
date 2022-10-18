@@ -5,6 +5,6 @@ export interface Customer{
     identificationType: string,
     identification: string,
     address: string,
-    healthInsurance: number,
-    healthInsurancePlan: number
+    healthInsuranceId: number,
+    healthInsurancePlanId: number
 }

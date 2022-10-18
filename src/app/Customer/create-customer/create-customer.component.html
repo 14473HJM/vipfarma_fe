@@ -1,0 +1,79 @@
+<div class="container">
+    <br>
+    <div class="row g-3">
+        <div class="col">
+        </div>
+        <div class="col">
+            <h3>Crear Cliente</h3>
+        </div>
+        <div class="col-auto">
+            <img src="../../assets/logito.png" alt="">
+        </div>
+    </div>
+    
+
+    <hr>
+    <form>
+        <div class="row g-3">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nombre" aria-label="First name" [(ngModel)]="customer.name">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Apellido" aria-label="Last name" [(ngModel)]="customer.lastName">
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col">
+                <select name="identificacion" id="identificaciontype" class="form-select" placeholder="Tipo de identificacion" aria-label="identificacion" >
+                    <option value="" disabled selected>Tipo identificacion</option>
+                    <option value="1">DNI</option>
+                    <option value="2">CUIL</option>
+                    <option value="3">CUIT</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="DNI/CUIL/CUIT" aria-label="dni">
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Calle - N° - Piso - Depto" aria-label="calle">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Ciudad" aria-label="Ciudad">
+            </div>
+        </div>
+
+
+
+
+        <div class="row g-3">
+            <div class="col">
+                <select name="healthInsurance" class="form-select" placeholder="healthInsurance" aria-label="healthInsurance" [(ngModel)]="customer.healthInsuranceId">
+                    <option disabled selected>Obra Social</option>
+                    <option *ngFor="let os of healthinsurance" [ngValue]="os.id">
+                        {{os.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <select name="availablePlans" class="form-select" placeholder="availablePlans" aria-label="availablePlans" [(ngModel)]="customer.healthInsurancePlanId">
+                            <option disabled selected>Plan</option>
+                            <option *ngFor="let osp of healthinsuranceplan" [ngValue]="osp.id">
+                                {{osp.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-outline-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+  

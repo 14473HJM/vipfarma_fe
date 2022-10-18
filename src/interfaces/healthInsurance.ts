@@ -4,5 +4,5 @@ export interface healthInsurance{
      id: number
      name: string
      number: string
-     availablePlans?: healthInsurancePlan
+     availablePlans?: healthInsurancePlan[]
 }
