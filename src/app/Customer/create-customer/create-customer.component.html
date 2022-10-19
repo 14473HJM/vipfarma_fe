@@ -16,43 +16,36 @@
     <form>
         <div class="row g-3">
             <div class="col">
-                <input type="text" class="form-control" placeholder="Nombre" aria-label="First name" [(ngModel)]="customer.name">
+                <input [(ngModel)]="customer.name"  name="name" type="text" id="inputName" class="form-control" placeholder="Nombre" aria-label="First name">
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Apellido" aria-label="Last name" [(ngModel)]="customer.lastName">
+                <input [(ngModel)]="customer.lastName" type="text" id="inputLast" name="apellido" class="form-control" placeholder="Apellido" aria-label="Last name" >
             </div>
         </div>
         <div class="row g-3">
             <div class="col">
-                <select name="identificacion" id="identificaciontype" class="form-select" placeholder="Tipo de identificacion" aria-label="identificacion" >
+                <select [(ngModel)]="customer.identificationType" name="identificacion" id="identificaciontype" name="tipoid" class="form-select" placeholder="Tipo de identificacion" aria-label="identificacion" >
                     <option value="" disabled selected>Tipo identificacion</option>
-                    <option value="1">DNI</option>
-                    <option value="2">CUIL</option>
-                    <option value="3">CUIT</option>
+                    <option value="DNI">DNI</option>
+                    <option value="CUIL">CUIL</option>
+                    <option value="CUIT">CUIT</option>
                 </select>
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="DNI/CUIL/CUIT" aria-label="dni">
+                <input type="number" [(ngModel)]="customer.identification" id="identficacion"  name="identficacion" class="form-control" placeholder="DNI/CUIL/CUIT" aria-label="dni">
             </div>
         </div>
 
         <div class="row g-3">
             <div class="col">
-                <input type="text" class="form-control" placeholder="Calle - N° - Piso - Depto" aria-label="calle">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Ciudad" aria-label="Ciudad">
+                <input type="text" id="inputAdrees" [(ngModel)]="customer.address" name="inputAdrees" class="form-control" placeholder="Calle - N° - Piso - Depto" aria-label="calle">
             </div>
         </div>
-
-
-
-
         <div class="row g-3">
             <div class="col">
-                <select name="healthInsurance" class="form-select" placeholder="healthInsurance" aria-label="healthInsurance" [(ngModel)]="customer.healthInsuranceId">
+                <select [(ngModel)]="obs" id="os" name="Obra Social"  class="form-select"  placeholder="healthInsurance" aria-label="healthInsurance" (change)="sethealthInsuranceId(obs.id)">
                     <option disabled selected>Obra Social</option>
-                    <option *ngFor="let os of healthinsurance" [ngValue]="os.id">
+                    <option *ngFor="let os of healthinsurance" [ngValue]="os">
                         {{os.name}}
                     </option>
                 </select>
@@ -61,15 +54,15 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <select name="availablePlans" class="form-select" placeholder="availablePlans" aria-label="availablePlans" [(ngModel)]="customer.healthInsurancePlanId">
+                        <select [(ngModel)]="customer.healthInsurancePlanId"  name="availablePlans" id="plan" name="plan" class="form-select" placeholder="availablePlans" aria-label="availablePlans" >
                             <option disabled selected>Plan</option>
-                            <option *ngFor="let osp of healthinsuranceplan" [ngValue]="osp.id">
+                            <option *ngFor="let osp of obs.availablePlans" [ngValue]="osp.id">
                                 {{osp.name}}
                             </option>
                         </select>
                     </div>
                     <div class="col-auto">
-                        <button type="button" class="btn btn-outline-primary">Guardar</button>
+                        <button type="button" class="btn btn-outline-primary" (click)="save()">Guardar</button>
                     </div>
                 </div>
             </div>
