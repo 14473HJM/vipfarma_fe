@@ -9,6 +9,8 @@ import { RegistroUsuarioComponent } from './usuarios/registro-usuario/registro-u
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home/home.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
+import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
+import { MainComponent } from './home/main/main.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CreateCustomerComponent } from './Customer/create-customer/create-custo
     LoginComponent,
     RegistroUsuarioComponent,
     HomeComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    BillOrderComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
