@@ -9,7 +9,7 @@ import { OfferStock } from 'src/interfaces/OfferStock';
 })
 export class OfferService {
 
-  private API_URL: string = `http://localhost:8080/offers`;
+  private API_URL: string = `http://localhost:8080/stocks/offers`;
 
   
 

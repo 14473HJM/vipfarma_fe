@@ -10,6 +10,9 @@ export interface OfferStock{
     discountValue?: number;
     finalPrice?: number;
     stock: number;
+    
+
+
 
 
 }

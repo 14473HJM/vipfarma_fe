@@ -4,27 +4,31 @@
 
 
 
+
+
 <div class="container">
 <table class="table table-hover align-middle">
     <thead class="table-info">
         <tr>
-            <th scope="col"></th>
+            
             <th scope="col">Producto</th>
             <th scope="col">Precio</th>
+            <th scope="col">Descuento</th>
             <th scope="col">Cantidad Disponible</th>
-            <th scope="col">Sucursal</th>
+            <!-- <th scope="col">Sucursal</th> -->
           </tr>
     </thead>
     <tbody>
 
         <tr *ngFor="let offer of list">
             
-            <th scope="row">{{ offer.id }}</th>
-            <td>{{ offer.product }}</td>
+            
+            <td>{{ offer.product?.name }}</td>
             <td>{{ offer.finalPrice }}</td>
+            <td>{{ offer.discountValue }}</td>
             <td>{{ offer.stock }}</td>
-            <!-- <td>{{offer.sucursal}}</td> -->
-            <th scope="row">{{ offer.id }}</th>
+            <!-- <td>{{offer.branchOffice}}</td> -->
+            
         </tr>
 
         <!-- <tr>
