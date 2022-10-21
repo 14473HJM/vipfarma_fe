@@ -15,15 +15,15 @@ export class ProductService {
     private router: Router) { }
 
   getSearchedByName(name : string) : Observable<any> {
-    const url = this.apiUrlBase + "/products";
-    const headers = { 'content-type': name };
+    const url = this.apiUrlBase + "/products" + "?name="+ name;
+    const headers = { 'content-type': 'application/json' };
   
     return this.http.get(url, { 'headers': headers })
   }
 
-  getSearchedByCodebar(codebar : string) : Observable<any>{
-    const url = this.apiUrlBase + "/products";
-    const headers = { 'content-type': codebar };
+  getSearchedByCodebar(barcode : string) : Observable<any>{
+    const url = this.apiUrlBase + "/products" + "?barcode="+ barcode;
+    const headers = { 'content-type': 'application/json' };
   
     return this.http.get(url, { 'headers': headers })
   }

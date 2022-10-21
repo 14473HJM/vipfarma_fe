@@ -11,53 +11,56 @@ import { ProductService } from 'src/services/product.service';
 })
 export class SearchProductsComponent implements OnInit {
   messageName: string = '';
-  messageCodebar: string = '';
-  activo : boolean = false;
-  activo1 : boolean = false;
+  messageBarcode: string = '';
+  activeName : boolean = false;
+  activeBarcode : boolean = false;
   products: Product[]=[];
 
   constructor(private router:Router, private productService : ProductService) { }
 
   ngOnInit(): void {
-    this.activo = true;
-    this.activo1 = false;
+    this.activeName=false;
+    this.activeBarcode=true;
   }
 
-  activar(){
-    if(this.activo){ 
-      this.activo1=true;
-      this.activo=false; 
-    } 
-      else{ 
-        this.activo=true;
-        this.activo1=false;
-      }
+  activateName(){     
+      this.activeName=true; 
+      this.activeBarcode=false;
+      this.messageBarcode='';
+
   }
 
-  activar1(){
-    if(this.activo1){ 
-      this.activo=true;
-      this.activo1=false; 
-    } 
-      else{ 
-        this.activo1=true;
-        this.activo=false;
-      }
+  activateBarcode(){
+      this.activeName=false;
+      this.activeBarcode=true; 
+      this.messageName='';
   }
 
 
   searchProducts(){
-    if(this.messageName!='')
+    if(this.messageName !=='' && this.activeName==true){
       this.productService.getSearchedByName(this.messageName).subscribe({
         next: (products: Product[]) =>{
+          console.log(products);
+          this.products=products;
+        },
+        error: () =>{
+          alert('error al obtener los productos')
+        }
+      });}
+    else if (this.messageBarcode !=='' && this.activeBarcode==true){
+      this.productService.getSearchedByCodebar(this.messageBarcode).subscribe({
+        next: (products: Product[]) =>{
           console.log(products)
+          this.products=products;
         },
         error: () =>{
           alert('error al obtener los productos')
         }
       });
-    else {
-      this.productService.getSearchedByCodebar (this.messageCodebar);
+    }
+    else{
+      alert("Debe ingresar parametro de busqueda en el campo seleccionado")
     }
 
   }

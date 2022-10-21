@@ -5,20 +5,20 @@
         <div class="input-group">
             <div class="col-5">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0" name="search" id="check1" ng-model="checked" (click)="activar1()" value="name" type="radio" value="" aria-label="Radio button for following text input">
-                    <label for="">Nombre Producto</label>
-                    <input type="text" [disabled]="activo" [(ngModel)]="messageName">
+                    <input class="form-check-input mt-0" name="search" id="check1" value="name" type="radio" (click)="activateName()" aria-label="Radio button for following text input">
+                    <label for="">&nbsp;Nombre Producto&nbsp;&nbsp;</label>
+                    <input type="text" [disabled]="!activeName" [(ngModel)]="messageName">
                 </div>
 
             </div>
             <div class="col-5">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0" name="search" id="check2" ng-model="checked" (click)="activar()" value="codebar" type="radio" value="" aria-label="Radio button for following text input">
-                    <label for="">Código de Barras</label>
-                    <input type="text" [disabled]="activo1" [(ngModel)]="messageCodebar">
+                    <input class="form-check-input mt-0" name="search" id="check2" value="codebar" type="radio" (click)="activateBarcode()" checked aria-label="Radio button for following text input">
+                    <label for="">&nbsp;Código de Barras&nbsp;&nbsp;</label>
+                    <input type="text" [disabled]="!activeBarcode" [(ngModel)]="messageBarcode">
                 </div>
             </div>
-            <div class="col-2" style="align-items:center ;">
+            <div class="col-2">
                 <button type="button" class="btn btn-primary" (click)="searchProducts()">Buscar</button>
             </div>
         </div>
@@ -26,18 +26,20 @@
     <table class="table table-success table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Código de Barras</th>
+                <th scope="col">Laboratorio</th>
+                <th scope="col">Prescripción Requerida</th>
+                <th scope="col">Precio</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of products">
+                <th>{{item.name}}</th>
+                <td>{{item.barcode}}</td>
+                <td>{{item.laboratory}}</td>
+                <td>{{item.prescriptionRequired}}</td>
+                <th>{{item.price}}</th>
             </tr>
         </tbody>
     </table>
