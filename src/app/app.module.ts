@@ -9,6 +9,9 @@ import { RegistroUsuarioComponent } from './usuarios/registro-usuario/registro-u
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home/home.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
+ import { DeleteCustomerComponent } from './Customer/delete-customer/delete-customer.component';
+ import { AlterCustomerComponent } from './Customer/alter-customer/alter-customer.component';
+ import { ListCustomerComponent } from './Customer/list-customer/list-customer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { CreateCustomerComponent } from './Customer/create-customer/create-custo
     LoginComponent,
     RegistroUsuarioComponent,
     HomeComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    DeleteCustomerComponent,
+    AlterCustomerComponent,
+    ListCustomerComponent
   ],
   imports: [
     BrowserModule,

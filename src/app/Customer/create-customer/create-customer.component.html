@@ -43,7 +43,7 @@
         </div>
         <div class="row g-3">
             <div class="col">
-                <select [(ngModel)]="obs" id="os" name="Obra Social"  class="form-select"  placeholder="healthInsurance" aria-label="healthInsurance" (change)="sethealthInsuranceId(obs.id)">
+                <select [(ngModel)]="obs" id="os" name="Obra Social"  class="form-select"  placeholder="healthInsurance" aria-label="healthInsurance" (change)="sethealthInsuranceId(obs)">
                     <option disabled selected>Obra Social</option>
                     <option *ngFor="let os of healthinsurance" [ngValue]="os">
                         {{os.name}}
@@ -54,9 +54,9 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <select [(ngModel)]="customer.healthInsurancePlanId"  name="availablePlans" id="plan" name="plan" class="form-select" placeholder="availablePlans" aria-label="availablePlans" >
+                        <select [(ngModel)]="customer.healthInsurancePlan"  name="availablePlans" id="plan" name="plan" class="form-select" placeholder="availablePlans" aria-label="availablePlans" >
                             <option disabled selected>Plan</option>
-                            <option *ngFor="let osp of obs.availablePlans" [ngValue]="osp.id">
+                            <option *ngFor="let osp of obs.availablePlans" [ngValue]="osp">
                                 {{osp.name}}
                             </option>
                         </select>

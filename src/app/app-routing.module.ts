@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home/home.component';
 import { AbmOrderComponent } from './ventas/abm-order/abm-order.component';
 import { ConsultaOrdenComponent } from './ventas/consulta-orden/consulta-orden.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
+import { ListCustomerComponent } from './Customer/list-customer/list-customer.component';
+
+
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -14,7 +17,9 @@ const routes: Routes = [
   { path: "register", component: RegistroUsuarioComponent },
   { path: "abm", component: AbmOrderComponent },
   { path: "consulta", component: ConsultaOrdenComponent },
-  { path: "customer", component: CreateCustomerComponent }
+  { path: "customer", component: CreateCustomerComponent },
+  { path: "listcustomer", component: ListCustomerComponent }
+
 ];
 
 @NgModule({

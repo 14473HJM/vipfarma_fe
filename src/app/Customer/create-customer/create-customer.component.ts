@@ -18,7 +18,6 @@ export class CreateCustomerComponent implements OnInit {
   customer: Customer= {} as Customer;
   healthinsurance:  healthInsurance[];
   obs: healthInsurance = {} as healthInsurance;
-  //availablePlans: healthInsurancePlan[];
   private subscription = new Subscription();
   availablePlans: healthInsurancePlan[];
   healthInsuranceId: any;
@@ -29,6 +28,9 @@ export class CreateCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.getHealthInsurance()
   
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   getHealthInsurance(){
@@ -45,9 +47,10 @@ export class CreateCustomerComponent implements OnInit {
 
   }
 
-  sethealthInsuranceId(id: number)
+  sethealthInsuranceId(obs: healthInsurance)
   {
-    this.customer.healthInsuranceId=id
+    this.customer.healthInsurance=obs
+    this.customer.healthInsuranceId=obs.id
     this.customer.healthInsurancePlanId=0;
   }
 
@@ -68,15 +71,17 @@ export class CreateCustomerComponent implements OnInit {
       alert(`Debe introducir correctamente el domicilio`)
       return
     }
-    if(this.customer.healthInsuranceId == null || this.customer.healthInsuranceId ===0 || this.customer.healthInsurancePlanId == null || this.customer.healthInsurancePlanId ===0){
+    if(this.customer.healthInsurance.id == null || this.customer.healthInsurance.id ===0 || this.customer.healthInsurancePlan.id == null || this.customer.healthInsurancePlan.id ===0){
       alert(`Debe introducir selecionar correctamente la obra social y su plan`)
       return
     }
 
    
       this.subscription.add(
-        this.customerService.postCreate(this.customer.name, this.customer.lastName, this.customer.identificationType, this.customer.identification, this.customer.address, this.customer.healthInsuranceId, this.customer.healthInsurancePlanId).subscribe({
+        this.customerService.postCreate(this.customer).subscribe({
           next: () => {
+            alert('Cliente cargado correctamente')
+            this.reset();
             this.router.navigate(['customer']);
           },
           error: () => {
@@ -86,6 +91,11 @@ export class CreateCustomerComponent implements OnInit {
       );
     
 
+  }
+
+  reset(){
+    this.customer={} as Customer;
+    
   }
 
 
