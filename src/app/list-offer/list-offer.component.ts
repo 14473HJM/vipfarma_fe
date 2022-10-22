@@ -15,7 +15,8 @@ export class ListOfferComponent implements OnInit {
 
   @Input() id: string="";
 
-  list: OfferStock[] = [];
+  offers: OfferStock[] = [];
+  filterProducts: string = '' ;
   private subscription = new Subscription();
   
 
@@ -25,6 +26,8 @@ export class ListOfferComponent implements OnInit {
     private router: Router
     ) { }
 
+    
+    
   ngOnInit(): void {
     this.refreshList();
   }
@@ -58,7 +61,7 @@ export class ListOfferComponent implements OnInit {
       this.offerService.getOffer().subscribe({
 
         next: (respuesta: OfferStock[]) => {
-          this.list= respuesta;
+          this.offers= respuesta;
         },
         error: () => {
           alert('error al comunicarse con la API');

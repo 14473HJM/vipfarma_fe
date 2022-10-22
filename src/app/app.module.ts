@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home/home.component';
 import { ListOfferComponent } from './list-offer/list-offer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegistroUsuarioComponent,
     HomeComponent,
-    ListOfferComponent
+    ListOfferComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

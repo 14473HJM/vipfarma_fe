@@ -4,7 +4,7 @@ import { Product } from "./Product";
 
 export interface OfferStock{
     id: number;
-    product?: Product
+    product: Product;
     productId?: number;
     healthInsurance: HealthInsurance;
     healthInsurancePlan: HealthInsurancePlan;

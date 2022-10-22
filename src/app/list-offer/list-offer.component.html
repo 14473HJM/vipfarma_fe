@@ -1,11 +1,13 @@
 <br>
-<p>Listado de Productos precio cantidad y sucursal</p>
+<p>Listado de Productos precio y cantidad</p>
 <br>
 
 
 
-
-
+<div class="container col-4">
+<input type="text" class="form-control" name="filterProducts" placeholder="Search Producto..." [(ngModel)]="filterProducts">
+</div>
+<br>
 <div class="container">
 <table class="table table-hover text-center">
     <thead class="table-info">
@@ -21,10 +23,10 @@
     </thead>
     <tbody>
 
-        <tr *ngFor="let offer of list">
+        <tr *ngFor="let offer of offers | filter: filterProducts">
             
             
-            <td>{{ offer.product?.name }}</td>
+            <td>{{ offer.product.name }}</td>
             <td>{{ offer.healthInsurance.name }}</td>
             <td>{{ offer.healthInsurancePlan.name }}</td>
             <td>{{ offer.finalPrice }}</td>
