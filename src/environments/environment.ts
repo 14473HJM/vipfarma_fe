@@ -9,7 +9,8 @@ export const environment = {
   healthInsuranceBaseUrl: "http://localhost:8080/healthInsurance",
   healthInsurancePlanBaseUrl: "http://localhost:8080/healthInsurancePlan",
   saleOrderBaseUrl: "http://localhost:8080/sale/orders",
-  billBaseUrl: "http://localhost:8080/billing/order"
+  billBaseUrl: "http://localhost:8080/billing/order",
+  stocksOffers: 'http://localhost:8080/stocks/offers',
 
 };
 
