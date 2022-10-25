@@ -1,0 +1,88 @@
+<br>
+<p>Listado de Productos y precio por obra social</p>
+<br>
+
+
+<div class="row">
+    <div class="container col-4">
+    <input type="text" class="form-control" name="filterDiscounts" placeholder="Buscar Producto..." [(ngModel)]="filterDiscounts">
+    </div>
+    <div class="container col-4">
+        <select class="form-select" name="healthInsurance" placeholder="Seleccione Obra Social" [(ngModel)]="healthInsurance">
+            <option *ngFor="let health of healthInsurance" [ngValue]="health.id">
+                {{ health.name }}
+            </option>
+            </select>
+    </div>
+    <div class="container col-4">
+        <select class="form-select" name="healthInsurancePlan" placeholder="Seleccione Plan" [(ngModel)]="healthInsurancePlan">
+            <option *ngFor="let healthP of healthInsurancePlan" [ngValue]="healthP.id">
+                {{ healthP.name }}
+            </option>
+            </select>
+    </div>
+</div>
+<br>
+<div class="container">
+<table class="table table-hover text-center">
+    <thead class="table-info">
+        <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Obra Social</th>
+            <th scope="col">Plan</th>
+            <th scope="col">Precio final</th>
+            <th scope="col">Descuento</th>
+            <!-- <th scope="col">Cantidad Disponible</th> -->
+            <!-- <th scope="col">Sucursal</th> -->
+          </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let offer of discounts | filter: filterDiscounts">
+            
+            
+            <td>{{ offer.product.name }}</td>
+            <td>{{ offer.healthInsurance.name }}</td>
+            <td>{{ offer.healthInsurancePlan.name }}</td>
+            <td>{{ offer.finalPrice }}</td>
+            <td>{{ offer.discountValue | percent: '2.0-2' }}</td>
+            <!-- <td>{{ offer.stock }}</td> -->
+            <!-- <td>{{offer.branchOffice}}</td> -->
+            
+        </tr>
+
+        <!-- <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>Suc1</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+          <td>Suc1</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+          <td>Suc1</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>Suc1</td>
+        </tr> -->
+      </tbody>
+
+    <tbody>
+      
+    </tbody>
+  </table>
+</div>

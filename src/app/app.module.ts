@@ -11,6 +11,12 @@ import { HomeComponent } from './home/home/home.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
 import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
 import { MainComponent } from './home/main/main.component';
+import { ListOfferComponent } from './reports/list-offer/list-offer.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
+import { DiscountPipe } from './pipes/discount.pipe';
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +26,12 @@ import { MainComponent } from './home/main/main.component';
     HomeComponent,
     CreateCustomerComponent,
     BillOrderComponent,
-    MainComponent
+    MainComponent,
+    ListOfferComponent,
+    FilterPipe,
+    ListDiscountComponent,
+    DiscountPipe
+    
   ],
   imports: [
     BrowserModule,
