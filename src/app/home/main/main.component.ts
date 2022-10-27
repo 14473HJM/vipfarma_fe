@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
   isHome : boolean = true;
   refreshListOffer: boolean = false;
   refreshListDiscount: boolean=false;
+  isDespacho: boolean = false;
 
   constructor(private router: Router, private userServ: UserService) { }
 
@@ -37,6 +38,9 @@ export class MainComponent implements OnInit {
   cleanFlags() {
     this.isHome = false;
     this.isFacturar = false;
+    this.refreshListDiscount = false;
+    this.refreshListOffer = false;
+    this.isDespacho = false;
   }
 
   facturar() {
@@ -46,22 +50,23 @@ export class MainComponent implements OnInit {
   }
 
   listOffer(){
-    this.isHome = false;
+    this.cleanFlags();
     this.refreshListOffer =true;
-    this.isFacturar = false;
-    this.refreshListDiscount=false;
   }
 
   listDiscount(){
-    this.isHome = false;
-    this.refreshListOffer =false;
-    this.isFacturar = false;
+    this.cleanFlags();
     this.refreshListDiscount=true;
   }
 
   home() {
     this.cleanFlags();
     this.isHome = true;
+  }
+
+  despacho() {
+    this.cleanFlags();
+    this.isDespacho = true;
   }
 
 }

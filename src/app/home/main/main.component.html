@@ -2,7 +2,8 @@
   <div class="jumbotron bg-cover text-white">
     <div class="container py-5 text-center">
         <h1 *ngIf="isHome" class="display-4 font-weight-bold text-center">Bienvenido a FARMAVIP</h1>
-        <h1 *ngIf="isFacturar" class="display-4 font-weight-bold text-center">FACTURACION</h1>
+        <h1 *ngIf="isFacturar " class="display-4 font-weight-bold text-center">FACTURACION</h1>
+        <h1 *ngIf="isDespacho " class="display-4 font-weight-bold text-center">DESPACHO</h1>
         <h1 *ngIf="refreshListOffer" class="display-4 font-weight-bold">LISTADO DE PRECIOS</h1>
         <h1 *ngIf="refreshListDiscount" class="display-4 font-weight-bold">LISTADO DE DESCUENTOS</h1>
     </div>
@@ -26,7 +27,7 @@
       </div>       
     </div>
   
-    <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+    <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">HOME</p>
   
     <ul class="nav flex-column bg-white mb-0">
       <li class="nav-item">
@@ -36,52 +37,53 @@
               </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link text-dark font-italic" (click)="facturar()">
+        <a href="#" class="nav-link text-dark font-italic" >
                   <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                  Facturar
+                  Mi perfil
               </a>
-      </li>
-      
-      <li class="nav-item dropend"> <!-- cambiar por dropdown-->
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                  Reportes
-              </a>
-              <ul class="dropdown-menu dropdown-menu-ligth" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item" href="#" (click)="listOffer()">Listado de Precios</a></li>
-                <li><a class="dropdown-item" href="#" (click)="listDiscount()">Listado de Descuentos</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
       </li>
     </ul>
-  
-    <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+
+    <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">VENTAS</p>
   
     <ul class="nav flex-column bg-white mb-0">
       <li class="nav-item">
-        <a href="#" class="nav-link text-dark font-italic">
-                  <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
-                  Area charts
+        <a href="#" class="nav-link text-dark font-italic" >
+                  <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                  Orden de Venta
               </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link text-dark font-italic">
-                  <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
-                  Bar charts
+        <a href="#" class="nav-link text-dark font-italic" (click)="facturar()">
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Facturacion
+              </a>
+      </li>
+      
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" (click)="despacho()">
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Despacho
+              </a>
+      </li>
+    </ul>
+  
+    <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">REPORTES</p>
+  
+    <ul class="nav flex-column bg-white mb-0">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" (click)="listOffer()" >
+                  <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                  Listado de Precios
               </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link text-dark font-italic">
-                  <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
-                  Pie charts
+        <a href="#" class="nav-link text-dark font-italic"  (click)="listDiscount()" >
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Listado de Descuentos
               </a>
       </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link text-dark font-italic">
-                  <i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>
-                  Line charts
-              </a>
-      </li>
+      
     </ul>
   </div>
   <!-- End vertical navbar -->
@@ -93,5 +95,6 @@
     <app-bill-order *ngIf="isFacturar"></app-bill-order>
     <app-list-offer *ngIf="refreshListOffer"></app-list-offer>
     <app-list-discount *ngIf="refreshListDiscount"></app-list-discount>
+    <app-despacho *ngIf="isDespacho" ></app-despacho>
   </div>
   <!-- End demo content -->
