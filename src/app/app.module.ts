@@ -15,6 +15,7 @@ import { ListOfferComponent } from './reports/list-offer/list-offer.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
 import { DiscountPipe } from './pipes/discount.pipe';
+import { DespachoComponent } from './ventas/despacho/despacho.component';
 
 
 
@@ -30,7 +31,8 @@ import { DiscountPipe } from './pipes/discount.pipe';
     ListOfferComponent,
     FilterPipe,
     ListDiscountComponent,
-    DiscountPipe
+    DiscountPipe,
+    DespachoComponent
     
   ],
   imports: [

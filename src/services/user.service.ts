@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from "rxjs";
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from "src/environments/environment";
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class UserService {
   apiUrlBase: string = environment.userBaseUrl;
   userMapping : string[] = ["SALES_CASHIER", "SALES_ADMIN", "SALES_SELLER"];
 
-  constructor(private http: HttpClient, private cookies: CookieService, 
+  constructor(private http: HttpClient, 
     private router: Router) { }
 
   postLogin(user: string, pass: string): Observable<any> {
@@ -35,21 +34,21 @@ export class UserService {
 
   /* TOKEN SERVICES */
   setToken(token: string, userName: string, rol: string) {
-    this.cookies.set("token", token);
-    this.cookies.set("userName", userName);
-    this.cookies.set("userRol", rol);
+    localStorage.setItem("token", token);
+    localStorage.setItem("userName", userName);
+    localStorage.setItem("userRol", rol);
   }
 
-  getToken() {
-    return this.cookies.get("token");
+  getToken() : any {
+    return localStorage.getItem("token");
   }
 
-  getRol() {
-    return this.cookies.get("userRol");
+  getRol() : any {
+    return localStorage.getItem("userRol");
   }
 
-  getUserName() {
-    return this.cookies.get("userName");
+  getUserName() : any {
+    return localStorage.getItem("userName");
   }
 
   /* AUTHENTICATION SERVICES */
@@ -57,7 +56,7 @@ export class UserService {
     let token = this.getToken();
     if(token != "" && token != null) {
       let rol = this.getRol();
-      let viewRol = view.concat('_').concat(rol);
+      var viewRol = view.concat('_').concat(rol);
       if(this.userMapping.includes(viewRol)) {
         return true;
       }

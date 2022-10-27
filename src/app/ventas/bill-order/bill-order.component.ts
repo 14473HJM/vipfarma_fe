@@ -21,7 +21,7 @@ export class BillOrderComponent implements OnInit {
   }
 
   refresh() {
-    this.saleOrderSrv.getSaleOrders(1001).subscribe({
+    this.saleOrderSrv.getSaleOrdersReadyToBill(1001).subscribe({
       next: (response : SaleOrder[]) => {
         this.saleOrder = response;
       },
