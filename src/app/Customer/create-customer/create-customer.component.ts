@@ -27,6 +27,8 @@ export class CreateCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHealthInsurance()
+    this.customer.identificationType="tipo";
+  
   
   }
   ngOnDestroy(): void {
@@ -95,6 +97,7 @@ export class CreateCustomerComponent implements OnInit {
 
   reset(){
     this.customer={} as Customer;
+    this.customer.identificationType="tipo";
     
   }
 
