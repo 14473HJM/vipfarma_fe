@@ -20,6 +20,10 @@ export class SaleOrderService {
     return this.http.get(this.apiUrlBase + "/offers");
   }
 
+  getOrderById(id : number): Observable<any> {
+    return this.http.get(this.apiUrlSaleOrder + "/" + id);
+  }
+
   getSaleOrdersReadyToBill(branchId: number): Observable<any> {
     return this.http.get(this.apiUrlSaleOrder + "?saleOrderStatus=READY_TO_BILL&branchOfficeId=" + branchId);
   }
