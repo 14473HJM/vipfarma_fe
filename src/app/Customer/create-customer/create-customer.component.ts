@@ -19,8 +19,10 @@ export class CreateCustomerComponent implements OnInit {
   healthinsurance:  healthInsurance[];
   obs: healthInsurance = {} as healthInsurance;
   private subscription = new Subscription();
-  availablePlans: healthInsurancePlan[];
+  //availablePlans: healthInsurancePlan[];
+  availablePlans: healthInsurancePlan= {} as healthInsurancePlan;
   healthInsuranceId: any;
+
 
   constructor(private router: Router, private customerService: CustomerService, private healthInsuranceService: HealthInsuranceService, private healthInsurancePlanService: HealthInsurancePlanService ) {
    }
@@ -28,9 +30,10 @@ export class CreateCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.getHealthInsurance()
     this.customer.identificationType="tipo";
-  
-  
   }
+
+
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -49,11 +52,17 @@ export class CreateCustomerComponent implements OnInit {
 
   }
 
-  sethealthInsuranceId(obs: healthInsurance)
+  sethealthInsurance(obs: healthInsurance)
   {
+    console.log
     this.customer.healthInsurance=obs
     this.customer.healthInsuranceId=obs.id
     this.customer.healthInsurancePlanId=0;
+  }
+
+  sethealthInsurancePlan(plan: healthInsurancePlan)
+  {
+    this.customer.healthInsurancePlan=plan;
   }
 
   save(){
@@ -73,10 +82,11 @@ export class CreateCustomerComponent implements OnInit {
       alert(`Debe introducir correctamente el domicilio`)
       return
     }
-    if(this.customer.healthInsurance.id == null || this.customer.healthInsurance.id ===0 || this.customer.healthInsurancePlan.id == null || this.customer.healthInsurancePlan.id ===0){
-      alert(`Debe introducir selecionar correctamente la obra social y su plan`)
+    if(this.customer.healthInsurance == null ||this.customer.healthInsurancePlan == null ){
+      alert(`Debe introducir correctamente la obra social y el plan correspondiente`)
       return
-    }
+    } 
+
 
    
       this.subscription.add(
