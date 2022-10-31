@@ -8,7 +8,7 @@ import { AbmOrderComponent } from './ventas/abm-order/abm-order.component';
 import { ConsultaOrdenComponent } from './ventas/consulta-orden/consulta-orden.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
 import { ListCustomerComponent } from './Customer/list-customer/list-customer.component';
-
+import { AlterCustomerComponent } from './Customer/alter-customer/alter-customer.component';
 
 
 const routes: Routes = [
@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: "abm", component: AbmOrderComponent },
   { path: "consulta", component: ConsultaOrdenComponent },
   { path: "customer", component: CreateCustomerComponent },
-  { path: "listcustomer", component: ListCustomerComponent }
+  { path: "listcustomer", component: ListCustomerComponent },
+  { path: 'altercostumber/:id', component: AlterCustomerComponent  }
 
 ];
 

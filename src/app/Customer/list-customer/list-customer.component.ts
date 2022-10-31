@@ -44,6 +44,12 @@ export class ListCustomerComponent implements OnInit {
           );
         }
 
+  alterCustomer(id: number){
+    console.log(id)
+    this.router.navigate(['altercostumber', id]);
+    
+  }
+
 
 
 }
