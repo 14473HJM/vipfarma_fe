@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { OfferStock } from 'src/interfaces/OfferStock';
 import { OfferService } from 'src/services/offer.service';
 import { healthInsurance } from 'src/interfaces/healthInsurance';
@@ -8,6 +8,8 @@ import { HealthInsuranceService } from 'src/services/health-insurance.service';
 import { healthInsurancePlan } from 'src/interfaces/healthInsurancePlan';
 import { HealthInsurancePlanService } from 'src/services/health-insurance-plan.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-list-discount',
@@ -16,9 +18,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providers: [HealthInsuranceService],
 })
 export class ListDiscountComponent implements OnInit {
-
-  
-  //@Input() id: string='';
 
   public formulario : FormGroup = new FormGroup({});
 
@@ -33,8 +32,6 @@ export class ListDiscountComponent implements OnInit {
   listHealthInsurance= {} as healthInsurance[];
   listHealthInsurancePlan= {} as healthInsurancePlan[];
 
-  
-
   constructor(
     private offerService: OfferService, //corresponde a OfferStock
     private selectHealthInsu: HealthInsuranceService,
@@ -48,20 +45,12 @@ export class ListDiscountComponent implements OnInit {
   
       });
      }
-
-    
     
   ngOnInit(): void {
     this.refreshList();
     this.getPlans();
     this.getHealthI();
-  //this.onSelect();
-    
   }
-
-  
-
-  
 
   refreshList() {
     this.subscription.add(
@@ -74,21 +63,8 @@ export class ListDiscountComponent implements OnInit {
           alert('error al comunicarse con la API');
           },
       }),
-
-
-
     );
   }
-
-  // onSelect(id: number): void {
-    
-  //   this.subscription.add(
-  //     this.healthInsurancePlanService.gethealthInsurancePlans().subscribe({
-        
-  //     })
-  //   )
-    
-  // }
 
   getHealthI(){
     this.selectHealthInsu.gethealthInsurance().subscribe({
@@ -116,14 +92,26 @@ export class ListDiscountComponent implements OnInit {
         error: () => {
           alert('error al comunicarse con la API');
         },
-
-      }),    
-      
-      
+      }),     
     )
-    
-
   })
+}
+
+descargar() {
+  var data = document.getElementById('listado');
+  if(data !== null) {
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      let imgWidth = 208;   
+      let imgHeight = canvas.height * imgWidth / canvas.width;  
+
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
+      let position = 0;  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+      pdf.save('reporteDescuentos.pdf'); // Generated PDF   
+    });
+  } 
 }
 
 
