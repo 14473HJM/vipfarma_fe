@@ -10,5 +10,6 @@ export interface SaleOrder {
     saleOrderStatus: string;
     statusDetail: string;
     orderItems: OrderItem;
+    saleOrderItems?: OrderItem[];
     totalAmount: number;
 }

@@ -7,6 +7,9 @@ import { Customer } from 'src/interfaces/Customer';
 import { OrderItem } from 'src/interfaces/order-item';
 import { OrderItemService } from './order-item.service';
 import { SaleOrder } from 'src/interfaces/sale-order';
+import { SaleOrder } from 'src/interfaces/sale-order';
+import { UserService } from './user.service';
+
 
 
 
@@ -16,6 +19,9 @@ import { SaleOrder } from 'src/interfaces/sale-order';
 export class SaleOrderService {
 
   apiUrlBase: string = environment.baseUrl;
+  apiUrlSaleOrder: string = environment.saleOrderBaseUrl;
+
+  constructor(private http: HttpClient, private userServ: UserService) { }
 
   constructor(
     private http: HttpClient,
@@ -48,6 +54,23 @@ export class SaleOrderService {
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(saleOrder);
     return this.http.post(url, body, { 'headers': headers })
+  }
+
+  getOrderById(id : number): Observable<any> {
+    return this.http.get(this.apiUrlSaleOrder + "/" + id);
+  }
+
+  getSaleOrdersReadyToBill(): Observable<any> {
+    let branchId = this.userServ.getBranchId();
+    return this.http.get(this.apiUrlSaleOrder + "?saleOrderStatus=READY_TO_BILL&branchOfficeId=" + branchId);
+  }
+
+  getSaleOrdersBilled(branchId: number): Observable<any> {
+    return this.http.get(this.apiUrlSaleOrder + "?saleOrderStatus=BILLED&branchOfficeId=" + branchId);
+  }
+
+  changeStatus(id: number, status: string): Observable<any> {
+    return this.http.put(this.apiUrlSaleOrder + "/" + id + "/status/" + status, null);
   }
 
 }

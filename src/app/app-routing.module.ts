@@ -6,14 +6,23 @@ import { HomeComponent } from './home/home/home.component';
 import { ConsultaOrdenComponent } from './ventas/consulta-orden/consulta-orden.component';
 import { CreateSaleOrderComponent } from './ventas/create-sale-order/create-sale-order.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
+import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
+import { MainComponent } from './home/main/main.component';
+import { ListOfferComponent } from './reports/list-offer/list-offer.component';
+import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
+
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
-  { path: "", component: HomeComponent },
+  { path: "", component: MainComponent },
   { path: "register", component: RegistroUsuarioComponent },
   { path: "abm", component: CreateSaleOrderComponent },
   { path: "consulta", component: ConsultaOrdenComponent },
-  { path: "cliente", component: CreateCustomerComponent }
+  { path: "cliente", component: CreateCustomerComponent },
+  { path: "consulta", component: ConsultaOrdenComponent },
+  { path: "facturar", component: BillOrderComponent },
+  { path: "reportes/list-offer", component: ListOfferComponent},
+  { path: "reportes/list-discount", component: ListDiscountComponent},
 ];
 
 @NgModule({

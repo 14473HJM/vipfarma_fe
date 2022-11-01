@@ -9,27 +9,13 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  viewName : string = "HOME";
-  user = {} as User;
-  userActive : boolean = false;
-
-  constructor(private router: Router, private userServ: UserService) {
+  
+  constructor() {
     
   }
 
   ngOnInit() {
-    this.userServ.authenticateUser(this.viewName);
-    this.setUserLogged();
-  }
-
-  logOut() {
-    this.userServ.setToken("", "", "");
-    this.router.navigate(['login']);
-  }
-
-  setUserLogged() {
-    this.user.userName = this.userServ.getUserName();
-    this.user.userRole = this.userServ.getRol();
+    
   }
 
 }

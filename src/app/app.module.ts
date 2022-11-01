@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './usuarios/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +15,13 @@ import { CommonModule } from '@angular/common';
 import { CreateSaleOrderComponent } from './ventas/create-sale-order/create-sale-order.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 
+import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
+import { MainComponent } from './home/main/main.component';
+import { ListOfferComponent } from './reports/list-offer/list-offer.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
+import { DiscountPipe } from './pipes/discount.pipe';
+import { DespachoComponent } from './ventas/despacho/despacho.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +30,14 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     RegistroUsuarioComponent,
     HomeComponent,
     CreateCustomerComponent,
-    CreateSaleOrderComponent
+    CreateSaleOrderComponent,
+    BillOrderComponent,
+    MainComponent,
+    ListOfferComponent,
+    FilterPipe,
+    ListDiscountComponent,
+    DiscountPipe,
+    DespachoComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +46,9 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    MdbModalModule
+    MdbModalModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

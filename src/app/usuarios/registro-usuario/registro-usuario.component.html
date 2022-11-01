@@ -8,21 +8,35 @@
     <form class="p-3 mt-3">
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
-            <input type="email" name="email" id="email" placeholder="Email">
+            <input type="email" name="email" id="email" placeholder="Email(*)" [(ngModel)]="user.email">
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
-            <input type="text" name="userName" id="userName" placeholder="Username">
+            <input type="text" name="userName" id="userName" placeholder="Username(*)" [(ngModel)]="user.userName">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <select type="text" name="branch" id="branch" [(ngModel)]="user.branchOffice"> 
+                <option *ngFor="let b of branchs" [ngValue]="b" > {{ b.name }} </option>
+            </select>
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <select type="text" name="rol" id="rol" [(ngModel)]="user.userRole" > 
+                <option value="CASHIER" > CAJERO </option>
+                <option value="SELLER" > VENDEDOR </option>
+                <option value="WAREHOUSE_MANAGER" > DEPOSITO </option>
+            </select>
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="fas fa-key"></span>
-            <input type="password" name="password" id="pwd" placeholder="Password">
+            <input type="password" name="password" id="pwd" placeholder="Password(*)" [(ngModel)]="user.password" >
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="fas fa-key"></span>
-            <input type="password" name="password2" id="pwd2" placeholder="Repita el Password">
+            <input type="password" name="password2" id="pwd2" placeholder="Repita el Password (*)" [(ngModel)]="pwd" >
         </div>
-        <button class="btn mt-3">Registrarse</button>
+        <button class="btn mt-3" (click)="registrar()" >Registrarse</button>
     </form>
     <div class="text-center fs-6">
         <a href="/login">Iniciar Sesion</a>

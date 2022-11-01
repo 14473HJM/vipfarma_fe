@@ -1,0 +1,95 @@
+<br>
+<h3>Listado de Productos precio y descuento por obra social</h3>
+<br>
+
+
+<div class="row">
+  
+    <div class="container col-4">
+    <input type="text" class="form-control" name="filterDiscounts" placeholder="Buscar Producto..." [(ngModel)]="filterDiscounts">
+    </div>
+    <form [formGroup]="formulario">
+    
+    <div class="container col-4">
+        <select formControlName="hInsu" class="form-control" name="healthInsurance" placeholder="Seleccione Obra Social" [(ngModel)]="selectedHealthInsurance">
+            <option *ngFor="let health of listHealthInsurance" [value]="health.id">
+                {{ health.name }}
+            </option>
+            </select>
+    </div>
+    <div class="container col-4">
+        <select formControlName="hInsuPlan" class="form-control" name="filterhealthInsurancePlan" placeholder="Seleccione Plan" [(ngModel)]="filterhealthInsurancePlan">
+            <option *ngFor="let healthP of listHealthInsurancePlan" [value]="healthP.name">
+                {{ healthP.name }}
+            </option>
+            </select>
+    </div>
+    
+  </form>
+</div>
+<br>
+<div class="container">
+<table id="listado" class="table table-hover text-center">
+    <thead class="table-info">
+        <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Obra Social</th>
+            <th scope="col">Plan</th>
+            <th scope="col">Precio final</th>
+            <th scope="col">Descuento</th>
+            <!-- <th scope="col">Cantidad Disponible</th> -->
+            <!-- <th scope="col">Sucursal</th> -->
+          </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let offer of discounts | discount: filterDiscounts: filterhealthInsurancePlan ">
+            
+            
+            <td>{{ offer.product.name }}</td>
+            <td>{{ offer.healthInsurance.name }}</td>
+            <td>{{ offer.healthInsurancePlan.name }}</td>
+            <td>{{ offer.finalPrice }}</td>
+            <td>{{ offer.discountValue | percent: '2.0-2' }}</td>
+            <!-- <td>{{ offer.stock }}</td> -->
+            <!-- <td>{{offer.branchOffice}}</td> -->
+            
+        </tr>
+
+        <!-- <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>Suc1</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+          <td>Suc1</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+          <td>Suc1</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>Suc1</td>
+        </tr> -->
+      </tbody>
+
+    <tbody>
+      
+    </tbody>
+  </table>
+  <br>
+  <button class="btn btn-primary" (click)="descargar()" >Descargar</button>
+</div>
