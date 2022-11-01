@@ -38,7 +38,7 @@ export class RegistroUsuarioComponent implements OnInit {
 			this.userServ.postCreate(this.user).subscribe({
 			  next: (response : User) => {
           this.user = response;
-          this.userServ.setToken(this.user.id.toString(), this.user.userName, this.user.userRole);
+          this.userServ.setToken(this.user.id.toString(), this.user.userName, this.user.userRole, this.user.branchOffice.id.toString());
           this.router.navigate(['/']);
 				},
 			  error: (err: HttpErrorResponse) => {

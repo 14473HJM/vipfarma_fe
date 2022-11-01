@@ -44,7 +44,15 @@ export class DespachoComponent implements OnInit {
   }
 
   despachar() {
-   
+    this.saleOrderSrv.changeStatus(this.selectedOrder.id, "DELIVERED").subscribe({
+      next: (response : SaleOrder) => {
+        this.refresh();
+        this.selectedOrder = {} as SaleOrder;
+      },
+      error: () => {
+        alert("Error en el Servicio");
+      },
+    })
   }
 
 }

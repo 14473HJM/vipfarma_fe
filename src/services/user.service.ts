@@ -49,10 +49,11 @@ export class UserService {
   }
 
   /* TOKEN SERVICES */
-  setToken(token: string, userName: string, rol: string) {
+  setToken(token: string, userName: string, rol: string, branch: string) {
     localStorage.setItem("token", token);
     localStorage.setItem("userName", userName);
     localStorage.setItem("userRol", rol);
+    localStorage.setItem("branch", branch);
   }
 
   getToken() : any {
@@ -65,6 +66,10 @@ export class UserService {
 
   getUserName() : any {
     return localStorage.getItem("userName");
+  }
+
+  getBranchId() : any {
+    return localStorage.getItem("branch");
   }
 
   /* AUTHENTICATION SERVICES */

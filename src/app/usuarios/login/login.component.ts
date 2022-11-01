@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
 			this.userServ.postLogin(this.user.userName, this.user.password).subscribe({
 			  next: (response : User) => {
           this.user = response;
-          this.userServ.setToken(this.user.id.toString(), this.user.userName, this.user.userRole);
+          this.userServ.setToken(this.user.id.toString(), this.user.userName, 
+                this.user.userRole, this.user.branchOffice.id.toString());
           this.router.navigate(['/']);
 				},
 			  error: (err: HttpErrorResponse) => {
