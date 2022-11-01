@@ -4,7 +4,14 @@
 
 export const environment = {
   production: false,
-  userBaseUrl: "http://localhost:8080/user" 
+  userBaseUrl: "http://localhost:8080/user",
+  branchOfficeUrl: "http://localhost:8080/branchOffice",
+  customerBaseUrl: "http://localhost:8080/customers",
+  healthInsuranceBaseUrl: "http://localhost:8080/healthInsurance",
+  healthInsurancePlanBaseUrl: "http://localhost:8080/healthInsurancePlan",
+  saleOrderBaseUrl: "http://localhost:8080/sale/orders",
+  billBaseUrl: "http://localhost:8080/billing/order",
+  stocksOffers: 'http://localhost:8080/stocks/offers',
 };
 
 /*

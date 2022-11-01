@@ -9,6 +9,15 @@ import { RegistroUsuarioComponent } from './usuarios/registro-usuario/registro-u
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home/home.component';
 import { SearchProductsComponent } from './products/search-products/search-products.component';
+import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
+import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
+import { MainComponent } from './home/main/main.component';
+import { ListOfferComponent } from './reports/list-offer/list-offer.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
+import { DiscountPipe } from './pipes/discount.pipe';
+import { DespachoComponent } from './ventas/despacho/despacho.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +25,16 @@ import { SearchProductsComponent } from './products/search-products/search-produ
     LoginComponent,
     RegistroUsuarioComponent,
     HomeComponent,
-    SearchProductsComponent
+    SearchProductsComponent,
+    CreateCustomerComponent,
+    BillOrderComponent,
+    MainComponent,
+    ListOfferComponent,
+    FilterPipe,
+    ListDiscountComponent,
+    DiscountPipe,
+    DespachoComponent
+    
   ],
   imports: [
     BrowserModule,

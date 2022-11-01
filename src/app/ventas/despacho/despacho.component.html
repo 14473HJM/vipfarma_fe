@@ -1,0 +1,92 @@
+<div class="container">
+    <h3>Ordernes de Venta Facturadas</h3>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">#</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Cajero</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>       
+        <tbody>
+            <tr *ngFor="let order of saleOrder">
+                <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
+                <th scope="row"> {{ order.id }} </th>
+                <td>{{ order.createdDate }}</td>
+                <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
+                <td>{{ order.user.userName }}</td>
+                <td>{{ order.totalAmount }}</td>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+
+<div class="container container-fluid " *ngIf="selectedOrder.id != null">
+    <h3>Detalle Orden {{selectedOrder.id}}</h3>
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Rack</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cod. Barra</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Descuento</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>       
+        <tbody>
+            <tr *ngFor="let item of orderDetail.saleOrderItems">
+                <td>ubicacion!!!</td>
+                <td>{{ item?.offer?.product?.name }} </td>
+                <td>{{ item?.offer?.product?.barcode }}</td>
+                <td>{{ item.unitaryPrice }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.discountAmount }}</td>
+                <td>{{ item.totalPrice }}</td>
+        </tbody>
+    </table>
+
+    <div class="row mt-3">
+        <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0"></div>
+
+        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+            <div class="row my-2">
+                <div class="col-7 text-right"></div>
+                <div class="col-5">
+                    <span class="text-120 text-secondary-d1"></span>
+                </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-7 text-right"></div>
+                <div class="col-5">
+                    <span class="text-110 text-secondary-d1"></span>
+                </div>
+            </div>
+
+            <div class="row my-2 align-items-right bgc-primary-l3 p-2">
+                <div class="col-7 text-right">
+                    Total de Orden: 
+                </div>
+                <div class="col-5">
+                    <span class="text-50 text-success-d3 opacity-2"> 
+                        <b> {{orderDetail.totalAmount}} </b> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary align-right" type="submit" (click)="despachar()">Despachar</button>
+</div>
+
+
+
+
+
