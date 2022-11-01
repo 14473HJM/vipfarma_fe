@@ -3,5 +3,4 @@ export interface healthInsurancePlan{
     name: string
     description: string
     healthInsuranceId: number
-
 }

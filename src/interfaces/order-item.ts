@@ -1,4 +1,5 @@
 import { OfferStock } from "./OfferStock";
+import { Stock } from "./Stock";
 
 export interface OrderItem {
     id: number;
@@ -8,4 +9,5 @@ export interface OrderItem {
     unitaryPrice: number;
     discountAmount: number;
     totalPrice: number;
+    stocks: Stock[];
 }

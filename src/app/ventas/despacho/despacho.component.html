@@ -33,6 +33,7 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">Locker</th>
                 <th scope="col">Rack</th>
                 <th scope="col">Producto</th>
                 <th scope="col">Cod. Barra</th>
@@ -44,7 +45,8 @@
         </thead>       
         <tbody>
             <tr *ngFor="let item of orderDetail.saleOrderItems">
-                <td>ubicacion!!!</td>
+                <td>{{ item.stocks[0].locker.id}} </td>
+                <td>{{ item.stocks[0].locker.rack.id}} </td>
                 <td>{{ item?.offer?.product?.name }} </td>
                 <td>{{ item?.offer?.product?.barcode }}</td>
                 <td>{{ item.unitaryPrice }}</td>
