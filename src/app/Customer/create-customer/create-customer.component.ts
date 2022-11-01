@@ -27,7 +27,7 @@ export class CreateCustomerComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.getHealthInsurance()
+   // this.getHealthInsurance()
   
   }
   ngOnDestroy(): void {
@@ -48,56 +48,56 @@ export class CreateCustomerComponent implements OnInit {
 
   // }
 
-  // sethealthInsuranceId(obs: healthInsurance)
-  // {
-  //   this.customer.healthInsurance=obs
-  //   this.customer.healthInsuranceId=obs.id
-  //   this.customer.healthInsurancePlanId=0;
-  // }
+//   sethealthInsuranceId(obs: healthInsurance)
+//   {
+//     this.customer.healthInsurance=obs
+//     this.customer.healthInsuranceId=obs.id
+//     this.customer.healthInsurancePlanId=0;
+//   }
 
- save(){}
-  //   if(this.customer.lastName == null || this.customer.lastName.trim().length ===0 || this.customer.name == null || this.customer.name.trim().length ===0){
-  //     alert('Debe introducir el nombre completo')
-  //     return
-  //   }
-  //   if(this.customer.identificationType == null){
-  //     alert('Debe seleccionar el tipo de identificacion')
-  //     return
-  //   }
-  //   if(this.customer.identification == null){
-  //     alert(`Debe introducir correctamente el ${this.customer.identificationType}`)
-  //     return
-  //   }
-  //   if(this.customer.address == null || this.customer.address.trim().length ===0){
-  //     alert(`Debe introducir correctamente el domicilio`)
-  //     return
-  //   }
-  //   if(this.customer.healthInsurance.id == null || this.customer.healthInsurance.id ===0 || this.customer.healthInsurancePlan.id == null || this.customer.healthInsurancePlan.id ===0){
-  //     alert(`Debe introducir selecionar correctamente la obra social y su plan`)
-  //     return
-  //   }
+save(){}
+//     if(this.customer.lastName == null || this.customer.lastName.trim().length ===0 || this.customer.name == null || this.customer.name.trim().length ===0){
+//       alert('Debe introducir el nombre completo')
+//       return
+//     }
+//     if(this.customer.identificationType == null){
+//       alert('Debe seleccionar el tipo de identificacion')
+//       return
+//     }
+//     if(this.customer.identification == null){
+//       alert(`Debe introducir correctamente el ${this.customer.identificationType}`)
+//       return
+//     }
+//     if(this.customer.address == null || this.customer.address.trim().length ===0){
+//       alert(`Debe introducir correctamente el domicilio`)
+//       return
+//     }
+//     if(this.customer.healthInsurance.id == null || this.customer.healthInsurance.id ===0 || this.customer.healthInsurancePlan.id == null || this.customer.healthInsurancePlan.id ===0){
+//       alert(`Debe introducir selecionar correctamente la obra social y su plan`)
+//       return
+//     }
 
    
-      // this.subscription.add(
-      //   this.customerService.postCreate(this.customer).subscribe({
-      //     next: () => {
-      //       alert('Cliente cargado correctamente')
-      //       this.reset();
-      //       this.router.navigate(['customer']);
-      //     },
-      //     error: () => {
-      //       alert('Error al guardar el cliente');
-      //     }
-      //   })
-      // );
+//       this.subscription.add(
+//         this.customerService.postCreate(this.customer).subscribe({
+//           next: () => {
+//             alert('Cliente cargado correctamente')
+//             this.reset();
+//             this.router.navigate(['customer']);
+//           },
+//           error: () => {
+//             alert('Error al guardar el cliente');
+//           }
+//         })
+//       );
     
 
-  // }
+//   }
 
-  // reset(){
-  //   // this.customer={} as Customer;
+//   reset(){
+//     this.customer={} as Customer;
     
-  // }
+//   }
 
 
 

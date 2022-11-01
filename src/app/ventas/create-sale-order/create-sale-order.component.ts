@@ -69,7 +69,7 @@ export class CreateSaleOrderComponent implements OnInit {
     this.modalRef = this.modalService.open(CreateCustomerComponent)
   }
   openModalOffer() {
-    this.modalRef = this.modalService.open(OfferComponent)
+    //this.modalRef = this.modalService.open(SearchProductsComponent )
   }
 
   
