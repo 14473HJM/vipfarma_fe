@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SaleOrder } from 'src/interfaces/sale-order';
+import { UserService } from './user.service';
 
 
 
@@ -14,7 +15,7 @@ export class SaleOrderService {
   apiUrlBase: string = environment.userBaseUrl;
   apiUrlSaleOrder: string = environment.saleOrderBaseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userServ: UserService) { }
 
   getOffers(): Observable<any> {
     return this.http.get(this.apiUrlBase + "/offers");
@@ -24,12 +25,17 @@ export class SaleOrderService {
     return this.http.get(this.apiUrlSaleOrder + "/" + id);
   }
 
-  getSaleOrdersReadyToBill(branchId: number): Observable<any> {
+  getSaleOrdersReadyToBill(): Observable<any> {
+    let branchId = this.userServ.getBranchId();
     return this.http.get(this.apiUrlSaleOrder + "?saleOrderStatus=READY_TO_BILL&branchOfficeId=" + branchId);
   }
 
   getSaleOrdersBilled(branchId: number): Observable<any> {
     return this.http.get(this.apiUrlSaleOrder + "?saleOrderStatus=BILLED&branchOfficeId=" + branchId);
+  }
+
+  changeStatus(id: number, status: string): Observable<any> {
+    return this.http.put(this.apiUrlSaleOrder + "/" + id + "/status/" + status, null);
   }
 
 }

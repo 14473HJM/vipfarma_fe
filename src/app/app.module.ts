@@ -17,8 +17,6 @@ import { ListDiscountComponent } from './reports/list-discount/list-discount.com
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +30,7 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
     FilterPipe,
     ListDiscountComponent,
     DiscountPipe,
-    DespachoComponent
-    
+    DespachoComponent    
   ],
   imports: [
     BrowserModule,

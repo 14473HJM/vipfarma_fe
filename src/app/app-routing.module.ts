@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: "consulta", component: ConsultaOrdenComponent },
   { path: "facturar", component: BillOrderComponent },
   { path: "reportes/list-offer", component: ListOfferComponent},
-  { path: "reportes/list-discount", component: ListDiscountComponent}
+  { path: "reportes/list-discount", component: ListDiscountComponent},
 ];
 
 @NgModule({

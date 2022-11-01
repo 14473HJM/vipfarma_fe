@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
   }
 
   logOut() {
-    this.userServ.setToken("", "", "");
+    this.userServ.setToken("", "", "", "");
     this.router.navigate(['login']);
   }
 
