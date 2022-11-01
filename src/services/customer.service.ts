@@ -11,7 +11,7 @@ import { Customer } from 'src/interfaces/Customer';
 })
 export class CustomerService {
 
-  private apiUrlBase: string = environment.customerBaseUrl;
+  private apiUrlBase: string = environment.baseUrl;
 
   constructor(private http: HttpClient, private cookies: CookieService, 
     private router: Router) { }
@@ -34,11 +34,11 @@ export class CustomerService {
     }
 
     getCustomers(): Observable<Customer[]>{
-      return this.http.get<Customer[]>(this.apiUrlBase);
+      return this.http.get<Customer[]>(this.apiUrlBase + "/customers");
     }
 
-    getCustomer(id: string): Observable<any>{
-      return this.http.get(this.apiUrlBase + "/" + id);
+    getCustomer(id: number): Observable<any>{
+      return this.http.get(this.apiUrlBase + "/customers/" + id);
     }
 
 

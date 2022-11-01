@@ -9,6 +9,6 @@ export interface SaleOrder {
     createdDate: Date;
     saleOrderStatus: string;
     statusDetail: string;
-    orderItems?: OrderItem;
+    orderItems: OrderItem;
     totalAmount: number;
 }

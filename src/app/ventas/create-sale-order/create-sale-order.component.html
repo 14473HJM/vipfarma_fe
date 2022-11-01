@@ -1,53 +1,37 @@
 <div class="container">
-    <h2>Consultar</h2>
+    <h2>Generar</h2>
     <hr>
-    <!--formulario-->
+    <!-- formulario-->
     <form>
         <div class="row g-3">
             <div class="col">
-                <label for="ejemplo" class="form-label" >Año</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione año</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
+                <select class="form-select" name="customer" id="customer" placeholder="Cliente"
+                    [(ngModel)]="customer" (change)="listado(customer)">
+                    <option *ngFor="let c of customers" [ngValue]="c">
+                        {{ c.name }} {{ c.lastName }}
+                    </option>
+                </select>
             </div>
             <div class="col">
-                <label for="ejemplo" class="form-label">Mes</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione mes</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
+                <input type="text" class="form-control" name="dni" [(ngModel)]="cusDni">
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col">
+                <input type="text" class="form-control" name="name" [(ngModel)]="cusOs">
             </div>
             <div class="col">
-                <label for="ejemplo" class="form-label">Día</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione día</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
+                <input type="text" class="form-control" name="namePlan" [(ngModel)]="cusOsP">
             </div>
+        </div>
+        <div class="row g-3">
             <div class="col">
-                <label for="ejemplo" class="form-label">Cajero</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Cajero</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-outline-primary">Generar listado</button>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-outline-primary">Imprimir</button>
+                <button type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear cliente</button>
+                <button type="button" class="btn btn-outline-primary" (click)="openModalOffer()" >Agregar productos</button>
             </div>
         </div>
     </form>
+
     <!--formulario-->
 
     <!--tabla-->
@@ -56,8 +40,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Código</th>
-                <th scope="col">Cajero</th>
-                <th scope="col">Fecha</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Subtotal</th>
                 <th scope="col">Descuento</th>
                 <th scope="col">Total</th>
@@ -119,7 +103,9 @@
         <div class="col-auto">
             <input type="text" class="form-control" placeholder="Total" aria-label="First name">
         </div>
-
-        <!--Total-->
-
+        <div class="col-auto">
+        <button type="button" class="btn btn-outline-primary">Guardar</button>
+        </div>
     </div>
+
+    <!--Total-->

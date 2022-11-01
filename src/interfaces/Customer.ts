@@ -1,3 +1,6 @@
+import { healthInsurance } from "./healthInsurance"
+import { healthInsurancePlan } from "./healthInsurancePlan"
+
 export interface Customer{
     id: number
     name: string
@@ -5,6 +8,6 @@ export interface Customer{
     identificationType: string,
     identification: string,
     address: string,
-    healthInsurance: number,
-    healthInsurancePlan: number
+    healthInsurance: healthInsurance,
+    healthInsurancePlan: healthInsurancePlan
 }

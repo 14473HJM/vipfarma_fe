@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './usuarios/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +8,11 @@ import { RegistroUsuarioComponent } from './usuarios/registro-usuario/registro-u
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home/home.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CreateSaleOrderComponent } from './ventas/create-sale-order/create-sale-order.component';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+
 
 @NgModule({
   declarations: [
@@ -16,13 +20,17 @@ import { CreateCustomerComponent } from './Customer/create-customer/create-custo
     LoginComponent,
     RegistroUsuarioComponent,
     HomeComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    CreateSaleOrderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
-    HttpClientModule
+    CommonModule,
+    ReactiveFormsModule,
+    MdbModalModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
