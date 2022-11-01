@@ -20,8 +20,8 @@ export class HealthInsurancePlanService {
     return this.http.get<healthInsurancePlan[]>(this.apiUrlBase);
   }
 
-  gethealthInsurancePlan(id: string): Observable<healthInsurancePlan>{
-    return this.http.get<healthInsurancePlan>(this.apiUrlBase + "/" + id);
+  gethealthInsurancePlan(id: number): Observable<healthInsurancePlan[]>{
+    return this.http.get<healthInsurancePlan[]>(this.apiUrlBase + id);
   }
 
 }
