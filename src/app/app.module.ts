@@ -24,6 +24,7 @@ import { ListDiscountComponent } from './reports/list-discount/list-discount.com
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
 import { FilterOrderByCustPipe } from './pipes/filterOrderByCustomer';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { FilterOrderByCustPipe } from './pipes/filterOrderByCustomer';
     ReactiveFormsModule,
     MdbModalModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

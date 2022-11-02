@@ -20,6 +20,7 @@ import jsPDF from 'jspdf';
 export class ListDiscountComponent implements OnInit {
 
   public formulario : FormGroup = new FormGroup({});
+  public page: number;
 
   discounts: OfferStock[] = [];
   filterDiscounts: string = '' ;
