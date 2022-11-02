@@ -35,11 +35,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DiscountPipe,
     DespachoComponent
     
-<<<<<<< Updated upstream
   ],
-=======
- ],
->>>>>>> Stashed changes
   imports: [
     BrowserModule,
     AppRoutingModule,

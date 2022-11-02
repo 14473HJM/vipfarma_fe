@@ -8,10 +8,6 @@ export const environment = {
   customerBaseUrl: "http://localhost:8080/customers",
   healthInsuranceBaseUrl: "http://localhost:8080/healthInsurance",
   healthInsurancePlanBaseUrl: "http://localhost:8080/healthInsurancePlan/insurance/",
-<<<<<<< Updated upstream
-=======
-  baseUrl: "http://localhost:8080",
->>>>>>> Stashed changes
   saleOrderBaseUrl: "http://localhost:8080/sale/orders",
   billBaseUrl: "http://localhost:8080/billing/order",
   stocksOffers: 'http://localhost:8080/stocks/offers',
