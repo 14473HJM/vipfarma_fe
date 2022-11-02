@@ -1,29 +1,33 @@
 <br>
+<<<<<<< Updated upstream
 <p>Listado de Productos precio y descuento por obra social</p>
+=======
+<h3>Listado de productos, precio y descuento por obra social</h3>
+>>>>>>> Stashed changes
 <br>
 
 
 <div class="row">
   
     <div class="container col-4">
-    <input type="text" class="form-control" name="filterDiscounts" placeholder="Buscar Producto..." [(ngModel)]="filterDiscounts">
+    <input type="text" class="form-control" name="filterDiscounts" placeholder="Buscar Producto, Obra social o Plan" [(ngModel)]="filterDiscounts">
     </div>
     <form [formGroup]="formulario">
     
-    <div class="container col-4">
+    <!-- <div class="container col-4">
         <select formControlName="hInsu" class="form-control" name="healthInsurance" placeholder="Seleccione Obra Social" [(ngModel)]="selectedHealthInsurance">
             <option *ngFor="let health of listHealthInsurance" [value]="health.id">
                 {{ health.name }}
             </option>
             </select>
-    </div>
-    <div class="container col-4">
+    </div> -->
+    <!-- <div class="container col-4">
         <select formControlName="hInsuPlan" class="form-control" name="filterhealthInsurancePlan" placeholder="Seleccione Plan" [(ngModel)]="filterhealthInsurancePlan">
             <option *ngFor="let healthP of listHealthInsurancePlan" [value]="healthP.name">
                 {{ healthP.name }}
             </option>
             </select>
-    </div>
+    </div> -->
     
   </form>
 </div>
@@ -43,13 +47,13 @@
     </thead>
     <tbody>
 
-        <tr *ngFor="let offer of discounts | discount: filterDiscounts: filterhealthInsurancePlan ">
+        <tr *ngFor="let offer of discounts | discount: filterDiscounts | paginate: { itemsPerPage: 10, currentPage: page }">
             
             
             <td>{{ offer.product.name }}</td>
             <td>{{ offer.healthInsurance.name }}</td>
             <td>{{ offer.healthInsurancePlan.name }}</td>
-            <td>{{ offer.finalPrice }}</td>
+            <td>{{ offer.finalPrice | currency: '$ '}}</td>
             <td>{{ offer.discountValue | percent: '2.0-2' }}</td>
             <!-- <td>{{ offer.stock }}</td> -->
             <!-- <td>{{offer.branchOffice}}</td> -->
@@ -90,4 +94,12 @@
       
     </tbody>
   </table>
+<<<<<<< Updated upstream
+=======
+
+  <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+  <br>
+  <button class="btn btn-primary" (click)="descargar()" >Descargar</button>
+>>>>>>> Stashed changes
 </div>

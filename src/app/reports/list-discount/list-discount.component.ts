@@ -21,6 +21,7 @@ export class ListDiscountComponent implements OnInit {
   //@Input() id: string='';
 
   public formulario : FormGroup = new FormGroup({});
+  public page: number;
 
   discounts: OfferStock[] = [];
   filterDiscounts: string = '' ;

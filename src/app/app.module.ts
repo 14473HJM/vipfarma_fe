@@ -16,6 +16,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -34,13 +35,18 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
     DiscountPipe,
     DespachoComponent
     
+<<<<<<< Updated upstream
   ],
+=======
+ ],
+>>>>>>> Stashed changes
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
