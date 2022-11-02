@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/interfaces/products';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { Product } from 'src/interfaces/Product';
+
 import { ProductService } from 'src/services/product.service';
 
 
@@ -12,54 +14,55 @@ import { ProductService } from 'src/services/product.service';
 export class SearchProductsComponent implements OnInit {
   messageName: string = '';
   messageBarcode: string = '';
-  activeName : boolean = false;
-  activeBarcode : boolean = false;
-  products: Product[]=[];
+  activeName: boolean = false;
+  activeBarcode: boolean = false;
+  products: Product[] = [];
 
-  constructor(private router:Router, private productService : ProductService) { }
+  constructor(public modalRef: MdbModalRef<SearchProductsComponent>, private router: Router, private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.activeName=false;
-    this.activeBarcode=true;
+    this.activeName = false;
+    this.activeBarcode = true;
   }
 
-  activateName(){     
-      this.activeName=true; 
-      this.activeBarcode=false;
-      this.messageBarcode='';
+  activateName() {
+    this.activeName = true;
+    this.activeBarcode = false;
+    this.messageBarcode = '';
 
   }
 
-  activateBarcode(){
-      this.activeName=false;
-      this.activeBarcode=true; 
-      this.messageName='';
+  activateBarcode() {
+    this.activeName = false;
+    this.activeBarcode = true;
+    this.messageName = '';
   }
 
 
-  searchProducts(){
-    if(this.messageName !=='' && this.activeName==true){
+  searchProducts() {
+    if (this.messageName !== '' && this.activeName == true) {
       this.productService.getSearchedByName(this.messageName).subscribe({
-        next: (products: Product[]) =>{
+        next: (products: Product[]) => {
           console.log(products);
-          this.products=products;
+          this.products = products;
         },
-        error: () =>{
-          alert('error al obtener los productos')
-        }
-      });}
-    else if (this.messageBarcode !=='' && this.activeBarcode==true){
-      this.productService.getSearchedByCodebar(this.messageBarcode).subscribe({
-        next: (products: Product[]) =>{
-          console.log(products)
-          this.products=products;
-        },
-        error: () =>{
+        error: () => {
           alert('error al obtener los productos')
         }
       });
     }
-    else{
+    else if (this.messageBarcode !== '' && this.activeBarcode == true) {
+      this.productService.getSearchedByCodebar(this.messageBarcode).subscribe({
+        next: (products: Product[]) => {
+          console.log(products)
+          this.products = products;
+        },
+        error: () => {
+          alert('error al obtener los productos')
+        }
+      });
+    }
+    else {
       alert("Debe ingresar parametro de busqueda en el campo seleccionado")
     }
 

@@ -9,6 +9,8 @@ import { SaleOrderService } from 'src/services/sale-order.service';
 import { Router } from '@angular/router';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { CreateCustomerComponent } from '../../Customer/create-customer/create-customer.component';
+import { SearchProductsComponent } from 'src/app/products/search-products/search-products.component';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-create-sale-order',
@@ -36,7 +38,8 @@ export class CreateSaleOrderComponent implements OnInit {
     private saleOderService: SaleOrderService,
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: MdbModalService) { }
+    private modalService: MdbModalService,
+    private productService: ProductService) { }
 
   ngOnInit(): void {
     this.refresh()
@@ -69,7 +72,7 @@ export class CreateSaleOrderComponent implements OnInit {
     this.modalRef = this.modalService.open(CreateCustomerComponent)
   }
   openModalOffer() {
-    //this.modalRef = this.modalService.open(SearchProductsComponent )
+    this.modalRef = this.modalService.open(SearchProductsComponent )
   }
   
   
