@@ -2,9 +2,7 @@
         <br>
         <div class="row g-3">
             <div class="col">
-            </div>
-            <div class="col">
-                <h3>Clientes</h3>
+                <h3>Listado de Clientes</h3>
             </div>
             <div class="col-auto">
                 <img src="../../assets/logito.png" alt="">
@@ -15,13 +13,7 @@
         <br>
         <div class="row g-3">
             <div class="col">
-                <input type="text" class="form-control" placeholder="DNI/CUIT/CUIL" aria-label="DNI/CUIT/CUIL">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Nombre" aria-label="name">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Apellido" aria-label="Last name">
+                <input type="text" class="form-control" placeholder="Buscar Clientes .... " aria-label="DNI/CUIT/CUIL">
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-outline-primary">Buscar</button>
@@ -29,10 +21,9 @@
         </div>
     </form>
     <br>
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Código</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">DNI/CUIL/CUIT</th>
@@ -44,7 +35,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let customers of listado; let index=index">
-                <th scope="row">{{index+1}}</th>
                 <td>{{customers.id}}</td>
                 <td>{{customers.name + ' ' + customers.lastName}}</td>
                 <td>{{customers.identification}}</td>
@@ -53,14 +43,14 @@
                 <td>{{customers.healthInsurancePlan.name}}</td>
                 <td>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-outline-secondary" (click)="alterCustomer(customers.id)">
+                        <button type="button" class="btn btn-outline-secondary" (click)="alterCustomer(customers)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pencil" viewBox="0 0 16 16">
                                 <path
                                     d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
                                 </path>
                             </svg>
-                            <span class="visually-hidden" (click)="alterCustomer(customers.id)">Button</span>
+                            <span class="visually-hidden" (click)="alterCustomer(customers)">Button</span>
                         </button>
                         <app-delete-customer [id]="customers.id" (onDelete)="getCustomer()">  </app-delete-customer>
                     </div>
@@ -70,3 +60,11 @@
             <br>
         </tbody>
     </table>
+
+    <app-alter-customer *ngIf="selectCust.id != null"
+        [id]="selectCust.id" >
+    </app-alter-customer>
+
+    <div *ngIf="selectCust.id != null">
+        <button type="button" class="btn btn-danger text-capitalize" (click)="cancelar()">Cancelar</button>
+    </div>

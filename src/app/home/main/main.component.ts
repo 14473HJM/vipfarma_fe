@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
   refreshListOffer: boolean = false;
   refreshListDiscount: boolean=false;
   isDespacho: boolean = false;
+  isVerClientes: boolean = false;
 
   constructor(private router: Router, private userServ: UserService) { }
 
@@ -46,6 +47,7 @@ export class MainComponent implements OnInit {
     this.refreshListDiscount = false;
     this.refreshListOffer = false;
     this.isDespacho = false;
+    this.isVerClientes = false;
   }
 
   facturar() {
@@ -72,6 +74,11 @@ export class MainComponent implements OnInit {
   despacho() {
     this.cleanFlags();
     this.isDespacho = true;
+  }
+
+  verClientes() {
+    this.cleanFlags();
+    this.isVerClientes = true;
   }
 
 }
