@@ -2,3 +2,8 @@
     border-bottom:black;
     border: black;
 }
+
+.btn {
+    border: 15px;
+    margin: 8px 4px;
+}
