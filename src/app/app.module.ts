@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegistroUsuarioComponent } from './usuarios/registro-usuario/registro-usuario.component';
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home/home.component';
+import { SearchProductsComponent } from './products/search-products/search-products.component';
 import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -30,6 +31,7 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
     LoginComponent,
     RegistroUsuarioComponent,
     HomeComponent,
+    SearchProductsComponent,
     CreateCustomerComponent,
     CreateSaleOrderComponent,
     CreateSaleOrderComponent,

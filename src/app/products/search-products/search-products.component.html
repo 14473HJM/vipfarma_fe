@@ -1,0 +1,46 @@
+<div class="container">
+    <h2>Buscar Productos</h2>
+    <br>
+    <div class="row">
+        <div class="input-group">
+            <div class="col-5">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" name="search" id="check1" value="name" type="radio" (click)="activateName()" aria-label="Radio button for following text input">
+                    <label for="">&nbsp;Nombre Producto&nbsp;&nbsp;</label>
+                    <input type="text" [disabled]="!activeName" [(ngModel)]="messageName">
+                </div>
+
+            </div>
+            <div class="col-5">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" name="search" id="check2" value="codebar" type="radio" (click)="activateBarcode()" checked aria-label="Radio button for following text input">
+                    <label for="">&nbsp;Código de Barras&nbsp;&nbsp;</label>
+                    <input type="text" [disabled]="!activeBarcode" [(ngModel)]="messageBarcode">
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-primary" (click)="searchProducts()">Buscar</button>
+            </div>
+        </div>
+    </div>
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Código de Barras</th>
+                <th scope="col">Laboratorio</th>
+                <th scope="col">Prescripción Requerida</th>
+                <th scope="col">Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of products">
+                <th>{{item.name}}</th>
+                <td>{{item.barcode}}</td>
+                <td>{{item.laboratory}}</td>
+                <td>{{item.prescriptionRequired}}</td>
+                <th>{{item.price}}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
