@@ -5,4 +5,7 @@ export interface healthInsurance{
      name: string
      number: string
      availablePlans: healthInsurancePlan[]
+     number: number
+     availablePlans?: number
+
 }

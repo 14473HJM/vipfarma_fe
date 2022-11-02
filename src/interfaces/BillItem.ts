@@ -1,13 +1,12 @@
 import { OfferStock } from "./OfferStock";
-import { Stock } from "./Stock";
 
-export interface OrderItem {
+export interface BillItem {
     id: number;
-    orderId: number;
-    offer: OfferStock;
+    billId: number;
+    offer?: OfferStock;
     quantity: number;
+    labelInvoice: string;
     unitaryPrice: number;
     discountAmount: number;
     totalPrice: number;
-    stocks: Stock[];
 }

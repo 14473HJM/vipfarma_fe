@@ -60,6 +60,18 @@ body {
     /* border: 1px solid red; */
 }
 
+select {
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.2rem;
+    color: #666;
+    padding: 10px 15px 10px 10px;
+    /* border: 1px solid red; */
+}
+
 .wrapper .form-field {
     padding-left: 10px;
     margin-bottom: 20px;

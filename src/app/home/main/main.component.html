@@ -1,0 +1,100 @@
+  <!-- Bootstrap Static Header -->
+  <div class="jumbotron bg-cover text-white">
+    <div class="container py-5 text-center">
+        <h1 *ngIf="isHome" class="display-4 font-weight-bold text-center">Bienvenido a FARMAVIP</h1>
+        <h1 *ngIf="isFacturar " class="display-4 font-weight-bold text-center">FACTURACION</h1>
+        <h1 *ngIf="isDespacho " class="display-4 font-weight-bold text-center">DESPACHO</h1>
+        <h1 *ngIf="refreshListOffer" class="display-4 font-weight-bold">LISTADO DE PRECIOS</h1>
+        <h1 *ngIf="refreshListDiscount" class="display-4 font-weight-bold">LISTADO DE DESCUENTOS</h1>
+    </div>
+</div>
+
+  <!-- Vertical navbar -->
+<div class="vertical-nav bg-white" id="sidebar">
+    <div class="py-4 px-3 mb-4 bg-light">
+      <div class="media d-flex align-items-center">
+        <img *ngIf="user.userRole == 'ADMIN'" src="../../../assets/perfil1.png" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+        <img *ngIf="user.userRole == 'SELLER'" src="../../../assets/perfil2.png" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+        <img *ngIf="user.userRole == 'CASHIER'" src="../../../assets/perfil3.png" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+        <img *ngIf="user.userRole == 'WAREHOUSE_MANAGER'" src="../../../assets/perfil4.png" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+        <div class="media-body">
+          <h4 class="m-0">{{ user.userName }}</h4>
+          <p class="font-weight-light text-muted mb-0">{{ user.userRole }}</p>
+        </div>
+      </div>
+      <div>
+        <button class="btn" (click)="logOut()">Cerrar Sesion</button>
+      </div>       
+    </div>
+  
+    <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">HOME</p>
+  
+    <ul class="nav flex-column bg-white mb-0">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic bg-light" (click)="home()">
+                  <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                  Home
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" >
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Mi perfil
+              </a>
+      </li>
+    </ul>
+
+    <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">VENTAS</p>
+  
+    <ul class="nav flex-column bg-white mb-0">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" >
+                  <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                  Orden de Venta
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" (click)="facturar()">
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Facturacion
+              </a>
+      </li>
+      
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" (click)="despacho()">
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Despacho
+              </a>
+      </li>
+    </ul>
+  
+    <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">REPORTES</p>
+  
+    <ul class="nav flex-column bg-white mb-0">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" (click)="listOffer()" >
+                  <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                  Listado de Precios
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic"  (click)="listDiscount()" >
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Listado de Descuentos
+              </a>
+      </li>
+      
+    </ul>
+  </div>
+  <!-- End vertical navbar -->
+  
+  <!-- Page content holder -->
+
+  <div class="page-content p-5" id="content">
+    <app-home *ngIf="isHome"></app-home>
+    <app-bill-order *ngIf="isFacturar"></app-bill-order>
+    <app-list-offer *ngIf="refreshListOffer"></app-list-offer>
+    <app-list-discount *ngIf="refreshListDiscount"></app-list-discount>
+    <app-despacho *ngIf="isDespacho" ></app-despacho>
+  </div>
+  <!-- End demo content -->
