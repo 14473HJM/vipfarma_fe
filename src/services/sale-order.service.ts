@@ -7,7 +7,6 @@ import { Customer } from 'src/interfaces/Customer';
 import { OrderItem } from 'src/interfaces/order-item';
 import { OrderItemService } from './order-item.service';
 import { SaleOrder } from 'src/interfaces/sale-order';
-import { SaleOrder } from 'src/interfaces/sale-order';
 import { UserService } from './user.service';
 
 
@@ -22,11 +21,6 @@ export class SaleOrderService {
   apiUrlSaleOrder: string = environment.saleOrderBaseUrl;
 
   constructor(private http: HttpClient, private userServ: UserService) { }
-
-  constructor(
-    private http: HttpClient,
-    private orderItemService: OrderItemService
-  ) { }
 
   //[GET]/sale/orders/{id}
   getSaleOrderById(id: number): Observable<any> {

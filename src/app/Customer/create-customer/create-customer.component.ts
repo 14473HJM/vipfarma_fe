@@ -7,12 +7,14 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { HealthInsuranceService } from 'src/services/health-insurance.service';
 import { HealthInsurancePlanService } from 'src/services/health-insurance-plan.service';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
   styleUrls: ['./create-customer.component.css']
 })
+
 export class CreateCustomerComponent implements OnInit {
 
   customer: Customer= {} as Customer;
@@ -24,14 +26,13 @@ export class CreateCustomerComponent implements OnInit {
   healthInsuranceId: any;
 
 
-  constructor(private router: Router, private customerService: CustomerService, private healthInsuranceService: HealthInsuranceService, private healthInsurancePlanService: HealthInsurancePlanService ) {
+  constructor(public modalRef: MdbModalRef<CreateCustomerComponent>, private router: Router, private customerService: CustomerService, private healthInsuranceService: HealthInsuranceService, private healthInsurancePlanService: HealthInsurancePlanService ) {
    }
 
   ngOnInit(): void {
     this.getHealthInsurance()
     this.customer.identificationType="tipo";
   }
-
 
 
   ngOnDestroy(): void {

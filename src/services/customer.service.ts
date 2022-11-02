@@ -18,8 +18,6 @@ export class CustomerService {
   constructor(private http: HttpClient, private cookies: CookieService, 
     private router: Router) { }
 
-
-
     postCreate(customer: Customer): Observable<any> {
         const url = this.apiUrlBase;
         const headers = { 'content-type': 'application/json' };
@@ -29,11 +27,11 @@ export class CustomerService {
     }
 
     getCustomers(): Observable<Customer[]>{
-      return this.http.get<Customer[]>(this.apiUrlBase + "/customers");
+      return this.http.get<Customer[]>(this.apiUrlBase + "/");
     }
 
-    getCustomer(id: number): Observable<any>{
-      return this.http.get(this.apiUrlBase + "/customers/" + id);
+    getCustomer(id: string): Observable<any>{
+      return this.http.get(this.apiUrlBase + "/" + id);
     }
 
     delete(id: number): Observable<any>{

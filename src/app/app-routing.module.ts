@@ -11,15 +11,15 @@ import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
 import { MainComponent } from './home/main/main.component';
 import { ListOfferComponent } from './reports/list-offer/list-offer.component';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
+import { CreateSaleOrderComponent } from './ventas/create-sale-order/create-sale-order.component';
 
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "", component: MainComponent },
   { path: "register", component: RegistroUsuarioComponent },
-  { path: "abm", component: AbmOrderComponent },
+  { path: "abm", component: CreateSaleOrderComponent },
   { path: "consulta", component: ConsultaOrdenComponent },
-
   { path: "customer", component: CreateCustomerComponent },
   { path: "listcustomer", component: ListCustomerComponent },
   { path: 'altercostumber/:id', component: AlterCustomerComponent  },
