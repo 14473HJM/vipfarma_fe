@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './usuarios/login/login.component';
@@ -14,7 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateSaleOrderComponent } from './ventas/create-sale-order/create-sale-order.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
-
+import { DeleteCustomerComponent } from './Customer/delete-customer/delete-customer.component';
+import { AlterCustomerComponent } from './Customer/alter-customer/alter-customer.component';
+import { ListCustomerComponent } from './Customer/list-customer/list-customer.component';
 import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
 import { MainComponent } from './home/main/main.component';
 import { ListOfferComponent } from './reports/list-offer/list-offer.component';
@@ -22,6 +22,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +32,10 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
     HomeComponent,
     CreateCustomerComponent,
     CreateSaleOrderComponent,
+    CreateSaleOrderComponent,
+    DeleteCustomerComponent,
+    AlterCustomerComponent,
+    ListCustomerComponent,
     BillOrderComponent,
     MainComponent,
     ListOfferComponent,
@@ -38,7 +43,8 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
     ListDiscountComponent,
     DiscountPipe,
     DespachoComponent
-  ],
+
+ ],
   imports: [
     BrowserModule,
     AppRoutingModule,

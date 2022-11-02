@@ -11,24 +11,19 @@ import { Customer } from 'src/interfaces/Customer';
 })
 export class CustomerService {
 
-  private apiUrlBase: string = environment.baseUrl;
+  //customer: Customer= {} as Customer;
+
+  private apiUrlBase: string = environment.customerBaseUrl;
 
   constructor(private http: HttpClient, private cookies: CookieService, 
     private router: Router) { }
 
-    postCreate(name: string, lastName: string, dni: string, identification: string, address: string, id: number, plan: number): Observable<any> {
-      const comando = {
-        "name": name,
-        "lastName": lastName,
-        "identificationType": dni,
-        "identification": identification,
-        "address": address,
-        "healthInsurance": id,
-        "healthInsurancePlan": plan
-       }
+
+
+    postCreate(customer: Customer): Observable<any> {
         const url = this.apiUrlBase;
         const headers = { 'content-type': 'application/json' };
-        const body = JSON.stringify(comando);
+        const body = JSON.stringify(customer);
 
       return this.http.post(url, body, { 'headers': headers })
     }
@@ -41,6 +36,8 @@ export class CustomerService {
       return this.http.get(this.apiUrlBase + "/customers/" + id);
     }
 
-
+    delete(id: number): Observable<any>{
+      return this.http.delete(this.apiUrlBase + "/" + id);
+    }
 
 }
