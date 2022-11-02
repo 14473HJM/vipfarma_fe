@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/interfaces/User';
 import { UserService } from 'src/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -29,15 +30,27 @@ export class LoginComponent implements OnInit {
 				},
 			  error: (err: HttpErrorResponse) => {
           if(err.status == HttpStatusCode.NotFound) {
-            alert('Usuario y/o contrasena incorrecta');
+            Swal.fire({
+              title: 'Usuario y/o contrasena incorrecta',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
           }
           if(err.status == HttpStatusCode.InternalServerError) {
-            alert("Error en el Servicio"); 
+            Swal.fire({
+              title: 'Error en el Servicio',
+              icon: 'error',
+              confirmButtonText: "Ok",
+          });
           }
 			  },
 			})
     } else {
-      alert('Ingrese nombre de usuario y contraseña');
+      Swal.fire({
+        title: 'Ingrese nombre de usuario y contraseña',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
     }
   }
 

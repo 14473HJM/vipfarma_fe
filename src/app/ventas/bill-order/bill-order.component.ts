@@ -17,6 +17,8 @@ export class BillOrderComponent implements OnInit {
   saleOrder = {} as SaleOrder[];
   selectedOrder = {} as SaleOrder;
   bill = {} as Bill;
+  apply : boolean = false;
+  filterCustomer: string = '';
 
   constructor(private saleOrderSrv : SaleOrderService, private router: Router,
     private billSrv : BillingService) { }
@@ -41,15 +43,22 @@ export class BillOrderComponent implements OnInit {
 }
 
   facturar() {
-    this.billSrv.billOrder(this.selectedOrder.id).subscribe({
-      next: (response: Bill) => {
-        this.bill = response;
-        this.refresh();
-      },
-      error: () => {
-        alert("Error en el Servicio");
-      },
-    })
+    const result: boolean = confirm(
+      'Está seguro que desea Facturar la Orden ' + this.selectedOrder.id + ' ???'
+    );
+
+    if (result) {
+      this.billSrv.billOrder(this.selectedOrder.id).subscribe({
+        next: (response: Bill) => {
+          alert("Se facturo correctamente la Orden # " + this.selectedOrder.id);
+          this.bill = response;
+          this.refresh();
+        },
+        error: () => {
+          alert("Error en el Servicio");
+        },
+      })
+    }
   }
 
   eliminar(id : number) {
@@ -69,6 +78,13 @@ export class BillOrderComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    this.bill = {} as Bill;
+    this.selectedOrder = {} as SaleOrder;
+    this.apply = false;
+    this.refresh();
+  }
+
   pdf() {
     var data = document.getElementById('invoice');
     if(data !== null) {
@@ -83,7 +99,7 @@ export class BillOrderComponent implements OnInit {
         pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
         pdf.save('invoice' + '_' + this.bill.id + '.pdf'); // Generated PDF   
       });
-    }  
+    }
   }
 
 }
