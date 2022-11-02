@@ -14,6 +14,7 @@ export class ListCustomerComponent implements OnInit {
   listado: Customer[]= {} as Customer[];
   private subscription = new Subscription();
   counter: number;
+  selectCust = {} as Customer;
 
   constructor(private router: Router, private customerService: CustomerService ) { }
 
@@ -44,12 +45,15 @@ export class ListCustomerComponent implements OnInit {
           );
         }
 
-  alterCustomer(id: number){
-    console.log(id)
-    this.router.navigate(['altercostumber', id]);
-    
+  alterCustomer(cust: Customer){
+    console.log(cust)
+    //this.router.navigate(['altercostumber', id]);
+    this.selectCust = cust;
   }
 
-
+  cancelar() {
+    this.selectCust = {} as Customer;
+    this.getCustomer();
+  }
 
 }

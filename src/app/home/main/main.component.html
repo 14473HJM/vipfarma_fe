@@ -2,8 +2,9 @@
   <div class="jumbotron bg-cover text-white">
     <div class="container py-5 text-center">
         <h1 *ngIf="isHome" class="display-4 font-weight-bold text-center">Bienvenido a FARMAVIP</h1>
-        <h1 *ngIf="isFacturar " class="display-4 font-weight-bold text-center">FACTURACION</h1>
-        <h1 *ngIf="isDespacho " class="display-4 font-weight-bold text-center">DESPACHO</h1>
+        <h1 *ngIf="isFacturar" class="display-4 font-weight-bold text-center">FACTURACION</h1>
+        <h1 *ngIf="isDespacho" class="display-4 font-weight-bold text-center">DESPACHO</h1>
+        <h1 *ngIf="isVerClientes" class="display-4 font-weight-bold text-center">CLIENTES</h1>
         <h1 *ngIf="refreshListOffer" class="display-4 font-weight-bold">LISTADO DE PRECIOS</h1>
         <h1 *ngIf="refreshListDiscount" class="display-4 font-weight-bold">LISTADO DE DESCUENTOS</h1>
     </div>
@@ -36,12 +37,6 @@
                   Home
               </a>
       </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link text-dark font-italic" >
-                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                  Mi perfil
-              </a>
-      </li>
     </ul>
 
     <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">VENTAS</p>
@@ -64,6 +59,17 @@
         <a href="#" class="nav-link text-dark font-italic" (click)="despacho()">
                   <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
                   Despacho
+              </a>
+      </li>
+    </ul>
+
+    <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">CLIENTES</p>
+  
+    <ul class="nav flex-column bg-white mb-0">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-dark font-italic" (click)="verClientes()" >
+                  <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                  Consultar Clientes
               </a>
       </li>
     </ul>
@@ -96,5 +102,6 @@
     <app-list-offer *ngIf="refreshListOffer"></app-list-offer>
     <app-list-discount *ngIf="refreshListDiscount"></app-list-discount>
     <app-despacho *ngIf="isDespacho" ></app-despacho>
+    <app-list-customer *ngIf="isVerClientes" ></app-list-customer>
   </div>
   <!-- End demo content -->

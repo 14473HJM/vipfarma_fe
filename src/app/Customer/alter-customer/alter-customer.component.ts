@@ -14,6 +14,7 @@ import { HealthInsuranceService } from 'src/services/health-insurance.service';
 export class AlterCustomerComponent implements OnInit {
   customer: Customer= {} as Customer;
   healthinsurance:  healthInsurance[];
+  @Input() id: number;
 
   private subscription = new Subscription();
 
@@ -58,8 +59,7 @@ export class AlterCustomerComponent implements OnInit {
     this.subscription.add(
       this.activatedRoute.params.subscribe({
         next: (params) => {
-          const id = params['id'];
-          this.customerService.getCustomer(id).subscribe({
+          this.customerService.getCustomer(this.id.toString()).subscribe({
             next: (respuesta: Customer) => {
               this.customer = respuesta;
             },
@@ -100,7 +100,7 @@ export class AlterCustomerComponent implements OnInit {
         this.customerService.postCreate(this.customer).subscribe({
           next: () => {
             alert('Cliente modificado correctamente')
-            this.router.navigate(['listcustomer']);
+            //this.router.navigate(['listcustomer']);
           },
           error: () => {
             alert('Error al guardar el cliente');
