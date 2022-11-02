@@ -24,13 +24,6 @@ export class HealthInsuranceService {
     return this.http.get<healthInsurance>(this.apiUrlBase + "/" + id);
   }
 
-
-  constructor(private http: HttpClient, private router: Router) { }
-
-  gethealthInsurance(): Observable<healthInsurance[]>{
-    return this.http.get<healthInsurance[]>(this.apiUrlBase);
-  }
-
-  
+ 
 
 }

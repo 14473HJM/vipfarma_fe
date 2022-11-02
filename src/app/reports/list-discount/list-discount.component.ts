@@ -67,7 +67,7 @@ export class ListDiscountComponent implements OnInit {
   }
 
   getHealthI(){
-    this.selectHealthInsu.gethealthInsurance().subscribe({
+    this.selectHealthInsu.gethealthInsurances().subscribe({
       next: (respuesta: healthInsurance[]) => {
         this.listHealthInsurance= respuesta;
       },
