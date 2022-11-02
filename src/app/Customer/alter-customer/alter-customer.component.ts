@@ -1,39 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
-import { healthInsurance } from 'src/interfaces/healthInsurance';
-import { healthInsurancePlan } from 'src/interfaces/healthInsurancePlan';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { healthInsurance } from 'src/interfaces/healthInsurance';
 import { HealthInsuranceService } from 'src/services/health-insurance.service';
-import { HealthInsurancePlanService } from 'src/services/health-insurance-plan.service';
-import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
-  selector: 'app-create-customer',
-  templateUrl: './create-customer.component.html',
-  styleUrls: ['./create-customer.component.css']
+  selector: 'app-alter-customer',
+  templateUrl: './alter-customer.component.html',
+  styleUrls: ['./alter-customer.component.css']
 })
-
-export class CreateCustomerComponent implements OnInit {
-
+export class AlterCustomerComponent implements OnInit {
   customer: Customer= {} as Customer;
   healthinsurance:  healthInsurance[];
-  obs: healthInsurance = {} as healthInsurance;
+
   private subscription = new Subscription();
-  //availablePlans: healthInsurancePlan[];
-  availablePlans: healthInsurancePlan= {} as healthInsurancePlan;
-  healthInsuranceId: any;
 
-
-  constructor(public modalRef: MdbModalRef<CreateCustomerComponent>, private router: Router, private customerService: CustomerService, private healthInsuranceService: HealthInsuranceService, private healthInsurancePlanService: HealthInsurancePlanService ) {
-   }
+  constructor(private customerService: CustomerService, private healthInsuranceService: HealthInsuranceService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getHealthInsurance()
-    this.customer.identificationType="tipo";
+    this.getCustomer();
+    this.getHealthInsurance();
   }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -53,17 +42,34 @@ export class CreateCustomerComponent implements OnInit {
 
   }
 
-  sethealthInsurance(obs: healthInsurance)
+  sethealthInsurance(obs: Customer["healthInsurance"])
   {
     console.log
     this.customer.healthInsurance=obs
     this.customer.healthInsuranceId=obs.id
-    this.customer.healthInsurancePlanId=0;
+    this.customer.healthInsurancePlan.name="Selecione un plan"
   }
-
-  sethealthInsurancePlan(plan: healthInsurancePlan)
+  sethealthInsurancePlan(plan: Customer["healthInsurancePlan"])
   {
     this.customer.healthInsurancePlan=plan;
+  }
+
+  private getCustomer() {
+    this.subscription.add(
+      this.activatedRoute.params.subscribe({
+        next: (params) => {
+          const id = params['id'];
+          this.customerService.getCustomer(id).subscribe({
+            next: (respuesta: Customer) => {
+              this.customer = respuesta;
+            },
+            error: () => {
+              alert('error al obtener el cliente');
+            },
+          });
+        },
+      })
+    );
   }
 
   save(){
@@ -93,9 +99,8 @@ export class CreateCustomerComponent implements OnInit {
       this.subscription.add(
         this.customerService.postCreate(this.customer).subscribe({
           next: () => {
-            alert('Cliente cargado correctamente')
-            this.reset();
-            this.router.navigate(['customer']);
+            alert('Cliente modificado correctamente')
+            this.router.navigate(['listcustomer']);
           },
           error: () => {
             alert('Error al guardar el cliente');
@@ -106,11 +111,6 @@ export class CreateCustomerComponent implements OnInit {
 
   }
 
-  reset(){
-    this.customer={} as Customer;
-    this.customer.identificationType="tipo";
-    
-  }
 
 
 
