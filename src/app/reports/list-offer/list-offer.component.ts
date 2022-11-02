@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { Subscription } from 'rxjs';
 import { OfferStock } from 'src/interfaces/OfferStock';
 import { OfferService } from 'src/services/offer.service';
@@ -21,39 +23,11 @@ export class ListOfferComponent implements OnInit {
 
   constructor(
     private offerService: OfferService, //corresponde a OfferStock
-  
-    private router: Router
-    ) { }
-
-    
+    private router: Router) { }
     
   ngOnInit(): void {
     this.refreshList();
   }
-
-  // refreshList() {
-  //   this.subscription.add(
-  //     this.productService.obtener().subscribe({
-  //       next: (products: Product[]) => {
-  //          this.offerService.getOffer().subscribe({
-  //            next: (respuesta: OfferStock[]) => {
-  //              for (const offer of respuesta) {
-  //               const productIndex = products.findIndex(
-  //                 (x) => x.id === offer.productId
-  //               );
-  //               offer.product = products[productIndex];
-  //             }
-
-  //             this.list = respuesta;
-  //           },
-  //           error: () => {
-  //             alert('error al comunicarse con la API');
-  //           },
-  //         });
-  //       },
-  //     })
-  //   );
-  // }
 
   refreshList() {
     this.subscription.add(
@@ -69,9 +43,21 @@ export class ListOfferComponent implements OnInit {
     );
   }
   
+  descargar() {
+    var data = document.getElementById('listado');
+    if(data !== null) {
+      html2canvas(data).then(canvas => {  
+        // Few necessary setting options  
+        let imgWidth = 208;   
+        let imgHeight = canvas.height * imgWidth / canvas.width;  
   
-    
-  
-
+        const contentDataURL = canvas.toDataURL('image/png')  
+        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
+        let position = 0;  
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+        pdf.save('reposrteProductos.pdf'); // Generated PDF   
+      });
+    } 
+  }
 
 }

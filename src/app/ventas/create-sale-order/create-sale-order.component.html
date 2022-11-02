@@ -1,41 +1,37 @@
 <div class="container">
     <h2>Generar</h2>
     <hr>
-    <!--formulario-->
+    <!-- formulario-->
     <form>
         <div class="row g-3">
             <div class="col">
-                <input type="text" class="form-control" placeholder="DNI/CUIT/CUIL " aria-label="First name">
+                <select class="form-select" name="customer" id="customer" placeholder="Cliente"
+                    [(ngModel)]="customer" (change)="listado(customer)">
+                    <option *ngFor="let c of customers" [ngValue]="c">
+                        {{ c.name }} {{ c.lastName }}
+                    </option>
+                </select>
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Nombre" aria-label="Last name">
-            </div>
-        </div>
-        <div class="row g-3">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Obra socail" aria-label="First name">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Plan" aria-label="Last name">
+                <input type="text" class="form-control" name="dni" [(ngModel)]="cusDni">
             </div>
         </div>
         <div class="row g-3">
             <div class="col">
-                <input type="text" class="form-control" placeholder=" Producto" aria-label="First name">
+                <input type="text" class="form-control" name="name" [(ngModel)]="cusOs">
             </div>
             <div class="col">
-
-                <div class="row">
-                    <div class="col-auto">
-                        <input type="text" class="form-control" placeholder="Cantidad" aria-label="First name">
-                    </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-outline-primary">Cargar</button>
-                    </div>
-                </div>
+                <input type="text" class="form-control" name="namePlan" [(ngModel)]="cusOsP">
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col">
+                <button type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear cliente</button>
+                <button type="button" class="btn btn-outline-primary" (click)="openModalOffer()" >Agregar productos</button>
             </div>
         </div>
     </form>
+
     <!--formulario-->
 
     <!--tabla-->
@@ -45,17 +41,15 @@
                 <th scope="col">#</th>
                 <th scope="col">Código</th>
                 <th scope="col">Producto</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Subtotal</th>
-                <th scope="col">Descuento</th>
-                <th scope="col">Total</th>
+                <th scope="col">Código de Barra</th>
+                <th scope="col">Laboratorio</th>
+                <th scope="col">Precio</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
                 <td>Mark</td>
                 <td>Mark</td>
                 <td>Mark</td>
@@ -107,7 +101,9 @@
         <div class="col-auto">
             <input type="text" class="form-control" placeholder="Total" aria-label="First name">
         </div>
-
-        <!--Total-->
-
+        <div class="col-auto">
+        <button type="button" class="btn btn-outline-primary">Guardar</button>
+        </div>
     </div>
+
+    <!--Total-->

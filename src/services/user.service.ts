@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { HttpClient } from '@angular/common/http';
 import { environment } from "src/environments/environment";
 import { Router } from '@angular/router';
+import { User } from 'src/interfaces/User';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +29,31 @@ export class UserService {
     return this.http.post(url, body, { 'headers': headers })
   }
 
+  postCreate(user: User): Observable<any> {
+    const comando = {
+          "userName": user.userName,
+          "password": user.password,
+          "email": user.email,
+          "userRole": user.userRole,
+          "branchOffice": user.branchOffice
+    }
+    const url = this.apiUrlBase;
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(comando);
+
+    return this.http.post(url, body, { 'headers': headers })
+  }
+
   getUser(id: string): Observable<any> {
     return this.http.get(this.apiUrlBase + "/" + id);
   }
 
   /* TOKEN SERVICES */
-  setToken(token: string, userName: string, rol: string) {
+  setToken(token: string, userName: string, rol: string, branch: string) {
     localStorage.setItem("token", token);
     localStorage.setItem("userName", userName);
     localStorage.setItem("userRol", rol);
+    localStorage.setItem("branch", branch);
   }
 
   getToken() : any {
@@ -49,6 +66,10 @@ export class UserService {
 
   getUserName() : any {
     return localStorage.getItem("userName");
+  }
+
+  getBranchId() : any {
+    return localStorage.getItem("branch");
   }
 
   /* AUTHENTICATION SERVICES */

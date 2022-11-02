@@ -11,6 +11,7 @@ export class DespachoComponent implements OnInit {
 
   saleOrder = {} as SaleOrder[];
   selectedOrder = {} as SaleOrder;
+  orderDetail = {} as SaleOrder;
 
   constructor(private saleOrderSrv : SaleOrderService) { }
 
@@ -31,18 +32,28 @@ export class DespachoComponent implements OnInit {
 
   onSelectionChange(order: SaleOrder) {
     this.selectedOrder = order;
+
+    this.saleOrderSrv.getOrderById(this.selectedOrder.id).subscribe({
+      next: (response : SaleOrder) => {
+        this.orderDetail = response;
+      },
+      error: () => {
+        alert("Error en el Servicio");
+      },
+    })
   }
 
   despachar() {
-    //this.billSrv.billOrder(this.selectedOrder.id).subscribe({
-    //  next: () => {
-    //    alert("Se facturo Orden N` " + this.selectedOrder.id);
-    //    this.refresh();
-    //  },
-    //  error: () => {
-    //    alert("Error en el Servicio");
-    //  },
-    //})
+    this.saleOrderSrv.changeStatus(this.selectedOrder.id, "DELIVERED").subscribe({
+      next: (response : SaleOrder) => {
+        alert("Orden No " + this.selectedOrder.id + " se despacho correctamente !")
+        this.refresh();
+        this.selectedOrder = {} as SaleOrder;
+      },
+      error: () => {
+        alert("Error en el Servicio");
+      },
+    })
   }
 
 }
