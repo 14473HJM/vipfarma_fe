@@ -18,7 +18,9 @@ export class SearchProductsComponent implements OnInit {
   activeBarcode: boolean = false;
   products: Product[] = [];
 
-  constructor(public modalRef: MdbModalRef<SearchProductsComponent>, private router: Router, private productService: ProductService) { }
+  constructor(public modalRef: MdbModalRef<SearchProductsComponent>, 
+    private router: Router, 
+    private productService: ProductService) { }
 
   ngOnInit(): void {
     this.activeName = false;

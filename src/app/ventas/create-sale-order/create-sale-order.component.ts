@@ -75,7 +75,6 @@ export class CreateSaleOrderComponent implements OnInit {
     this.modalRef = this.modalService.open(SearchProductsComponent )
   }
   
-  
   saveOrder() {
   this.saleOderService.createSaleOrder(this.saleOrder).subscribe({
         next: () => {
