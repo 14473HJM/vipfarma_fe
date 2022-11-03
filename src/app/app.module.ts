@@ -19,6 +19,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
+import { CustomerPipe } from './pipes/customer.pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
     FilterPipe,
     ListDiscountComponent,
     DiscountPipe,
-    DespachoComponent    
+    DespachoComponent,
+    CustomerPipe    
 
   ],
   imports: [

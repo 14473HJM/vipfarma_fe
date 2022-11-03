@@ -15,16 +15,10 @@
         <br>
         <div class="row g-3">
             <div class="col">
-                <input type="text" class="form-control" placeholder="DNI/CUIT/CUIL" aria-label="DNI/CUIT/CUIL">
+                <input type="text" class="form-control" name="filterCustomer"  placeholder="DNI/CUIT/CUIL" aria-label="DNI/CUIT/CUIL"  [(ngModel)]="filterCustomer">
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Nombre" aria-label="name">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Apellido" aria-label="Last name">
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-outline-primary">Buscar</button>
+                <input type="text" class="form-control"  placeholder="Nombre o Apellido" aria-label="name" name="filterNombre" [(ngModel)]="filterNombre">
             </div>
         </div>
     </form>
@@ -43,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let customers of listado; let index=index">
+            <tr *ngFor="let customers of listado  | customers: filterCustomer: filterNombre; let index=index">
                 <th scope="row">{{index+1}}</th>
                 <td>{{customers.id}}</td>
                 <td>{{customers.name + ' ' + customers.lastName}}</td>

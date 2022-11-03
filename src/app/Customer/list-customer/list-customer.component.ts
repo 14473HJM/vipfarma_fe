@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
+
 
 @Component({
   selector: 'app-list-customer',
@@ -11,9 +12,13 @@ import { CustomerService } from 'src/services/customer.service';
 })
 export class ListCustomerComponent implements OnInit {
 
+  @Input() id: string='';
+
   listado: Customer[]= {} as Customer[];
   private subscription = new Subscription();
   counter: number;
+  filterCustomer: string= '';
+  filterNombre: string= '';
 
   constructor(private router: Router, private customerService: CustomerService ) { }
 
