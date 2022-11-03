@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Product } from 'src/interfaces/Product';
@@ -17,6 +17,8 @@ export class SearchProductsComponent implements OnInit {
   activeName: boolean = false;
   activeBarcode: boolean = false;
   products: Product[] = [];
+
+  @Input() prod: Product[];
 
   constructor(public modalRef: MdbModalRef<SearchProductsComponent>, 
     private router: Router, 
@@ -70,4 +72,7 @@ export class SearchProductsComponent implements OnInit {
 
   }
 
+  listaProductos(products: Product[]){
+    this.router.navigate(['listaProducto', products]);
+  }
 }

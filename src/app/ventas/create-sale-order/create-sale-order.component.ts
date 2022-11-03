@@ -11,6 +11,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { CreateCustomerComponent } from '../../Customer/create-customer/create-customer.component';
 import { SearchProductsComponent } from 'src/app/products/search-products/search-products.component';
 import { ProductService } from 'src/services/product.service';
+import { Product } from 'src/interfaces/Product';
 
 @Component({
   selector: 'app-create-sale-order',
@@ -19,7 +20,6 @@ import { ProductService } from 'src/services/product.service';
 })
 export class CreateSaleOrderComponent implements OnInit {
   
-
   customers = {} as Customer[];
   saleOrder = {} as SaleOrder;
   user = {} as User;
@@ -30,6 +30,8 @@ export class CreateSaleOrderComponent implements OnInit {
   cusDni: string;
   cusDniType: string;
   modalRef: MdbModalRef<CreateCustomerComponent> | null = null;
+  prod = {} as Product[];
+  
 
   private subscription = new Subscription();
 
@@ -85,4 +87,7 @@ export class CreateSaleOrderComponent implements OnInit {
         }
       })
   }
+
+
+
 }

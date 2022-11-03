@@ -38,23 +38,21 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Código</th>
-                <th scope="col">Producto</th>
-                <th scope="col">Código de Barra</th>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Código de Barras</th>
                 <th scope="col">Laboratorio</th>
+                <th scope="col">Prescripción Requerida</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Acción</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Mark</td>
+            <tr *ngFor="let item of prod">
+                <th>{{item.name}}</th>
+                <td>{{item.barcode}}</td>
+                <td>{{item.laboratory}}</td>
+                <td>{{item.prescriptionRequired}}</td>
+                <td>{{item.price}}</td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-secondary">
