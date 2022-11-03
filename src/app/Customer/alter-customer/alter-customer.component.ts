@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ export class AlterCustomerComponent implements OnInit {
   customer: Customer= {} as Customer;
   healthinsurance:  healthInsurance[];
   @Input() id: number;
+  @Output() onUpdate = new EventEmitter();
 
   private subscription = new Subscription();
 
@@ -93,14 +94,12 @@ export class AlterCustomerComponent implements OnInit {
       alert(`Debe introducir correctamente la obra social y el plan correspondiente`)
       return
     } 
-
-
    
       this.subscription.add(
         this.customerService.postCreate(this.customer).subscribe({
           next: () => {
             alert('Cliente modificado correctamente')
-            //this.router.navigate(['listcustomer']);
+            this.onUpdate.emit();
           },
           error: () => {
             alert('Error al guardar el cliente');

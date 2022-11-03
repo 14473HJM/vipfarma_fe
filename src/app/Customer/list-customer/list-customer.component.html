@@ -12,11 +12,8 @@
     <form>
         <br>
         <div class="row g-3">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Buscar Clientes .... " aria-label="DNI/CUIT/CUIL">
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-outline-primary">Buscar</button>
+            <div class="col 1">
+                <input type="text" class="form-control" placeholder="Buscar Clientes .... " name="filterCustomer" [(ngModel)]="filterCustomer">
             </div>
         </div>
     </form>
@@ -33,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let customers of listado; let index=index">
+            <tr *ngFor="let customers of listado | FilterCustByAttributes: filterCustomer ">
                 <td>{{customers.name + ' ' + customers.lastName}}</td>
                 <td>{{customers.identification}}</td>
                 <td>{{customers.address}}</td>
@@ -62,7 +59,7 @@
     <button type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear cliente</button>
 
     <app-alter-customer *ngIf="selectCust.id != null"
-        [id]="selectCust.id" >
+        [id]="selectCust.id" (onUpdate)="getCustomer()" >
     </app-alter-customer>
 
     <div *ngIf="selectCust.id != null">
