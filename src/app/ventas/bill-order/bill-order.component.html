@@ -53,7 +53,7 @@
             <div class="col-xl-8">
               <ul class="list-unstyled">
                 <li class="text-muted">To: <span style="color:#5d9fc5 ;">
-                    {{ selectedOrder.customer.lastName }}, {{ selectedOrder.customer.name}}</span></li>
+                    {{ preview.customer?.lastName }}, {{ preview.customer?.name}}</span></li>
                 <li class="text-muted"> {{selectedOrder.customer.address }} </li>
                 <li class="text-muted"> Argentina</li>
               </ul>
@@ -64,7 +64,7 @@
                 <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                     class="fw-bold">No #:</span> {{ bill.id }} </li>
                 <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="fw-bold">Fecha: </span> {{ bill.createdDate }} </li>
+                    class="fw-bold">Fecha: </span> {{ preview.createdDate }} </li>
                 <li *ngIf="bill.id != null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                       class="me-1 fw-bold">Status:</span><span class="badge bg-info text-black fw-bold">
                       Pagado</span></li>
@@ -88,9 +88,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of selectedOrder.saleOrderItems">
+                <tr *ngFor="let item of preview.items">
                   <th scope="row"> {{item.id}}  </th>
-                  <td> {{item.offer.product.name}} </td>
+                  <td> {{item.offer?.product?.name}} </td>
                   <td> {{item.quantity}} </td>
                   <td> {{item.unitaryPrice}} </td>
                   <td> {{item.discountAmount}} </td>
@@ -104,19 +104,19 @@
             </div>
             <div class="col-xl-3">
               <ul class="list-unstyled">
-                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> $ {{selectedOrder.totalAmount}} </li>
+                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> $ {{preview.totalAmount}} </li>
                 <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Descuento </span>$ 0</li>
               </ul>
               <p class="text-black float-start"><span class="text-black me-3"> Total: </span><span
-                  style="font-size: 25px;">$ {{selectedOrder.totalAmount}} </span></p>
+                  style="font-size: 25px;">$ {{preview.totalAmount}} </span></p>
             </div>
-            <div *ngIf="bill.cae != null">
-                Codigo de Autorizacion Electronico: {{ bill.cae }}
+            <div>
+                Codigo de Autorizacion Electronico: {{ preview.cae }}
             </div>
           </div>
           <hr>
           <div class="row">
-            <div *ngIf="bill.id != null" class="col-xl-10">
+            <div class="col-xl-10">
               <p>Gracias por su compra !!</p>
             </div>
           </div>

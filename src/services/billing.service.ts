@@ -14,12 +14,12 @@ export class BillingService {
 
   constructor(private http: HttpClient, private userServ : UserService) { }
 
-  billOrder(id: number): Observable<Bill> {
+  billOrder(id: number, preview: boolean): Observable<Bill> {
     let idUser = this.userServ.getToken();
     const comando = {
       "id": idUser
     }
-    return this.http.post<Bill>(this.apiUrlBase + "/" + id, comando);
+    return this.http.post<Bill>(this.apiUrlBase + "/" + id + "?preview=" + preview, comando);
   }
 
 }

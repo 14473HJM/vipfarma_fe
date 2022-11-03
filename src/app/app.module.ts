@@ -24,7 +24,10 @@ import { ListDiscountComponent } from './reports/list-discount/list-discount.com
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
 import { FilterOrderByCustPipe } from './pipes/filterOrderByCustomer';
+import { FilterCustByAttributesPipe } from './pipes/filterCustByAttributes';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
+import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 
 
 @NgModule({
@@ -47,7 +50,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ListDiscountComponent,
     DiscountPipe,
     DespachoComponent,
-    FilterOrderByCustPipe
+    FilterOrderByCustPipe,
+    FilterCustByAttributesPipe,
+    RecibirStockComponent,
+    GuardarStockComponent
  ],
  
   imports: [

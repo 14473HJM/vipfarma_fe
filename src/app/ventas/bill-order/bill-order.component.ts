@@ -17,6 +17,7 @@ export class BillOrderComponent implements OnInit {
   saleOrder = {} as SaleOrder[];
   selectedOrder = {} as SaleOrder;
   bill = {} as Bill;
+  preview = {} as Bill;
   apply : boolean = false;
   filterCustomer: string = '';
 
@@ -40,6 +41,17 @@ export class BillOrderComponent implements OnInit {
 
   onSelectionChange(order: SaleOrder) {
     this.selectedOrder = order;
+
+    this.billSrv.billOrder(this.selectedOrder.id, true).subscribe({
+      next: (response: Bill) => {
+        //alert("Se facturo correctamente la Orden # " + this.selectedOrder.id);
+        this.preview = response;
+        //this.refresh();
+      },
+      error: () => {
+        alert("Error en el Servicio");
+      },
+    })
 }
 
   facturar() {
@@ -48,7 +60,7 @@ export class BillOrderComponent implements OnInit {
     );
 
     if (result) {
-      this.billSrv.billOrder(this.selectedOrder.id).subscribe({
+      this.billSrv.billOrder(this.selectedOrder.id, false).subscribe({
         next: (response: Bill) => {
           alert("Se facturo correctamente la Orden # " + this.selectedOrder.id);
           this.bill = response;
@@ -80,6 +92,7 @@ export class BillOrderComponent implements OnInit {
 
   cancelar() {
     this.bill = {} as Bill;
+    this.preview = {} as Bill;
     this.selectedOrder = {} as SaleOrder;
     this.apply = false;
     this.refresh();
