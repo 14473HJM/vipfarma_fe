@@ -24,7 +24,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Código</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">DNI/CUIL/CUIT</th>
                 <th scope="col">Direccion</th>
@@ -35,7 +34,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let customers of listado; let index=index">
-                <td>{{customers.id}}</td>
                 <td>{{customers.name + ' ' + customers.lastName}}</td>
                 <td>{{customers.identification}}</td>
                 <td>{{customers.address}}</td>
@@ -60,6 +58,8 @@
             <br>
         </tbody>
     </table>
+
+    <button type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear cliente</button>
 
     <app-alter-customer *ngIf="selectCust.id != null"
         [id]="selectCust.id" >

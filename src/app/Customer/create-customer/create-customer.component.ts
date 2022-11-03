@@ -25,15 +25,17 @@ export class CreateCustomerComponent implements OnInit {
   availablePlans: healthInsurancePlan= {} as healthInsurancePlan;
   healthInsuranceId: any;
 
-
-  constructor(public modalRef: MdbModalRef<CreateCustomerComponent>, private router: Router, private customerService: CustomerService, private healthInsuranceService: HealthInsuranceService, private healthInsurancePlanService: HealthInsurancePlanService ) {
+  constructor(public modalRef: MdbModalRef<CreateCustomerComponent>, 
+    private router: Router, 
+    private customerService: CustomerService, 
+    private healthInsuranceService: HealthInsuranceService, 
+    private healthInsurancePlanService: HealthInsurancePlanService ) {
    }
 
   ngOnInit(): void {
     this.getHealthInsurance()
     this.customer.identificationType="tipo";
   }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -88,30 +90,22 @@ export class CreateCustomerComponent implements OnInit {
       return
     } 
 
-
-   
-      this.subscription.add(
-        this.customerService.postCreate(this.customer).subscribe({
-          next: () => {
-            alert('Cliente cargado correctamente')
-            this.reset();
-            this.router.navigate(['customer']);
-          },
-          error: () => {
-            alert('Error al guardar el cliente');
-          }
-        })
-      );
-    
-
+    this.subscription.add(
+      this.customerService.postCreate(this.customer).subscribe({
+        next: () => {
+          alert('Cliente cargado correctamente')
+          this.reset();
+        },
+        error: () => {
+          alert('Error al guardar el cliente');
+        }
+      })
+    );
   }
 
   reset(){
     this.customer={} as Customer;
     this.customer.identificationType="tipo";
-    
   }
-
-
 
 }
