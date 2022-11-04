@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SaleOrder } from 'src/interfaces/sale-order';
 import { SaleOrderService } from 'src/services/sale-order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-despacho',
@@ -25,7 +26,11 @@ export class DespachoComponent implements OnInit {
         this.saleOrder = response;
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el Servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
   }
@@ -38,22 +43,46 @@ export class DespachoComponent implements OnInit {
         this.orderDetail = response;
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el Servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
   }
 
   despachar() {
-    this.saleOrderSrv.changeStatus(this.selectedOrder.id, "DELIVERED").subscribe({
-      next: (response : SaleOrder) => {
-        alert("Orden No " + this.selectedOrder.id + " se despacho correctamente !")
-        this.refresh();
-        this.selectedOrder = {} as SaleOrder;
-      },
-      error: () => {
-        alert("Error en el Servicio");
-      },
-    })
+    Swal.fire({
+      title: 'Marcar Orden ' + this.selectedOrder.id + ' como DESPACHADA ??',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Despachar',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.saleOrderSrv.changeStatus(this.selectedOrder.id, "DELIVERED").subscribe({
+          next: (response : SaleOrder) => {
+            Swal.fire({
+              title: 'Orden No ' + this.selectedOrder.id + ' se despacho correctamente !',
+              icon: 'success',
+              confirmButtonText: "Ok",
+            });
+            this.refresh();
+            this.selectedOrder = {} as SaleOrder;
+          },
+          error: () => {
+            Swal.fire({
+              title: 'Error en el Servicio',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
+          },
+        })
+      }
+    })    
   }
 
 }
