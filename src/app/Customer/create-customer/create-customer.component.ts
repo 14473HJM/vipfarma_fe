@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
 import { healthInsurance } from 'src/interfaces/healthInsurance';
@@ -9,6 +9,7 @@ import { HealthInsuranceService } from 'src/services/health-insurance.service';
 import { HealthInsurancePlanService } from 'src/services/health-insurance-plan.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
+
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -16,6 +17,8 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 })
 
 export class CreateCustomerComponent implements OnInit {
+
+  @Output() refresh: EventEmitter<any> = new EventEmitter();
 
   customer: Customer= {} as Customer;
   healthinsurance:  healthInsurance[];
@@ -101,6 +104,8 @@ export class CreateCustomerComponent implements OnInit {
         }
       })
     );
+
+    this.refresh.emit();
   }
 
   reset(){
