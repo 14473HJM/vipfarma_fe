@@ -13,6 +13,8 @@ export class DespachoComponent implements OnInit {
   saleOrder = {} as SaleOrder[];
   selectedOrder = {} as SaleOrder;
   orderDetail = {} as SaleOrder;
+  filterCustomer: string = '';
+  public page: number;
 
   constructor(private saleOrderSrv : SaleOrderService) { }
 

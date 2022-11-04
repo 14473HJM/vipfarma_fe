@@ -21,6 +21,7 @@ export class BillOrderComponent implements OnInit {
   preview = {} as Bill;
   apply : boolean = false;
   filterCustomer: string = '';
+  public page: number;
 
   constructor(private saleOrderSrv : SaleOrderService, private router: Router,
     private billSrv : BillingService) { }
