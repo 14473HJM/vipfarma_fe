@@ -3,6 +3,7 @@
   <div class="container py-5 text-center">
     <h1 *ngIf="isHome" class="display-4 font-weight-bold text-center">Bienvenido a FARMAVIP</h1>
     <h1 *ngIf="isFacturar" class="display-4 font-weight-bold text-center">FACTURACION</h1>
+    <h1 *ngIf="isSell" class="display-4 font-weight-bold text-center">VENTA</h1>
     <h1 *ngIf="isDespacho" class="display-4 font-weight-bold text-center">DESPACHO</h1>
     <h1 *ngIf="isRecibirStock" class="display-4 font-weight-bold text-center">STOCK</h1>
     <h1 *ngIf="isVerClientes" class="display-4 font-weight-bold text-center">CLIENTES</h1>
@@ -34,13 +35,13 @@
   </div>
 
   <div class="sc">
-  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">HOME</p>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">INICIO</p>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
       <a href="#" class="nav-link text-dark font-italic bg-light" (click)="home()">
         <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
-        Home
+        Inicio
       </a>
     </li>
   </ul>
@@ -49,7 +50,7 @@
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark font-italic">
+      <a href="#" class="nav-link text-dark font-italic" (click)="sell()">
         <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
         Orden de Venta
       </a>
@@ -57,7 +58,7 @@
     <li class="nav-item">
       <a href="#" class="nav-link text-dark font-italic" (click)="facturar()">
         <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-        Facturacion
+        Facturación
       </a>
     </li>
 
@@ -117,6 +118,7 @@
 <div class="page-content p-5" id="content">
   <app-home *ngIf="isHome"></app-home>
   <app-bill-order *ngIf="isFacturar"></app-bill-order>
+  <app-create-sale-order *ngIf="isSell"></app-create-sale-order>
   <app-list-offer *ngIf="refreshListOffer"></app-list-offer>
   <app-list-discount *ngIf="refreshListDiscount"></app-list-discount>
   <app-despacho *ngIf="isDespacho"></app-despacho>

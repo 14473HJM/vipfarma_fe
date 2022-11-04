@@ -13,6 +13,7 @@ export class MainComponent implements OnInit {
   viewName : string = "HOME";
   user = {} as User;
   isFacturar : boolean = false;
+  isSell : boolean = false;
   isHome : boolean = true;
   refreshListOffer: boolean = false;
   refreshListDiscount: boolean=false;
@@ -45,6 +46,7 @@ export class MainComponent implements OnInit {
   cleanFlags() {
     this.isHome = false;
     this.isFacturar = false;
+    this.isSell = false;
     this.refreshListDiscount = false;
     this.refreshListOffer = false;
     this.isDespacho = false;
@@ -86,6 +88,11 @@ export class MainComponent implements OnInit {
   recibirStock() {
     this.cleanFlags();
     this.isRecibirStock = true;
+  }
+
+  sell(){
+    this.cleanFlags();
+    this.isSell =true;
   }
 
 }
