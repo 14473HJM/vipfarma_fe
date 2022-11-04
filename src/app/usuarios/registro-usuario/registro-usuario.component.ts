@@ -5,6 +5,7 @@ import { BranchOffice } from 'src/interfaces/BranchOffice';
 import { User } from 'src/interfaces/User';
 import { BranchOfficeService } from 'src/services/branch-office.service';
 import { UserService } from 'src/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -27,7 +28,11 @@ export class RegistroUsuarioComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         if(err.status == HttpStatusCode.InternalServerError) {
-          alert("Error en el Servicio"); 
+          Swal.fire({
+                title: 'Error en el Servicio',
+                icon: 'error',
+                confirmButtonText: "Ok",
+          });
         }
       },
     })
@@ -43,7 +48,11 @@ export class RegistroUsuarioComponent implements OnInit {
 				},
 			  error: (err: HttpErrorResponse) => {
           if(err.status == HttpStatusCode.InternalServerError) {
-            alert("Error en el Servicio"); 
+            Swal.fire({
+              title: 'Error en el Servicio',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            }); 
           }
 			  },
 			})
@@ -59,12 +68,20 @@ export class RegistroUsuarioComponent implements OnInit {
         this.pwd != null && this.pwd != "") {
 
           if(this.pwd !== this.user.password) {
-            alert('Los passwords deben ser iguales');
+            Swal.fire({
+              title: 'Las Contrasenas No son iguales',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
             return false;
           }
           return true;
     }
-    alert('Ingrese todos los campos requeridos');
+    Swal.fire({
+      title: 'Debe ingresar todos los campos requeridos',
+      icon: 'error',
+      confirmButtonText: "Ok",
+    });
     return false;
   }
 
