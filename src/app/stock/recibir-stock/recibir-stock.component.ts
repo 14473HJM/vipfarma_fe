@@ -88,7 +88,11 @@ export class RecibirStockComponent implements OnInit {
       item.rejectedQuantity = Number(value);
     }
 
-    item.actualQuantity = item.receivedQuantity - item.rejectedQuantity;
+    let total = item.receivedQuantity - item.rejectedQuantity;
+    if(total < 0) {
+      total = 0;
+    }
+    item.actualQuantity = total;
   }
 
   reject(id : number) {

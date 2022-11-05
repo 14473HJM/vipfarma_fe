@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/interfaces/User';
 import { UserService } from 'src/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main',
@@ -31,16 +32,20 @@ export class MainComponent implements OnInit {
   }
 
   logOut() {
-    const result: boolean = confirm(
-      '¿Está seguro que quiere cerrar sesión?'
-    );
-
-
-    
-    if(result) {
-      this.userServ.setToken("", "", "", "");
-      this.router.navigate(['login']);
-    }
+    Swal.fire({
+      title: '¿Está seguro que quiere cerrar sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.userServ.setToken("", "", "", "");
+        this.router.navigate(['login']);
+      }
+    })
   }
 
   setUserLogged() {
