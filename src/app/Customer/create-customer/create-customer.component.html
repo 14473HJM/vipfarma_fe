@@ -1,0 +1,89 @@
+
+<div class="modal-header">
+    <!-- <h5 class="modal-title" id="exampleModalLabel">Crear cliente</h5> -->
+    <button type="button" class="btn-close" aria-label="Cancelar" (click)="modalRef.close()"></button>
+</div>
+<div class="modal-body">
+    <!-- componente original -->
+
+    <div class="container">
+        <br>
+        <div class="row g-3">
+            <div class="col">
+            </div>
+            <div class="col">
+                <h3>Crear Cliente</h3>
+            </div>
+            <div class="col-auto">
+                <img src="../../assets/logito.png" alt="">
+            </div>
+        </div>
+        
+    
+        <hr>
+        <form>
+            <div class="row g-3">
+                <div class="col">
+                    <input [(ngModel)]="customer.name"  name="name" type="text" id="inputName" class="form-control" placeholder="Nombre" aria-label="First name">
+                </div>
+                <div class="col">
+                    <input [(ngModel)]="customer.lastName" type="text" id="inputLast" name="apellido" class="form-control" placeholder="Apellido" aria-label="Last name" >
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <select [(ngModel)]="customer.identificationType" name="identificacion" id="identificaciontype" name="tipoid" class="form-select" placeholder="Tipo de identificacion" aria-label="identificacion" >
+                        <option value="tipo" disabled selected>Tipo identificación</option>
+                        <option value="DNI">DNI</option>
+                        <option value="CUIL">CUIL</option>
+                        <option value="CUIT">CUIT</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="number" [(ngModel)]="customer.identification" id="identficacion"  name="identficacion" class="form-control" placeholder="DNI/CUIL/CUIT" aria-label="dni">
+                </div>
+            </div>
+    
+            <div class="row g-3">
+                <div class="col">
+                    <input type="text" id="inputAdrees" [(ngModel)]="customer.address" name="inputAdrees" class="form-control" placeholder="Calle - N° - Piso - Depto" aria-label="calle">
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <select [(ngModel)]="obs" id="os" name="Obra Social"  class="form-select"  placeholder="healthInsurance" aria-label="healthInsurance" (change)="sethealthInsurance(obs)">
+                        <option  value={{obs}} disabled selected>Obra Social</option>
+                        <option *ngFor="let os of healthinsurance" [ngValue]="os">
+                            {{os.name}}
+                        </option>
+                    </select>
+                </div>
+    
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <select [(ngModel)]="availablePlans"  name="availablePlans" id="plan" name="plan" class="form-select" placeholder="availablePlans" aria-label="availablePlans" (change)="sethealthInsurancePlan(availablePlans)">
+                                <option value={{availablePlans}} disabled selected>Plan</option>
+                                <option  *ngFor="let osp of obs.availablePlans" [ngValue]="osp">
+                                    {{osp.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-outline-primary" (click)="save(); modalRef.close()">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+      
+    
+    
+
+    <!-- componente original -->
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.close()">Cancelar</button>
+    </div>

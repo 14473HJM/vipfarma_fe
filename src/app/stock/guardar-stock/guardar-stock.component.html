@@ -1,0 +1,121 @@
+<div class="container">
+    <h3>Ordernes de Compra Recibidas</h3>
+    <br>
+    <form action="">
+        <div class="row g-3">
+            <div class="col 1">
+                <input type="text" class="form-control" placeholder="Buscar Ordenes por No .... " 
+                        name="filterOrderStock" [(ngModel)]="filterOrderStock">
+            </div>
+        </div>
+    </form>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">#</th>
+                <th scope="col">Orden de Compra #</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Warehouse</th>
+            </tr>
+        </thead>       
+        <tbody>
+            <tr *ngFor="let order of stockOrders | filterOStockByNumber: filterOrderStock | paginate: { itemsPerPage: 6, currentPage: page }">
+                <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
+                <th scope="row"> {{ order.id }} </th>
+                <td>{{ order.purchaseOrderId }}</td>
+                <td>{{ order.createdDate }}</td>
+                <td>{{ order.warehouse.name }}</td>
+        </tbody>
+    </table>
+
+    <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+</div>
+
+<br>
+<br>
+
+<div class="container container-fluid " *ngIf="selectedOrder.id != null">
+    <h3>Detalle Orden {{selectedOrder.id}}</h3>
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Cod</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cod. Barra</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Toatal Recibido</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>       
+        <tbody>
+            <tr *ngFor="let item of selectedOrder.stockOrderItems">
+                <td>{{ item.id}} </td>
+                <td>{{ item.product.name }} </td>
+                <td>{{ item.product.barcode }} </td>
+                <td>{{ item.stockOrderItemStatus }}</td>
+                <td>{{ item.actualQuantity }}</td>
+                <td>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary" (click)="actualizarUbicacion(item)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue"
+                                class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+        </tbody>
+    </table>
+
+    <br>
+    <button class="btn btn-primary align-right" type="submit" (click)="guardarOrden()">Almacenar Unidades</button>
+    <button class="btn align-right btn-outline-danger" type="submit" (click)="cancelar()">Cancelar</button>
+</div>
+<br>
+<br>
+<!--  Agregar Ubicacion  -->
+<div class="container" *ngIf="itemToSave.id != null" >
+    <br>
+    <div class="row g-3">
+        <div class="col">
+            <h3>Almacenar Producto # {{itemToSave.product.id}},  {{ itemToSave.product.name }} </h3> 
+            <h4>Unidades a Almacenar: {{itemToSave.actualQuantity}} </h4>
+        </div>
+    </div>
+    <br>
+
+    <hr>
+    <form>
+        <div *ngFor="let locker of actualLockers" class="row g-4">
+            <div class="col">
+                <h5  >Locker: </h5>
+            </div>
+            <div class="col">
+                <input type="number" [(ngModel)]="locker.id" id="locker" name="locker" class="form-control" disabled="true">
+            </div>
+            <div class="col">
+                <input type="number" [(ngModel)]="locker.stockCapacity" id="cantidad"  name="cantidad" class="form-control" placeholder="">
+            </div>
+        </div>
+
+        <div class="row g-3">
+           
+
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-outline-primary" >Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
