@@ -4,18 +4,7 @@
 
 export const environment = {
   production: false,
-  userBaseUrl: "http://localhost:8080/user",
-  branchOfficeUrl: "http://localhost:8080/branchOffice",
-  customerBaseUrl: "http://localhost:8080/customers",
-  healthInsuranceBaseUrl: "http://localhost:8080/healthInsurance",
-  healthInsurancePlanBaseUrl: "http://localhost:8080/healthInsurancePlan",
   baseUrl: "http://localhost:8080",
-  saleOrderBaseUrl: "http://localhost:8080/sale/orders",
-  billBaseUrl: "http://localhost:8080/billing/order",
-  stocksOffers: 'http://localhost:8080/stocks/offers',
-  orderStockBaseUrl: "http://localhost:8080/stock/orders",
-  uploadProductsBaseUrl: "http://localhost:8080/products",
-  lockerBaseUrl: "http://localhost:8080/lockers"
 };
 
 /*

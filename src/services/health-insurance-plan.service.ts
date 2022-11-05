@@ -12,7 +12,7 @@ import { healthInsurancePlan } from 'src/interfaces/healthInsurancePlan';
 })
 export class HealthInsurancePlanService {
   
-  private apiUrlBase: string = environment.healthInsurancePlanBaseUrl;
+  private apiUrlBase: string = environment.baseUrl + "/healthInsurancePlan";
 
   constructor(private http: HttpClient, private router: Router) { }
 

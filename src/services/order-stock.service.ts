@@ -10,7 +10,7 @@ import { UserService } from './user.service';
 })
 export class OrderStockService {
 
-  apiUrlOrderStock: string = environment.orderStockBaseUrl;
+  apiUrlOrderStock: string = environment.baseUrl + "/stock/orders";
 
   constructor(private http: HttpClient, private userServ: UserService) { }
 

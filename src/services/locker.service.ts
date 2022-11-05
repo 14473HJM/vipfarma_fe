@@ -9,7 +9,7 @@ import { Locker } from 'src/interfaces/Locker';
 })
 export class LockerService {
 
-  apiLockerBaseUrl: string = environment.lockerBaseUrl;
+  apiLockerBaseUrl: string = environment.baseUrl + "/lockers";
 
   constructor(private http: HttpClient) { }
 

@@ -18,7 +18,6 @@ import { UserService } from './user.service';
 export class SaleOrderService {
 
   apiUrlBase: string = environment.baseUrl;
-  apiUrlSaleOrder: string = environment.saleOrderBaseUrl;
 
   constructor(private http: HttpClient, private userServ: UserService) { }
 
@@ -51,20 +50,24 @@ export class SaleOrderService {
   }
 
   getOrderById(id : number): Observable<any> {
-    return this.http.get(this.apiUrlSaleOrder + "/" + id);
+    const url = this.apiUrlBase + "/sale/orders";
+    return this.http.get(url + "/" + id);
   }
 
   getSaleOrdersReadyToBill(): Observable<any> {
     let branchId = this.userServ.getBranchId();
-    return this.http.get(this.apiUrlSaleOrder + "?saleOrderStatus=READY_TO_BILL&branchOfficeId=" + branchId);
+    const url = this.apiUrlBase + "/sale/orders";
+    return this.http.get(url + "?saleOrderStatus=READY_TO_BILL&branchOfficeId=" + branchId);
   }
 
   getSaleOrdersBilled(branchId: number): Observable<any> {
-    return this.http.get(this.apiUrlSaleOrder + "?saleOrderStatus=BILLED&branchOfficeId=" + branchId);
+    const url = this.apiUrlBase + "/sale/orders";
+    return this.http.get(url + "?saleOrderStatus=BILLED&branchOfficeId=" + branchId);
   }
 
   changeStatus(id: number, status: string): Observable<any> {
-    return this.http.put(this.apiUrlSaleOrder + "/" + id + "/status/" + status, null);
+    const url = this.apiUrlBase + "/sale/orders";
+    return this.http.put(url + "/" + id + "/status/" + status, null);
   }
 
 }
