@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let customers of listado | FilterCustByAttributes: filterCustomer ">
+            <tr *ngFor="let customers of listado | FilterCustByAttributes: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td>{{customers.name + ' ' + customers.lastName}}</td>
                 <td>{{customers.identification}}</td>
                 <td>{{customers.address}}</td>
@@ -55,6 +55,8 @@
             <br>
         </tbody>
     </table>
+    <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
 
     <button type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear cliente</button>
 

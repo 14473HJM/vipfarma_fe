@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
 import { healthInsurance } from 'src/interfaces/healthInsurance';
@@ -10,6 +10,7 @@ import { HealthInsurancePlanService } from 'src/services/health-insurance-plan.s
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -17,6 +18,8 @@ import Swal from 'sweetalert2';
 })
 
 export class CreateCustomerComponent implements OnInit {
+
+  @Output() refresh: EventEmitter<any> = new EventEmitter();
 
   customer: Customer= {} as Customer;
   healthinsurance:  healthInsurance[];
@@ -134,6 +137,8 @@ export class CreateCustomerComponent implements OnInit {
         }
       })
     );
+
+    this.refresh.emit();
   }
 
   reset(){

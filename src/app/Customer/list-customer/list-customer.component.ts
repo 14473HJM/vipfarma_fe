@@ -19,6 +19,7 @@ export class ListCustomerComponent implements OnInit {
   selectCust = {} as Customer;
   modalRef: MdbModalRef<CreateCustomerComponent> | null = null;
   filterCustomer: string = '';
+  public page: number;
 
   constructor(private router: Router, 
     private customerService: CustomerService, 

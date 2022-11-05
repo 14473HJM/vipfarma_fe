@@ -9,7 +9,7 @@ import { OfferStock } from 'src/interfaces/OfferStock';
   providedIn: 'root'
 })
 export class OfferService {
-  private apiUrlBase: string = environment.stocksOffers;
+  private apiUrlBase: string = environment.baseUrl + "/stocks/offers";
   filterProducts='';
 
   constructor(private http: HttpClient) {}
