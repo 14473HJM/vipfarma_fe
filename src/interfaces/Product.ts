@@ -5,7 +5,4 @@ export interface Product{
     laboratory?: string;
     prescriptionRequired?: boolean;
     price: number;
-
-
-
 }
