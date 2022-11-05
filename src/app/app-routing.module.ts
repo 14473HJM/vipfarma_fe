@@ -13,6 +13,7 @@ import { ListOfferComponent } from './reports/list-offer/list-offer.component';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
 import { CreateSaleOrderComponent } from './ventas/create-sale-order/create-sale-order.component';
 import { SearchProductsComponent } from './products/search-products/search-products.component';
+import { UploadProductsComponent } from './products/upload-products/upload-products.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: "reportes/list-offer", component: ListOfferComponent},
   { path: "reportes/list-discount", component: ListDiscountComponent},
   { path: "searchProd", component: SearchProductsComponent },
+  { path: "uploadProd", component: UploadProductsComponent},
 
 ];
 

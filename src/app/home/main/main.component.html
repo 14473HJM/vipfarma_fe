@@ -5,17 +5,18 @@
     <h1 *ngIf="isFacturar" class="display-4 font-weight-bold text-center">FACTURACION</h1>
     <h1 *ngIf="isSell" class="display-4 font-weight-bold text-center">VENTA</h1>
     <h1 *ngIf="isDespacho" class="display-4 font-weight-bold text-center">DESPACHO</h1>
-    <h1 *ngIf="isRecibirStock" class="display-4 font-weight-bold text-center">STOCK</h1>
+    <h1 *ngIf="isRecibirStock || isGuardarStock" class="display-4 font-weight-bold text-center">STOCK</h1>
     <h1 *ngIf="isVerClientes" class="display-4 font-weight-bold text-center">CLIENTES</h1>
     <h1 *ngIf="refreshListOffer" class="display-4 font-weight-bold">LISTADO DE PRECIOS</h1>
     <h1 *ngIf="refreshListDiscount" class="display-4 font-weight-bold">LISTADO DE DESCUENTOS</h1>
+    <h1 *ngIf="isUploadProducts" class="display-4 font-weight-bold">INGRESAR PRODUCTOS</h1>
   </div>
 </div>
 
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
+    <div class="media mx-3 d-flex align-items-center">
       <img *ngIf="user.userRole == 'ADMIN'" src="../../../assets/perfil1.png" alt="..." width="65"
         class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <img *ngIf="user.userRole == 'SELLER'" src="../../../assets/perfil2.png" alt="..." width="65"
@@ -24,13 +25,13 @@
         class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <img *ngIf="user.userRole == 'WAREHOUSE_MANAGER'" src="../../../assets/perfil4.png" alt="..." width="65"
         class="mr-3 rounded-circle img-thumbnail shadow-sm">
-      <div class="media-body">
+      <div class="media-body mx-3">
         <h4 class="m-0">{{ user.userName }}</h4>
         <p class="font-weight-light text-muted mb-0">{{ user.userRole }}</p>
       </div>
     </div>
     <div>
-      <button class="btn" (click)="logOut()"><b>Cerrar Sesion</b></button>
+      <button class="btn mx-3" (click)="logOut()"><b>Cerrar Sesión</b></button>
     </div>
   </div>
 
@@ -46,6 +47,24 @@
     </li>
   </ul>
 
+  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">PRODUCTOS</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic" (click)="uploadProducts()">
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+        Cargar Productos
+      </a>
+    </li>
+  </ul>
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <!-- <a href="#" class="nav-link text-dark font-italic" (click)="searchProducts()">
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+        Consultar Productos
+      </a> -->
+    </li>
+  </ul>
   <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">VENTAS</p>
 
   <ul class="nav flex-column bg-white mb-0">
@@ -77,6 +96,14 @@
       <a href="#" class="nav-link text-dark font-italic" (click)="recibirStock()">
         <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
         Recibir Stock
+      </a>
+    </li>
+  </ul>
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic" (click)="guardarStock()">
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+        Almacenar Stock
       </a>
     </li>
   </ul>
@@ -124,5 +151,7 @@
   <app-despacho *ngIf="isDespacho"></app-despacho>
   <app-list-customer *ngIf="isVerClientes"></app-list-customer>
   <app-recibir-stock *ngIf="isRecibirStock"></app-recibir-stock>
+  <app-upload-products *ngIf="isUploadProducts"></app-upload-products>
+  <app-guardar-stock *ngIf="isGuardarStock"> </app-guardar-stock>
 </div>
 <!-- End demo content -->

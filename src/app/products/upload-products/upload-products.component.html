@@ -1,0 +1,94 @@
+
+<h3 class="text-center">Ingresar productos</h3>
+<br>
+<br>
+
+
+<div class="row">
+<div class="container col-5 text-center">
+    <label class="text-center">Ingrese un Producto</label>
+    <br>
+    <input type="text" class="form-control float-left" [(ngModel)]="createProds.name" placeholder="Nombre" >
+    <!-- [(ngModel)]="filterDiscounts"     -->
+</div>
+
+<div class="container col-5 text-center">
+    <label class="text-center">Ingrese el código de barras</label>
+    <br>
+    <input type="number" class="form-control float-left" [(ngModel)]="createProds.barcode" placeholder="Código" >
+    <!-- [(ngModel)]="filterDiscounts"     -->
+</div>
+</div>
+
+<br>
+<br>
+<div class="row">
+<div class="container col-5 text-center">
+    <label class="text-center" for="">Ingrese un Laboratorio</label>
+    <br>
+    <select id="selectLab" class="form-select" [(ngModel)]="createProds.laboratory">
+        <option *ngFor="let lab of labs" [ngValue]="lab.nombre">{{lab.nombre}}</option>
+    <!-- <option value="">Bagó</option>  
+    <option value="">Investi</option>  -->
+    </select>
+</div>
+<div class="container col-5 text-center">
+    <label class="text-center">Ingrese el precio</label>
+    <br>
+    <input type="number" class="form-control" [(ngModel)]="createProds.price" placeholder="$" >
+    <!-- [(ngModel)]="filterDiscounts"     -->
+</div>
+</div>
+<br><br>
+
+<div class="row">
+<div class="container col-4 text-center">
+    <label class="text-center">¿Requiere Preescripción?</label>
+    <br>
+    
+</div>
+<div class="form-check container col-8 text-center">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"[(ngModel)]="createProds.prescriptionRequired">
+    <br>
+</div>
+</div>
+<br><br>
+
+<div class="container col-5 text-center">
+    <button type="button" class="btn btn-outline-primary" (click)="saveProduct()">Guardar</button>
+</div>
+
+{{createProds | json}}
+<!-- <form class="p-3 mt-3">
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <input type="email" name="email" id="email" placeholder="Email(*)" [(ngModel)]="user.email">
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <input type="text" name="userName" id="userName" placeholder="Username(*)" [(ngModel)]="user.userName">
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <select type="text" name="branch" id="branch" [(ngModel)]="user.branchOffice"> 
+            <option *ngFor="let b of branchs" [ngValue]="b" > {{ b.name }} </option>
+        </select>
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <select type="text" name="rol" id="rol" [(ngModel)]="user.userRole" > 
+            <option value="CASHIER" > CAJERO </option>
+            <option value="SELLER" > VENDEDOR </option>
+            <option value="WAREHOUSE_MANAGER" > DEPOSITO </option>
+        </select>
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="fas fa-key"></span>
+        <input type="password" name="password" id="pwd" placeholder="Password(*)" [(ngModel)]="user.password" >
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="fas fa-key"></span>
+        <input type="password" name="password2" id="pwd2" placeholder="Repita el Password (*)" [(ngModel)]="pwd" >
+    </div>
+    <button class="btn mt-3" (click)="registrar()" >Registrarse</button> -->
+<!-- </form> -->
