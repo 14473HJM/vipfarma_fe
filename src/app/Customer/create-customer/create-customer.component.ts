@@ -9,6 +9,7 @@ import { HealthInsuranceService } from 'src/services/health-insurance.service';
 import { HealthInsurancePlanService } from 'src/services/health-insurance-plan.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import Swal from 'sweetalert2';
+import { HelperService } from 'src/services/HelperService';
 
 
 
@@ -36,18 +37,30 @@ export class CreateCustomerComponent implements OnInit {
   refrescar: boolean=false;
   controldni: string;
 
+  refresh: number;
+  editrefresh: number;
+
 
   constructor(public modalRef: MdbModalRef<CreateCustomerComponent>, 
     private router: Router, 
     private customerService: CustomerService, 
     private healthInsuranceService: HealthInsuranceService, 
-    private healthInsurancePlanService: HealthInsurancePlanService) {
+    private healthInsurancePlanService: HealthInsurancePlanService,
+    private helper: HelperService) {
    }
 
 
   ngOnInit(): void {
     this.getHealthInsurance()
+    this.changeRefresh(1)
     this.customer.identificationType="tipo";
+    this.helper.customMessage.subscribe(num => this.refresh = num);
+
+  }
+
+  changeRefresh(num: number) {
+    this.editrefresh=num;
+    this.helper.changeMessage(this.editrefresh);
   }
 
   ngOnDestroy(): void {
@@ -78,9 +91,10 @@ export class CreateCustomerComponent implements OnInit {
     if(obs.id==1){
       this.sinobs=1;
      this.customer.healthInsurancePlan=obs.availablePlans[0]
-      console.log(obs.availablePlans[0]);
+     // console.log(obs.availablePlans[0]);
 
     }else{
+      this.customer.healthInsurancePlan.name="sin";
       this.sinobs=0;
     }
     
@@ -129,7 +143,7 @@ export class CreateCustomerComponent implements OnInit {
       });
       return
     }
-    if(this.customer.healthInsurance == null ||this.customer.healthInsurancePlan == null ){
+    if(this.customer.healthInsurance == null ||this.customer.healthInsurancePlan == null || this.customer.healthInsurancePlan.name=="sin" ){
       Swal.fire({
         title: 'Debe introducir correctamente la obra social y el plan correspondiente',
         icon: 'warning',
@@ -137,10 +151,11 @@ export class CreateCustomerComponent implements OnInit {
       });
       return
     } 
-    //valicacion del dni
+ 
+
+
    this.controldni= this.customer.identification
       
-  
       this.subscription.add(
         this.customerService.getCustomers().subscribe({
           next: (respuesta: Customer[]) => {
@@ -153,31 +168,34 @@ export class CreateCustomerComponent implements OnInit {
                   confirmButtonText: "Ok",
                 });
                 return
-              }else{
-                this.subscription.add(
-                  this.customerService.postCreate(this.customer).subscribe({
-                    next: () => {
-                      Swal.fire({
-                        title: 'Cliente cargado correctamente',
-                        icon: 'success',
-                        confirmButtonText: "Ok",
-                      });
-                      this.modalRef.close();
-                      this.refrescar=true;
-                      this.reset();
-                    },
-                    error: () => {
-                      Swal.fire({
-                        title: 'Error al guardar el cliente',
-                        icon: 'error',
-                        confirmButtonText: "Ok",
-                      });
-                    }
-                  })
-                );
-
-              }     
+              }else{ this.existsDNI=false } 
           }
+          
+          if(!this.existsDNI){
+            this.subscription.add(
+              this.customerService.postCreate(this.customer).subscribe({
+                next: () => {
+                  Swal.fire({
+                    title: 'Cliente cargado correctamente',
+                    icon: 'success',
+                    confirmButtonText: "Ok",
+                  });
+                  this.changeRefresh(2);
+                  this.modalRef.close();
+                  this.reset();
+                },
+                error: () => {
+                  Swal.fire({
+                    title: 'Error al guardar el cliente',
+                    icon: 'error',
+                    confirmButtonText: "Ok",
+                  });
+                }
+              })
+            );
+
+          }
+
         },
           error: () => {
             Swal.fire({
@@ -189,11 +207,7 @@ export class CreateCustomerComponent implements OnInit {
         })
       );
       
-    ///
-
-    if(!this.existsDNI){
-    }
-
+     
     }
 
 
