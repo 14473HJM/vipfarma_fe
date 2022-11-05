@@ -21,6 +21,7 @@ export class BillOrderComponent implements OnInit {
   preview = {} as Bill;
   apply : boolean = false;
   filterCustomer: string = '';
+  public page: number;
 
   constructor(private saleOrderSrv : SaleOrderService, private router: Router,
     private billSrv : BillingService) { }
@@ -49,9 +50,7 @@ export class BillOrderComponent implements OnInit {
 
     this.billSrv.billOrder(this.selectedOrder.id, true).subscribe({
       next: (response: Bill) => {
-        //alert("Se facturo correctamente la Orden # " + this.selectedOrder.id);
         this.preview = response;
-        //this.refresh();
       },
       error: () => {
         Swal.fire({
@@ -64,47 +63,71 @@ export class BillOrderComponent implements OnInit {
 }
 
   facturar() {
-    const result: boolean = confirm(
-      'Está seguro que desea Facturar la Orden ' + this.selectedOrder.id + ' ???'
-    );
-
-    if (result) {
-      this.billSrv.billOrder(this.selectedOrder.id, false).subscribe({
-        next: (response: Bill) => {
-          alert("Se facturo correctamente la Orden # " + this.selectedOrder.id);
-          this.bill = response;
-          this.refresh();
-        },
-        error: () => {
-          Swal.fire({
-            title: 'Error en el Servicio',
-            icon: 'error',
-            confirmButtonText: "Ok",
-          });
-        },
-      })
-    }
-  }
-
-  eliminar(id : number) {
-    const result: boolean = confirm(
-      'Está seguro que desea borrar la Orden ' + id + ' ???'
-    );
-
-    if (result) {
-        this.saleOrderSrv.changeStatus(id, "CLOSED").subscribe({
-          next: () => {
+    Swal.fire({
+      title: 'Seguro desea Facturar la Orden ' + this.selectedOrder.id + ' ??',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Facturar',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.billSrv.billOrder(this.selectedOrder.id, false).subscribe({
+          next: (response: Bill) => {
+            Swal.fire({
+              title: 'Orden ' + this.selectedOrder.id + ' Facturada !!',
+              icon: 'success',
+              confirmButtonText: "Ok",
+            });
+            this.bill = response;
             this.refresh();
           },
           error: () => {
             Swal.fire({
-              title: 'Error al borrar la orden',
+              title: 'Error en el Servicio',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
+          },
+        })
+      }
+    })
+  }
+
+  eliminar(id : number) {
+    Swal.fire({
+      title: 'Seguro desea Borrar la Orden ' + id + ' ??',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.saleOrderSrv.changeStatus(id, "CLOSED").subscribe({
+          next: () => {
+            Swal.fire({
+              title: 'Orden ' + id + ' Borrada !!',
+              icon: 'info',
+              confirmButtonText: "Ok",
+            });
+            this.refresh();
+          },
+          error: () => {
+            Swal.fire({
+              title: 'Error en el Servicio',
               icon: 'error',
               confirmButtonText: "Ok",
             });
           },
         })
     }
+    })
+    
+
+    
   }
 
   cancelar() {

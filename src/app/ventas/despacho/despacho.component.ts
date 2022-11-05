@@ -13,6 +13,8 @@ export class DespachoComponent implements OnInit {
   saleOrder = {} as SaleOrder[];
   selectedOrder = {} as SaleOrder;
   orderDetail = {} as SaleOrder;
+  filterCustomer: string = '';
+  public page: number;
 
   constructor(private saleOrderSrv : SaleOrderService) { }
 
@@ -27,7 +29,7 @@ export class DespachoComponent implements OnInit {
       },
       error: () => {
         Swal.fire({
-          title: 'Error en el servicio',
+          title: 'Error en el Servicio',
           icon: 'error',
           confirmButtonText: "Ok",
         });
@@ -44,7 +46,7 @@ export class DespachoComponent implements OnInit {
       },
       error: () => {
         Swal.fire({
-          title: 'Error en el servicio',
+          title: 'Error en el Servicio',
           icon: 'error',
           confirmButtonText: "Ok",
         });
@@ -53,20 +55,36 @@ export class DespachoComponent implements OnInit {
   }
 
   despachar() {
-    this.saleOrderSrv.changeStatus(this.selectedOrder.id, "DELIVERED").subscribe({
-      next: (response : SaleOrder) => {
-        alert("Orden No " + this.selectedOrder.id + " se despacho correctamente !")
-        this.refresh();
-        this.selectedOrder = {} as SaleOrder;
-      },
-      error: () => {
-        Swal.fire({
-          title: 'Error en el servicio',
-          icon: 'error',
-          confirmButtonText: "Ok",
-        });
-      },
-    })
+    Swal.fire({
+      title: 'Marcar Orden ' + this.selectedOrder.id + ' como DESPACHADA ??',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Despachar',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.saleOrderSrv.changeStatus(this.selectedOrder.id, "DELIVERED").subscribe({
+          next: (response : SaleOrder) => {
+            Swal.fire({
+              title: 'Orden No ' + this.selectedOrder.id + ' se despacho correctamente !',
+              icon: 'success',
+              confirmButtonText: "Ok",
+            });
+            this.refresh();
+            this.selectedOrder = {} as SaleOrder;
+          },
+          error: () => {
+            Swal.fire({
+              title: 'Error en el Servicio',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
+          },
+        })
+      }
+    })    
   }
 
 }
