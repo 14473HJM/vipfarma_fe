@@ -13,7 +13,8 @@ export const environment = {
   saleOrderBaseUrl: "http://localhost:8080/sale/orders",
   billBaseUrl: "http://localhost:8080/billing/order",
   stocksOffers: 'http://localhost:8080/stocks/offers',
-  orderStockBaseUrl: "http://localhost:8080/stock/orders"
+  orderStockBaseUrl: "http://localhost:8080/stock/orders",
+  uploadProductsBaseUrl: "http://localhost:8080/products"
 };
 
 /*

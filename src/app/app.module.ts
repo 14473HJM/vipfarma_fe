@@ -28,6 +28,7 @@ import { FilterCustByAttributesPipe } from './pipes/filterCustByAttributes';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
+import { UploadProductsComponent } from './products/upload-products/upload-products.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.compo
     FilterOrderByCustPipe,
     FilterCustByAttributesPipe,
     RecibirStockComponent,
-    GuardarStockComponent
+    GuardarStockComponent,
+    UploadProductsComponent
  ],
  
   imports: [

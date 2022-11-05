@@ -20,6 +20,7 @@ export class MainComponent implements OnInit {
   isDespacho: boolean = false;
   isVerClientes: boolean = false;
   isRecibirStock: boolean = false;
+  isUploadProducts: boolean=false;
 
   constructor(private router: Router, private userServ: UserService) { }
 
@@ -52,6 +53,8 @@ export class MainComponent implements OnInit {
     this.isDespacho = false;
     this.isVerClientes = false;
     this.isRecibirStock = false;
+    this.isSell=false;
+    this.isUploadProducts=false;
   }
 
   facturar() {
@@ -95,4 +98,9 @@ export class MainComponent implements OnInit {
     this.isSell =true;
   }
 
+  uploadProducts(){
+    this.cleanFlags();
+    this.isUploadProducts=true;
+
+  }
 }
