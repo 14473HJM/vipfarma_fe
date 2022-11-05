@@ -36,7 +36,11 @@ export class BillOrderComponent implements OnInit {
         this.saleOrder = response;
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el Servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
   }

@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 			  error: (err: HttpErrorResponse) => {
           if(err.status == HttpStatusCode.NotFound) {
             Swal.fire({
-              title: 'Usuario y/o contrasena incorrecta',
-              icon: 'error',
+              title: 'Usuario y/o contraseña incorrecta',
+              icon: 'warning',
               confirmButtonText: "Ok",
             });
           }
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     } else {
       Swal.fire({
         title: 'Ingrese nombre de usuario y contraseña',
-        icon: 'error',
+        icon: 'warning',
         confirmButtonText: "Ok",
       });
     }

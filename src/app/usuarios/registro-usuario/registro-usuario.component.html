@@ -12,7 +12,7 @@
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
-            <input type="text" name="userName" id="userName" placeholder="Username(*)" [(ngModel)]="user.userName">
+            <input type="text" name="userName" id="userName" placeholder="Nombre de Usuario(*)" [(ngModel)]="user.userName">
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
@@ -30,15 +30,15 @@
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="fas fa-key"></span>
-            <input type="password" name="password" id="pwd" placeholder="Password(*)" [(ngModel)]="user.password" >
+            <input type="password" name="password" id="pwd" placeholder="Contraseña(*)" [(ngModel)]="user.password" >
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="fas fa-key"></span>
-            <input type="password" name="password2" id="pwd2" placeholder="Repita el Password (*)" [(ngModel)]="pwd" >
+            <input type="password" name="password2" id="pwd2" placeholder="Repita la contraseña(*)" [(ngModel)]="pwd" >
         </div>
         <button class="btn mt-3" (click)="registrar()" >Registrarse</button>
     </form>
     <div class="text-center fs-6">
-        <a href="/login">Iniciar Sesion</a>
+        <a href="/login">Iniciar Sesión</a>
     </div>
 </div>

@@ -10,6 +10,7 @@ import { HealthInsurancePlanService } from 'src/services/health-insurance-plan.s
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-discount',
@@ -61,7 +62,11 @@ export class ListDiscountComponent implements OnInit {
           this.discounts= respuesta;
         },
         error: () => {
-          alert('error al comunicarse con la API');
+          Swal.fire({
+            title: 'Error al comunicarse con la API',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
           },
       }),
     );
@@ -73,7 +78,11 @@ export class ListDiscountComponent implements OnInit {
         this.listHealthInsurance= respuesta;
       },
       error: () => {
-        alert('error al comunicarse con la API');
+        Swal.fire({
+          title: 'Error al comunicarse con la API',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
         },
     })
   }
@@ -91,7 +100,11 @@ export class ListDiscountComponent implements OnInit {
           this.listHealthInsurancePlan = respuesta2;
         },
         error: () => {
-          alert('error al comunicarse con la API');
+          Swal.fire({
+            title: 'Error al comunicarse con la API',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         },
       }),     
     )

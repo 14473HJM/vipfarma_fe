@@ -5,6 +5,7 @@ import jsPDF from 'jspdf';
 import { Subscription } from 'rxjs';
 import { OfferStock } from 'src/interfaces/OfferStock';
 import { OfferService } from 'src/services/offer.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -37,7 +38,11 @@ export class ListOfferComponent implements OnInit {
           this.offers= respuesta;
         },
         error: () => {
-          alert('error al comunicarse con la API');
+          Swal.fire({
+            title: 'Error al comunicarse con la API',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
           },
       }),
     );

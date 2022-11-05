@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { healthInsurance } from 'src/interfaces/healthInsurance';
 import { HealthInsuranceService } from 'src/services/health-insurance.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-alter-customer',
@@ -37,7 +38,11 @@ export class AlterCustomerComponent implements OnInit {
           this.healthinsurance = respuesta;
         },
         error: () => {
-          alert('Error al obtener el listado de obras sociales');
+          Swal.fire({
+            title: 'Error al obtener el listado de obras sociales',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         },
       })
     );
@@ -65,7 +70,11 @@ export class AlterCustomerComponent implements OnInit {
               this.customer = respuesta;
             },
             error: () => {
-              alert('error al obtener el cliente');
+              Swal.fire({
+                title: 'Error al obtener el cliente',
+                icon: 'error',
+                confirmButtonText: "Ok",
+              });
             },
           });
         },
@@ -75,34 +84,62 @@ export class AlterCustomerComponent implements OnInit {
 
   save(){
     if(this.customer.lastName == null || this.customer.lastName.trim().length ===0 || this.customer.name == null || this.customer.name.trim().length ===0){
-      alert('Debe introducir el nombre completo')
+      Swal.fire({
+        title: 'Debe introducir el nombre completo',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
       return
     }
     if(this.customer.identificationType == null){
-      alert('Debe seleccionar el tipo de identificacion')
+      Swal.fire({
+        title: 'Debe seleccionar el tipo de identificación',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
       return
     }
     if(this.customer.identification == null){
-      alert(`Debe introducir correctamente el ${this.customer.identificationType}`)
+      Swal.fire({
+        title: `Debe introducir correctamente el ${this.customer.identificationType}`,
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
       return
     }
     if(this.customer.address == null || this.customer.address.trim().length ===0){
-      alert(`Debe introducir correctamente el domicilio`)
+      Swal.fire({
+        title: 'Debe introducir correctamente el domicilio',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
       return
     }
     if(this.customer.healthInsurance == null ||this.customer.healthInsurancePlan == null ){
-      alert(`Debe introducir correctamente la obra social y el plan correspondiente`)
+      Swal.fire({
+        title: 'Debe introducir correctamente la obra social y el plan correspondiente',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
       return
     } 
    
       this.subscription.add(
         this.customerService.postCreate(this.customer).subscribe({
           next: () => {
-            alert('Cliente modificado correctamente')
+            Swal.fire({
+              title: 'Cliente modificado correctamente',
+              icon: 'success',
+              confirmButtonText: "Ok",
+            });
             this.onUpdate.emit();
           },
           error: () => {
-            alert('Error al guardar el cliente');
+            Swal.fire({
+              title: 'Error al guardar el cliente',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
           }
         })
       );

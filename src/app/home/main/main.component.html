@@ -15,7 +15,7 @@
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
+    <div class="media mx-3 d-flex align-items-center">
       <img *ngIf="user.userRole == 'ADMIN'" src="../../../assets/perfil1.png" alt="..." width="65"
         class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <img *ngIf="user.userRole == 'SELLER'" src="../../../assets/perfil2.png" alt="..." width="65"
@@ -24,13 +24,13 @@
         class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <img *ngIf="user.userRole == 'WAREHOUSE_MANAGER'" src="../../../assets/perfil4.png" alt="..." width="65"
         class="mr-3 rounded-circle img-thumbnail shadow-sm">
-      <div class="media-body">
+      <div class="media-body mx-3">
         <h4 class="m-0">{{ user.userName }}</h4>
         <p class="font-weight-light text-muted mb-0">{{ user.userRole }}</p>
       </div>
     </div>
     <div>
-      <button class="btn" (click)="logOut()"><b>Cerrar Sesion</b></button>
+      <button class="btn mx-3" (click)="logOut()"><b>Cerrar Sesión</b></button>
     </div>
   </div>
 
