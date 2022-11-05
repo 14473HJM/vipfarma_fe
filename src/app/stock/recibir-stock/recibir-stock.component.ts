@@ -13,6 +13,8 @@ export class RecibirStockComponent implements OnInit {
 
   stockOrders = {} as StockOrder[];
   selectedOrder = {} as StockOrder;
+  filterOrderStock: string = "";
+  public page: number;
 
   constructor(private orderStServ: OrderStockService) { }
 
@@ -50,7 +52,7 @@ export class RecibirStockComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.orderStServ.putStatusOrderStock("CANCELED", this.selectedOrder).subscribe({
+        this.orderStServ.putStatusOrderStockCancelled(id, "CANCELED").subscribe({
           next: () => {
             Swal.fire({
               title: 'Orden ' + id + ' Cancelada',
@@ -58,6 +60,7 @@ export class RecibirStockComponent implements OnInit {
               confirmButtonText: "Ok",
             });
             this.getAllPendingOrders();
+            this.selectedOrder = {} as StockOrder;
           },
           error: () => {
             Swal.fire({
@@ -107,6 +110,7 @@ export class RecibirStockComponent implements OnInit {
               confirmButtonText: "Ok",
             });
             this.getAllPendingOrders();
+            this.selectedOrder = {} as StockOrder;
           },
           error: () => {
             Swal.fire({

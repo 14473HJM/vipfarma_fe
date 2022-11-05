@@ -16,7 +16,7 @@
             </tr>
         </thead>       
         <tbody>
-            <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer ">
+            <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
                 <th scope="row"> {{ order.id }} </th>
                 <td>{{ order.createdDate }}</td>
@@ -28,6 +28,7 @@
                 </td>
         </tbody>
     </table>
+    <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 </div>
 <br>
 <br>
