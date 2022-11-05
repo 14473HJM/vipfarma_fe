@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Subscription } from 'rxjs';
@@ -7,12 +7,18 @@ import { CustomerService } from 'src/services/customer.service';
 import Swal from 'sweetalert2';
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
 
+
 @Component({
   selector: 'app-list-customer',
   templateUrl: './list-customer.component.html',
-  styleUrls: ['./list-customer.component.css']
+  styleUrls: ['./list-customer.component.css'],
+  entryComponents: [ CreateCustomerComponent ]
 })
-export class ListCustomerComponent implements OnInit {
+export class ListCustomerComponent implements OnInit{
+
+  @ViewChild(CreateCustomerComponent) 
+  private listadoCustomer: CreateCustomerComponent;
+
 
   listado: Customer[]= {} as Customer[];
   private subscription = new Subscription();
@@ -25,8 +31,16 @@ export class ListCustomerComponent implements OnInit {
     private customerService: CustomerService, 
     private modalService: MdbModalService) { }
 
+
+
   ngOnInit(): void {
     this.getCustomer()
+  }
+
+  recibirMensaje(event: Event) {
+    if(event){
+      this.getCustomer();
+    }
   }
 
   ngOnDestroy(): void {
@@ -53,6 +67,7 @@ export class ListCustomerComponent implements OnInit {
       })
     );
   }
+
 
   alterCustomer(cust: Customer){
     console.log(cust)

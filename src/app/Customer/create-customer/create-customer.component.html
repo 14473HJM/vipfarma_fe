@@ -52,7 +52,7 @@
             <div class="row g-3">
                 <div class="col">
                     <select [(ngModel)]="obs" id="os" name="Obra Social"  class="form-select"  placeholder="healthInsurance" aria-label="healthInsurance" (change)="sethealthInsurance(obs)">
-                        <option  value={{obs}} disabled selected>Obra Social</option>
+                        <option  value={{obs}} disabled selected>Seleccione una Obra Social</option>
                         <option *ngFor="let os of healthinsurance" [ngValue]="os">
                             {{os.name}}
                         </option>
@@ -62,15 +62,18 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <select [(ngModel)]="availablePlans"  name="availablePlans" id="plan" name="plan" class="form-select" placeholder="availablePlans" aria-label="availablePlans" (change)="sethealthInsurancePlan(availablePlans)">
+                            <select  *ngIf="sinobs == 0" [(ngModel)]="availablePlans"  name="availablePlans" id="plan" name="plan" class="form-select" placeholder="availablePlans" aria-label="availablePlans" (change)="sethealthInsurancePlan(availablePlans)">
                                 <option value={{availablePlans}} disabled selected>Plan</option>
                                 <option  *ngFor="let osp of obs.availablePlans" [ngValue]="osp">
                                     {{osp.name}}
                                 </option>
                             </select>
+                            <select  *ngIf="sinobs == 1"  name="availablePlans2" id="plan2" name="plan2" class="form-select">
+                                <option value="" disabled selected>SIN PLAN</option>
+                            </select>
                         </div>
                         <div class="col-auto">
-                            <button type="button" class="btn btn-outline-primary" (click)="save(); modalRef.close()">Guardar</button>
+                            <button type="button" class="btn btn-outline-primary" (click)="save()">Guardar</button>
                         </div>
                     </div>
                 </div>

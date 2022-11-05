@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
 import { healthInsurance } from 'src/interfaces/healthInsurance';
@@ -11,6 +11,11 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import Swal from 'sweetalert2';
 
 
+
+
+
+
+
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -19,22 +24,26 @@ import Swal from 'sweetalert2';
 
 export class CreateCustomerComponent implements OnInit {
 
-  @Output() refresh: EventEmitter<any> = new EventEmitter();
 
   customer: Customer= {} as Customer;
   healthinsurance:  healthInsurance[];
   obs: healthInsurance = {} as healthInsurance;
   private subscription = new Subscription();
-  //availablePlans: healthInsurancePlan[];
   availablePlans: healthInsurancePlan= {} as healthInsurancePlan;
   healthInsuranceId: any;
+  sinobs: number=0;
+  existsDNI: boolean=false;
+  refrescar: boolean=false;
+  controldni: string;
+
 
   constructor(public modalRef: MdbModalRef<CreateCustomerComponent>, 
     private router: Router, 
     private customerService: CustomerService, 
     private healthInsuranceService: HealthInsuranceService, 
-    private healthInsurancePlanService: HealthInsurancePlanService ) {
+    private healthInsurancePlanService: HealthInsurancePlanService) {
    }
+
 
   ngOnInit(): void {
     this.getHealthInsurance()
@@ -65,8 +74,17 @@ export class CreateCustomerComponent implements OnInit {
 
   sethealthInsurance(obs: healthInsurance)
   {
-    console.log
-    this.customer.healthInsurance=obs
+
+    if(obs.id==1){
+      this.sinobs=1;
+     this.customer.healthInsurancePlan=obs.availablePlans[0]
+      console.log(obs.availablePlans[0]);
+
+    }else{
+      this.sinobs=0;
+    }
+    
+     this.customer.healthInsurance=obs
     this.customer.healthInsuranceId=obs.id
     this.customer.healthInsurancePlanId=0;
   }
@@ -75,6 +93,8 @@ export class CreateCustomerComponent implements OnInit {
   {
     this.customer.healthInsurancePlan=plan;
   }
+
+
 
   save(){
     if(this.customer.lastName == null || this.customer.lastName.trim().length ===0 || this.customer.name == null || this.customer.name.trim().length ===0){
@@ -85,7 +105,7 @@ export class CreateCustomerComponent implements OnInit {
       });
       return
     }
-    if(this.customer.identificationType == null){
+    if(this.customer.identificationType == null || this.customer.identificationType=="tipo"){
       Swal.fire({
         title: 'Debe seleccionar el tipo de identificación',
         icon: 'warning',
@@ -117,31 +137,68 @@ export class CreateCustomerComponent implements OnInit {
       });
       return
     } 
+    //valicacion del dni
+   this.controldni= this.customer.identification
+      
+  
+      this.subscription.add(
+        this.customerService.getCustomers().subscribe({
+          next: (respuesta: Customer[]) => {
+            for(const list of respuesta){
+              if(list.identification==this.controldni){
+                this.existsDNI=true;
+                Swal.fire({
+                  title: 'Ya existe una persona cargada con ese dni',
+                  icon: 'warning',
+                  confirmButtonText: "Ok",
+                });
+                return
+              }else{
+                this.subscription.add(
+                  this.customerService.postCreate(this.customer).subscribe({
+                    next: () => {
+                      Swal.fire({
+                        title: 'Cliente cargado correctamente',
+                        icon: 'success',
+                        confirmButtonText: "Ok",
+                      });
+                      this.modalRef.close();
+                      this.refrescar=true;
+                      this.reset();
+                    },
+                    error: () => {
+                      Swal.fire({
+                        title: 'Error al guardar el cliente',
+                        icon: 'error',
+                        confirmButtonText: "Ok",
+                      });
+                    }
+                  })
+                );
 
-    this.subscription.add(
-      this.customerService.postCreate(this.customer).subscribe({
-        next: () => {
-          Swal.fire({
-            title: 'Cliente cargado correctamente',
-            icon: 'success',
-            confirmButtonText: "Ok",
-          });
-          this.reset();
+              }     
+          }
         },
-        error: () => {
-          Swal.fire({
-            title: 'Error al guardar el cliente',
-            icon: 'error',
-            confirmButtonText: "Ok",
-          });
-        }
-      })
-    );
+          error: () => {
+            Swal.fire({
+              title: 'Error al validar los datos del dni',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
+          },
+        })
+      );
+      
+    ///
 
-    this.refresh.emit();
-  }
+    if(!this.existsDNI){
+    }
+
+    }
+
 
   reset(){
+    this.existsDNI=false;
     this.customer={} as Customer;
     this.customer.identificationType="tipo";
   }
