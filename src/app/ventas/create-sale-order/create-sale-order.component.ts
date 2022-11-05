@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Customer } from 'src/interfaces/Customer';
@@ -11,6 +11,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { CreateCustomerComponent } from '../../Customer/create-customer/create-customer.component';
 import { SearchProductsComponent } from 'src/app/products/search-products/search-products.component';
 import { ProductService } from 'src/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-sale-order',
@@ -19,7 +20,6 @@ import { ProductService } from 'src/services/product.service';
 })
 export class CreateSaleOrderComponent implements OnInit {
   
-
   customers = {} as Customer[];
   saleOrder = {} as SaleOrder;
   user = {} as User;
@@ -54,7 +54,11 @@ export class CreateSaleOrderComponent implements OnInit {
         console.log(this.customers);
       },
       error: () => {
-        alert('error al obtener los clientes');
+        Swal.fire({
+          title: 'Error al obtener los clientes',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     }),
     );
@@ -78,11 +82,27 @@ export class CreateSaleOrderComponent implements OnInit {
   saveOrder() {
   this.saleOderService.createSaleOrder(this.saleOrder).subscribe({
         next: () => {
-          alert("Orden de venta creada correctamente");
+          Swal.fire({
+            title: 'Orden creada correctamente',
+            icon: 'success',
+            confirmButtonText: "Ok",
+          });
         },
         error: () => {
-          alert("Error al intentar crear la ordern de venta");
+          Swal.fire({
+            title: 'Error al intentar crear la orden de venta',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         }
       })
   }
+
+  // @ViewChild('createCustomer') createCustomer: createCustomer;
+  // onClickOkButton(){
+  //   this.createCustomer.doAction();
+  // }
+
+
+
 }

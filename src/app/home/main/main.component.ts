@@ -30,8 +30,11 @@ export class MainComponent implements OnInit {
 
   logOut() {
     const result: boolean = confirm(
-      'Esta seguro que quiere Cerrar Sesión ??'
+      '¿Está seguro que quiere cerrar sesión?'
     );
+
+
+    
     if(result) {
       this.userServ.setToken("", "", "", "");
       this.router.navigate(['login']);
