@@ -5,7 +5,7 @@
     <h1 *ngIf="isFacturar" class="display-4 font-weight-bold text-center">FACTURACION</h1>
     <h1 *ngIf="isSell" class="display-4 font-weight-bold text-center">VENTA</h1>
     <h1 *ngIf="isDespacho" class="display-4 font-weight-bold text-center">DESPACHO</h1>
-    <h1 *ngIf="isRecibirStock" class="display-4 font-weight-bold text-center">STOCK</h1>
+    <h1 *ngIf="isRecibirStock || isGuardarStock" class="display-4 font-weight-bold text-center">STOCK</h1>
     <h1 *ngIf="isVerClientes" class="display-4 font-weight-bold text-center">CLIENTES</h1>
     <h1 *ngIf="refreshListOffer" class="display-4 font-weight-bold">LISTADO DE PRECIOS</h1>
     <h1 *ngIf="refreshListDiscount" class="display-4 font-weight-bold">LISTADO DE DESCUENTOS</h1>
@@ -80,6 +80,14 @@
       </a>
     </li>
   </ul>
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic" (click)="guardarStock()">
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+        Almacenar Stock
+      </a>
+    </li>
+  </ul>
 
   <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">CLIENTES</p>
 
@@ -124,5 +132,6 @@
   <app-despacho *ngIf="isDespacho"></app-despacho>
   <app-list-customer *ngIf="isVerClientes"></app-list-customer>
   <app-recibir-stock *ngIf="isRecibirStock"></app-recibir-stock>
+  <app-guardar-stock *ngIf="isGuardarStock"> </app-guardar-stock>
 </div>
 <!-- End demo content -->
