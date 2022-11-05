@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
+import { Product } from 'src/interfaces/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,13 @@ export class ProductService {
     const headers = { 'content-type': 'application/json' };
   
     return this.http.get(url, { 'headers': headers })
+  }
+
+  postCreateProducts(product: Product): Observable<any>{
+    const url = this.apiUrlBase + "/products";
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(product);
+
+    return this.http.post(url, body, { 'headers': headers })
   }
 }

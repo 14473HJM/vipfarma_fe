@@ -1,3 +1,5 @@
+import { Laboratory } from "./Laboratory";
+
 export interface Product{
     id: number;
     name: string;
