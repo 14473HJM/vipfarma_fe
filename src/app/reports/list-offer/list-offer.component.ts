@@ -20,6 +20,7 @@ export class ListOfferComponent implements OnInit {
   offers: OfferStock[] = [];
   filterProducts: string = '' ;
   private subscription = new Subscription();
+  public page: number;
   
 
   constructor(
