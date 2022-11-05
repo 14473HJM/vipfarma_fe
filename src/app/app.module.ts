@@ -30,6 +30,7 @@ import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.compo
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
+import { CustomerPipe } from './pipes/customer.pipe';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { UploadProductsComponent } from './products/upload-products/upload-produ
     RecibirStockComponent,
     GuardarStockComponent,
     UploadProductsComponent,
-    FilterOrderStockByNumberPipe
+    FilterOrderStockByNumberPipe,
+    CustomerPipe
  ],
  
   imports: [
