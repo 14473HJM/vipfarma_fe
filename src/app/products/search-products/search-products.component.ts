@@ -4,6 +4,7 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Product } from 'src/interfaces/Product';
 
 import { ProductService } from 'src/services/product.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -49,7 +50,11 @@ export class SearchProductsComponent implements OnInit {
           this.products = products;
         },
         error: () => {
-          alert('error al obtener los productos')
+          Swal.fire({
+            title: 'Error al obtener los productos',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         }
       });
     }
@@ -60,14 +65,20 @@ export class SearchProductsComponent implements OnInit {
           this.products = products;
         },
         error: () => {
-          alert('error al obtener los productos')
+          Swal.fire({
+            title: 'Error al obtener los productos',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         }
       });
     }
     else {
-      alert("Debe ingresar parametro de busqueda en el campo seleccionado")
+      Swal.fire({
+        title: 'Debe ingresar parametro de búsqueda en el campo seleccionado',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
     }
-
   }
-
 }

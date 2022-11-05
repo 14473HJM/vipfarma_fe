@@ -21,6 +21,7 @@ export class MainComponent implements OnInit {
   isVerClientes: boolean = false;
   isRecibirStock: boolean = false;
   isUploadProducts: boolean=false;
+  isGuardarStock: boolean = false;
 
   constructor(private router: Router, private userServ: UserService) { }
 
@@ -31,8 +32,11 @@ export class MainComponent implements OnInit {
 
   logOut() {
     const result: boolean = confirm(
-      'Esta seguro que quiere Cerrar Sesión ??'
+      '¿Está seguro que quiere cerrar sesión?'
     );
+
+
+    
     if(result) {
       this.userServ.setToken("", "", "", "");
       this.router.navigate(['login']);
@@ -55,6 +59,7 @@ export class MainComponent implements OnInit {
     this.isRecibirStock = false;
     this.isSell=false;
     this.isUploadProducts=false;
+    this.isGuardarStock = false;
   }
 
   facturar() {
@@ -103,4 +108,9 @@ export class MainComponent implements OnInit {
     this.isUploadProducts=true;
 
   }
+  guardarStock() {
+    this.cleanFlags();
+    this.isGuardarStock = true;
+  }
+
 }

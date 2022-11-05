@@ -69,7 +69,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
           if(this.pwd !== this.user.password) {
             Swal.fire({
-              title: 'Las Contrasenas No son iguales',
+              title: 'Las Contraseñas No son iguales',
               icon: 'error',
               confirmButtonText: "Ok",
             });

@@ -1,6 +1,8 @@
 <div class="container">
     <h3>Ordernes de Venta Facturadas</h3>
     <br>
+    <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar Ordenes por Cliente..." [(ngModel)]="filterCustomer">
+    <br>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -13,7 +15,7 @@
             </tr>
         </thead>       
         <tbody>
-            <tr *ngFor="let order of saleOrder">
+            <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
                 <th scope="row"> {{ order.id }} </th>
                 <td>{{ order.createdDate }}</td>
@@ -22,6 +24,7 @@
                 <td>{{ order.totalAmount }}</td>
         </tbody>
     </table>
+    <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 </div>
 
 <br>
@@ -36,7 +39,7 @@
                 <th scope="col">Locker</th>
                 <th scope="col">Rack</th>
                 <th scope="col">Producto</th>
-                <th scope="col">Cod. Barra</th>
+                <th scope="col">Cód. Barra</th>
                 <th scope="col">Precio Unitario</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Descuento</th>

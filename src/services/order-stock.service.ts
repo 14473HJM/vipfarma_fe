@@ -19,6 +19,15 @@ export class OrderStockService {
     return this.http.get(this.apiUrlOrderStock + "?stockOrderStatus=PENDING_DELIVERY&warehouseId=" + brOfId);
   }
 
+  getSaleOrderReceived(): Observable<any> {
+    let brOfId = this.userServ.getBranchId();
+    return this.http.get(this.apiUrlOrderStock + "?stockOrderStatus=RECEIVED&warehouseId=" + brOfId);
+  }
+
+  putStatusOrderStockCancelled(id: number, status: string): Observable<any> {
+    return this.http.put(this.apiUrlOrderStock + "/" + id + "/status/" + status, null);
+  }
+
   putStatusOrderStock(status: string, order: StockOrder): Observable<any> {
     return this.http.put(this.apiUrlOrderStock + "/" + order.id + "/status/" + status, order);
   }
