@@ -11,7 +11,7 @@ import { User } from 'src/interfaces/User';
 })
 export class UserService {
   
-  apiUrlBase: string = environment.baseUrl + "//user"
+  apiUrlBase: string = environment.baseUrl + "/user"
   userMapping : string[] = ["SALES_CASHIER", "SALES_ADMIN", "SALES_SELLER"];
 
   constructor(private http: HttpClient, 
