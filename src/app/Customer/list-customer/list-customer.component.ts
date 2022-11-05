@@ -4,6 +4,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Subscription } from 'rxjs';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
+import Swal from 'sweetalert2';
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
 
 @Component({
@@ -42,7 +43,11 @@ export class ListCustomerComponent implements OnInit {
           this.listado = respuesta;            
         },
         error: () => {
-          alert('Error al traer el listado de la api');
+          Swal.fire({
+            title: 'Error al obtener la lista de clientes de la API',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         },
       })
     );

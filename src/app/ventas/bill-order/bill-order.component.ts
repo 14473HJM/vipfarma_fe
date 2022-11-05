@@ -6,6 +6,7 @@ import { Bill } from 'src/interfaces/Bill';
 import { SaleOrder } from 'src/interfaces/sale-order';
 import { BillingService } from 'src/services/billing.service';
 import { SaleOrderService } from 'src/services/sale-order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-bill-order',
@@ -34,7 +35,11 @@ export class BillOrderComponent implements OnInit {
         this.saleOrder = response;
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el Servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
   }
@@ -49,7 +54,11 @@ export class BillOrderComponent implements OnInit {
         //this.refresh();
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el Servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
 }
@@ -67,7 +76,11 @@ export class BillOrderComponent implements OnInit {
           this.refresh();
         },
         error: () => {
-          alert("Error en el Servicio");
+          Swal.fire({
+            title: 'Error en el Servicio',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         },
       })
     }
@@ -84,7 +97,11 @@ export class BillOrderComponent implements OnInit {
             this.refresh();
           },
           error: () => {
-            alert('error al borrar la orden');
+            Swal.fire({
+              title: 'Error al borrar la orden',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
           },
         })
     }

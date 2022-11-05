@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SaleOrder } from 'src/interfaces/sale-order';
 import { SaleOrderService } from 'src/services/sale-order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-despacho',
@@ -25,7 +26,11 @@ export class DespachoComponent implements OnInit {
         this.saleOrder = response;
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
   }
@@ -38,7 +43,11 @@ export class DespachoComponent implements OnInit {
         this.orderDetail = response;
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
   }
@@ -51,7 +60,11 @@ export class DespachoComponent implements OnInit {
         this.selectedOrder = {} as SaleOrder;
       },
       error: () => {
-        alert("Error en el Servicio");
+        Swal.fire({
+          title: 'Error en el servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
       },
     })
   }

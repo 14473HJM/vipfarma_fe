@@ -66,10 +66,10 @@
                 <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                     class="fw-bold">Fecha: </span> {{ preview.createdDate }} </li>
                 <li *ngIf="bill.id != null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                      class="me-1 fw-bold">Status:</span><span class="badge bg-info text-black fw-bold">
+                      class="me-1 fw-bold">Estado:</span><span class="badge bg-info text-black fw-bold">
                       Pagado</span></li>
                 <li *ngIf="bill.id == null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
+                    class="me-1 fw-bold">Estado:</span><span class="badge bg-warning text-black fw-bold">
                     Pendiente Pago</span></li>
               </ul>
             </div>
@@ -111,13 +111,13 @@
                   style="font-size: 25px;">$ {{preview.totalAmount}} </span></p>
             </div>
             <div>
-                Codigo de Autorizacion Electronico: {{ preview.cae }}
+                Código de Autorización Electrónico: {{ preview.cae }}
             </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-xl-10">
-              <p>Gracias por su compra !!</p>
+              <p>Gracias por su compra!!</p>
             </div>
           </div>
         </div>
@@ -128,19 +128,19 @@
   <div *ngIf="selectedOrder.id != null" >
     <h5>Elija Forma de Pago: </h5>
     <br>
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="a" [(ngModel)]="apply">
+    <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios1" value="a" [(ngModel)]="apply">
     <label class="form-check-label" for="exampleRadios1">
     Efectivo
     </label>
   <br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="b"  [(ngModel)]="apply">
+  <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios2" value="b"  [(ngModel)]="apply">
     <label class="form-check-label" for="exampleRadios2">
-    Tarjeta de Credito
+    Tarjeta de Crédito
     </label>
   <br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="c"  [(ngModel)]="apply">
+  <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios3" value="c"  [(ngModel)]="apply">
     <label class="form-check-label" for="exampleRadios3">
-    Tarjeta de Debito
+    Tarjeta de Débito
     </label>
   </div>
    <br>
