@@ -23,7 +23,7 @@
     </thead>
     <tbody>
 
-        <tr *ngFor="let offer of offers | filter: filterProducts">
+        <tr *ngFor="let offer of offers | filter: filterProducts | paginate: { itemsPerPage: 10, currentPage: page }">
             
             
             <td>{{ offer.product.name }}</td>
@@ -70,6 +70,9 @@
       
     </tbody>
   </table>
+  <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+  
   <button class="btn btn-primary" (click)="descargar()" >Descargar</button>
   
 </div>
