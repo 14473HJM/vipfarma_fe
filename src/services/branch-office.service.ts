@@ -9,7 +9,7 @@ import { BranchOffice } from 'src/interfaces/BranchOffice';
 })
 export class BranchOfficeService {
 
-  private apiUrlBase: string = environment.branchOfficeUrl;
+  private apiUrlBase: string = environment.baseUrl + "/branchOffice";
 
   constructor(private http: HttpClient) {}
 
