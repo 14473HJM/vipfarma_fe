@@ -36,6 +36,7 @@ import { DeleteProductComponent } from './products/delete-product/delete-product
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
 
 import { HelperService } from 'src/services/HelperService';
+import { YesNoPipe } from './pipes/yes-no.pipe';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { HelperService } from 'src/services/HelperService';
     UploadProductsComponent,
     FilterOrderStockByNumberPipe,
     FilterProductsPipe,
+    YesNoPipe,
     
     
  ],
