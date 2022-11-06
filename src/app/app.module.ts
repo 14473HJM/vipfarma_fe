@@ -26,6 +26,7 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
 import { FilterOrderByCustPipe } from './pipes/filterOrderByCustomer';
 import { FilterCustByAttributesPipe } from './pipes/filterCustByAttributes';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
@@ -37,6 +38,7 @@ import { DeleteProductComponent } from './products/delete-product/delete-product
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
 
 import { HelperService } from 'src/services/HelperService';
+import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component';
 
 
 
@@ -70,7 +72,8 @@ import { HelperService } from 'src/services/HelperService';
     AlterProductComponent,
     UploadProductsComponent,
     FilterOrderStockByNumberPipe,
-    FilterProductsPipe
+    FilterProductsPipe,
+    BarGraphicComponent
     
     
     
@@ -86,9 +89,10 @@ import { HelperService } from 'src/services/HelperService';
     MdbModalModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgChartsModule,
     NgxPaginationModule
   ],
-  providers: [CookieService, HelperService],
+  providers: [CookieService, HelperService, NgChartsConfiguration],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

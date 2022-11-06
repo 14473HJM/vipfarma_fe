@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Locker } from 'src/interfaces/Locker';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Locker } from 'src/interfaces/Locker';
 export class LockerService {
 
   apiLockerBaseUrl: string = environment.baseUrl + "/lockers";
+  userServ: UserService;
 
   constructor(private http: HttpClient) { }
 
@@ -17,4 +19,14 @@ export class LockerService {
     return this.http.get<Locker[]>
         (this.apiLockerBaseUrl + "?productId=" + id + "&availability=" + quant);
   }
+
+  getLockersByBranch(): Observable<Locker[]>{
+    let id = this.userServ.getBranchId();
+    return this.http.get<Locker[]>(this.apiLockerBaseUrl + "?branchOfficeId=" + id);
+  }
+
+  getAllLockers(): Observable<Locker[]>{
+    return this.http.get<Locker[]>(this.apiLockerBaseUrl);
+  }
+  
 }
