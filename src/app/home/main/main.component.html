@@ -9,6 +9,7 @@
     <h1 *ngIf="isVerClientes" class="display-4 font-weight-bold text-center">CLIENTES</h1>
     <h1 *ngIf="refreshListOffer" class="display-4 font-weight-bold">LISTADO DE PRECIOS</h1>
     <h1 *ngIf="refreshListDiscount" class="display-4 font-weight-bold">LISTADO DE DESCUENTOS</h1>
+    <h1 *ngIf="isDispoLocker" class="display-4 font-weight-bold">DISPONIBILIDAD DE LOCKER</h1>
     <h1 *ngIf="isListProducts" class="display-4 font-weight-bold">LISTADO DE PRODUCTOS</h1>
     <h1 *ngIf="isUploadProducts" class="display-4 font-weight-bold">INGRESAR PRODUCTOS</h1>
   </div>
@@ -133,6 +134,12 @@
       <a href="#" class="nav-link text-dark font-italic" (click)="listDiscount()">
         <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
         Listado de Descuentos
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic" (click)="dispoLocker()">
+        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+        Disponibilidad por Locker
       </a>
     </li>
 

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarGraphicComponent implements OnInit {
 
+  datos: CharacterData
   constructor() { }
 
   ngOnInit(): void {
