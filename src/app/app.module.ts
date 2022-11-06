@@ -29,7 +29,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
+import { ListProductsComponent } from './products/list-products/list-products.component';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
+import { FilterProductsPipe } from './pipes/filter-products.pipe';
+import { DeleteProductComponent } from './products/delete-product/delete-product.component';
+import { AlterProductComponent } from './products/alter-product/alter-product.component';
+
 
 
 @NgModule({
@@ -56,8 +61,14 @@ import { UploadProductsComponent } from './products/upload-products/upload-produ
     FilterCustByAttributesPipe,
     RecibirStockComponent,
     GuardarStockComponent,
+    ListProductsComponent,
+    DeleteProductComponent,
+    AlterProductComponent,
     UploadProductsComponent,
-    FilterOrderStockByNumberPipe
+    FilterOrderStockByNumberPipe,
+    FilterProductsPipe,
+    
+    
  ],
  
   imports: [
