@@ -35,6 +35,9 @@ export class StatusMapperPipe implements PipeTransform {
       case "COMPLETELY_RECEIVED":
         return "RECIBIDO TOTAL"
         break;
+      case "PENDING":
+        return "PENDIENTE";
+        break;
       default:
         return value;
         break;

@@ -63,12 +63,11 @@
                 <td>{{ item.id}} </td>
                 <td>{{ item.product.name }} </td>
                 <td>{{ item.product.barcode }} </td>
-                <td>{{ item.stockOrderItemStatus }}</td>
+                <td>{{ item.stockOrderItemStatus | statusPipe }}</td>
                 <td>{{ item.actualQuantity }}</td>
                 <td>
                     <div>
                         <select class="form-select" name="lockers" [id]="item.id" >
-                               <!-- [(ngModel)]="customer" (change)="listado(customer)"> -->
                             <option *ngFor="let l of item.lockersAvailables" [ngValue]="l.id">
                                 {{ l.id }}
                             </option>
@@ -84,43 +83,3 @@
 </div>
 <br>
 <br>
-<!--  Agregar Ubicacion  
-<div class="container" *ngIf="itemToSave.id != null" >
-    <br>
-    <div class="row g-3">
-        <div class="col">
-            <h3>Almacenar Producto # {{itemToSave.product.id}},  {{ itemToSave.product.name }} </h3> 
-            <h4>Unidades a Almacenar: {{itemToSave.actualQuantity}} </h4>
-        </div>
-    </div>
-    <br>
-
-    <hr>
-    <form>
-        <div *ngFor="let locker of actualLockers" class="row g-4">
-            <div class="col">
-                <h5  >Locker: </h5>
-            </div>
-            <div class="col">
-                <input type="number" [(ngModel)]="locker.id" id="locker" name="locker" class="form-control" disabled="true">
-            </div>
-            <div class="col">
-                <input type="number" [(ngModel)]="locker.stockCapacity" id="cantidad"  name="cantidad" class="form-control" placeholder="">
-            </div>
-        </div>
-
-        <div class="row g-3">
-           
-
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                    </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-outline-primary" >Guardar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-</div> -->
