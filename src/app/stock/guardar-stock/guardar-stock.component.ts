@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LockerStockDTO } from 'src/dto/LockerStockDTO';
 import { Locker } from 'src/interfaces/Locker';
-import { LockerTransaction } from 'src/interfaces/LockerTransaction';
 import { StockOrder } from 'src/interfaces/StockOrder';
 import { StockOrderItem } from 'src/interfaces/StockOrderItem';
 import { LockerService } from 'src/services/locker.service';
@@ -157,7 +156,9 @@ export class GuardarStockComponent implements OnInit {
   setStatus(status: string) {
     this.selectedOrder.stockOrderStatus = status;
     for(let item of this.selectedOrder.stockOrderItems) {
-      item.stockOrderItemStatus = status;
+      if(item.stockOrderItemStatus != "NO_RECEIVED") {
+        item.stockOrderItemStatus = status;
+      }
     }
   }
 
@@ -178,9 +179,6 @@ export class GuardarStockComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        alert("A GUARDAAAAAAAR !!!!!");
-        alert(this.selectedOrder.toString())
-        /*
         this.orderStServ.putStatusOrderStock("STORED", this.selectedOrder).subscribe({
           next: () => {
             Swal.fire({
@@ -199,7 +197,6 @@ export class GuardarStockComponent implements OnInit {
             });
           },
         })
-        */
       }
     });
   }
@@ -207,7 +204,7 @@ export class GuardarStockComponent implements OnInit {
   checkUbicaciones(): boolean {
     for(let item of this.selectedOrder.stockOrderItems) {
 
-      var lockerTrans = {} as LockerTransaction;
+      var lockers = {} as Locker[];
       var lockerSel = document.getElementById(item.id.toString()) as HTMLSelectElement | null;
       if (lockerSel != null) {
         const value = lockerSel.value;
@@ -219,10 +216,12 @@ export class GuardarStockComponent implements OnInit {
           });
           return false;
         } 
-        lockerTrans.lockerId = Number(value);
-        lockerTrans.quantity = item.actualQuantity;
+        var locker = {} as Locker;
+        locker.id = Number(value);
+        lockers = [];
+        lockers.push(locker);
       }
-      item.lockerTransaction = lockerTrans;
+      item.lockersToSave = lockers;
     }
     return true;
   }
