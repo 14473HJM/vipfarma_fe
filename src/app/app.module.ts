@@ -29,8 +29,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
+import { ListProductsComponent } from './products/list-products/list-products.component';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
+import { FilterProductsPipe } from './pipes/filter-products.pipe';
+import { YesNoPipe } from './pipes/yes-no.pipe';
+import { DeleteProductComponent } from './products/delete-product/delete-product.component';
+import { AlterProductComponent } from './products/alter-product/alter-product.component';
+
 import { HelperService } from 'src/services/HelperService';
+
 
 
 @NgModule({
@@ -50,6 +57,7 @@ import { HelperService } from 'src/services/HelperService';
     MainComponent,
     ListOfferComponent,
     FilterPipe,
+    YesNoPipe,
     ListDiscountComponent,
     DiscountPipe,
     DespachoComponent,
@@ -57,8 +65,15 @@ import { HelperService } from 'src/services/HelperService';
     FilterCustByAttributesPipe,
     RecibirStockComponent,
     GuardarStockComponent,
+    ListProductsComponent,
+    DeleteProductComponent,
+    AlterProductComponent,
     UploadProductsComponent,
-    FilterOrderStockByNumberPipe
+    FilterOrderStockByNumberPipe,
+    FilterProductsPipe
+    
+    
+    
  ],
  
   imports: [
