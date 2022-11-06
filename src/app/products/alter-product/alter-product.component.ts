@@ -28,6 +28,7 @@ export class AlterProductComponent implements OnInit {
   ngOnInit(): void {
     this.getProduct();
     this.getLabs();
+    
   }
 
   ngOnDestroy(): void {
@@ -41,7 +42,7 @@ export class AlterProductComponent implements OnInit {
 
   setLaboratory(lab: Laboratory)
   {
-    console.log
+
     this.product.laboratory=lab.nombre
     
   }
@@ -114,9 +115,8 @@ export class AlterProductComponent implements OnInit {
     //   return
     // }
     
-    console.log(this.product)
       this.subscription.add(
-        this.productService.postCreateProducts(this.product).subscribe({
+        this.productService.putProduct(this.id, this.product).subscribe({
           next: () => {
             Swal.fire({
               title: 'Producto modificado correctamente',

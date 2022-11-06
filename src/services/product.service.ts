@@ -34,13 +34,11 @@ export class ProductService {
     return this.http.get(this.apiUrlBase + "/"+ id);
   }
 
-  // putProduct(id: string): Observable<any>{
-  //   const url = this.apiUrlBase;
-  //   const headers = { 'content-type': 'application/json' };
-  //   const body = JSON.stringify(product);
-  //   return this.http.put(url, body, { 'headers': headers })
-
-  // }
+  putProduct(id: number, product: Product): Observable<any>{
+    const headers = { 'content-type': 'application/json' };
+     const body = JSON.stringify(product);
+     return this.http.put(`${this.apiUrlBase}/${id}`, body, { 'headers': headers })
+   }
 
   postCreateProducts(product: Product): Observable<any>{
     const url = this.apiUrlBase;
