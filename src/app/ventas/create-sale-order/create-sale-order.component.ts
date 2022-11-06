@@ -15,6 +15,7 @@ import { FormControl } from '@angular/forms';
 import { Product } from 'src/interfaces/Product';
 import { OfferStock } from 'src/interfaces/OfferStock';
 import { OfferService } from 'src/services/offer.service';
+import {HttpErrorResponse, HttpStatusCode} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-sale-order',
@@ -44,7 +45,7 @@ export class CreateSaleOrderComponent implements OnInit {
   change: Boolean = false;
   modalSwitch: boolean = false;
   selectedItem = {} as Product;
-  
+
   //poli
 
   private subscription = new Subscription();
@@ -161,10 +162,13 @@ alert(this.selectedCustomer.healthInsurancePlan.id);
         this.offer=offers;
         console.log(this.offer);
       },
-      error: () =>{
-        alert('error al obtener las ofertas')
-      }
-    });
+      error: (err: HttpErrorResponse) => {
+        if(err.status == HttpStatusCode.InternalServerError) {
+          alert("Error al obtener las ofertas");
+        } else if(err.status == HttpStatusCode.NotFound) {
+          alert('No hay stock para el producto seleccionado');
+        }
+      }});
     this.change= true;
     return this.change;
   }
