@@ -1,8 +1,6 @@
 <div class="container">
     <h3>Crear Orden de Venta</h3>
-
-    <form *ngIf="ocultarTB">
-        <br>
+    <form *ngIf="ocultar">
         <div class="row g-3">
             <div class="col 1">
                 <input type="text" class="form-control"
@@ -12,10 +10,9 @@
         </div>
     </form>
 
-    <br>
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-hover text-center">
+        <thead class="table-info">
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Nombre</th>
@@ -26,7 +23,7 @@
 
             </tr>
         </thead>
-        <tbody *ngIf="ocultarTB">
+        <tbody *ngIf="ocultar">
             <tr
                 *ngFor="let customer of customers | FilterCustByAttributes: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td><input id="radio" name="customers" type="radio" value="selectedCustomer"
@@ -40,7 +37,7 @@
             <br>
             <br>
         </tbody>
-        <tbody *ngIf="mostrarTB">
+        <tbody *ngIf="mostrar">
             <tr>
                 <td></td>
                 <td>{{selectedCustomer.name + ' ' + selectedCustomer.lastName}}</td>
@@ -51,17 +48,16 @@
             </tr>
         </tbody>
     </table>
-
-    <button type="button" class="btn btn-outline-primary" (click)="refresh()">Seleccionar otro cliente</button>
+    <button *ngIf="mostrar" type="button" class="btn btn-outline-primary" (click)="refresh()">Seleccionar otro cliente</button>
+    <button *ngIf="ocultar" type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear nuevo cliente</button>
 </div>
 <br>
-<div class="container" *ngIf="selectedCustomer != null && mostrarTB">
+<div class="container" *ngIf="selectedCustomer != null && mostrar">
 
     <h5>Buscar Productos</h5>
-    <br>
-    <div class="row">
-        <div class="input-group">
-            <div class="col-5">
+    <div class="row p-3">
+        <div class="input-group ">
+            <div class="col-5 px-2">
                 <div class="input-group-text">
                     <input class="form-check-input mt-0" name="search" id="check1" value="name" type="radio"
                         (click)="activateName()" checked aria-label="Radio button for following text input">
@@ -70,7 +66,7 @@
                 </div>
 
             </div>
-            <div class="col-5">
+            <div class="col-5 px-2">
                 <div class="input-group-text">
                     <input class="form-check-input mt-0" name="search" id="check2" value="codebar" type="radio"
                         (click)="activateBarcode()" aria-label="Radio button for following text input">
@@ -78,13 +74,13 @@
                     <input type="text" [disabled]="!activeBarcode" [(ngModel)]="messageBarcode">
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-2 px-5">
                 <button type="button" class="btn btn-primary" (click)="searchProducts()">Buscar</button>
             </div>
         </div>
     </div>
-    <table class="table table-success table-striped">
-        <thead>
+    <table class="table table-hover text-center">
+        <thead class="table-info">
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Nombre Producto</th>
@@ -107,8 +103,8 @@
         </tbody>
     </table>
     <div *ngIf="change==true">
-        <table class="table table-success table-striped">
-            <thead>
+        <table class="table table-hover text-center">
+            <thead class="table-info">
                 <tr>
                     <th scope="col">Producto</th>
                     <th scope="col">Obra Social</th>
@@ -116,7 +112,9 @@
                     <th scope="col">Precio Unitario</th>
                     <th scope="col">Descuento</th>
                     <th scope="col">Precio Final</th>
+                    <th scope="col">Stock</th>
                     <th scope="col">Cantidad</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -128,9 +126,23 @@
                     <th>{{ offer.discountValue }}</th>
                     <th>{{ offer.finalPrice }}</th>
                     <th>{{ offer.stock }}</th>
+                    <th><input type="number" name="cantidad" id="cantidad"></th>
+                    <th><button type="button" class="btn btn-primary" (click)="onSelectionChange3(offer)">Buscar</button></th>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div>
+        <table class="table table-hover text-center">
+            <tr>
+                <td>{{ selectedOffer.product.name }}</td>
+                <th>{{ selectedOffer.finalPrice }}</th>
+                <th>{{ selectedOffer.stock }}</th>
+                <th>cantidad</th>
+            </tr>
+        </table>
+    </div>
+
+
     <!--<pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
  -->

@@ -15,6 +15,7 @@ import { FormControl } from '@angular/forms';
 import { Product } from 'src/interfaces/Product';
 import { OfferStock } from 'src/interfaces/OfferStock';
 import { OfferService } from 'src/services/offer.service';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-create-sale-order',
@@ -24,16 +25,15 @@ import { OfferService } from 'src/services/offer.service';
 export class CreateSaleOrderComponent implements OnInit {
 
   customers = {} as Customer[];
-  ocultarTB: boolean = true;
-  mostrarTB: boolean = false;
+  ocultar: boolean = true;
+  mostrar: boolean = false;
   customer: Customer = {} as Customer;
   selectedCustomer: Customer;
   saleOrder = {} as SaleOrder;
   user = {} as User;
   filterCustomer: string = '';
   public page: number;
-
-  //poli
+  modalRef: MdbModalRef<CreateCustomerComponent> | null = null;
   messageName: string = '';
   messageBarcode: string = '';
   activeName: boolean = false;
@@ -44,8 +44,7 @@ export class CreateSaleOrderComponent implements OnInit {
   change: Boolean = false;
   modalSwitch: boolean = false;
   selectedItem = {} as Product;
-  
-  //poli
+  selectedOffer = {} as OfferStock;
 
   private subscription = new Subscription();
 
@@ -55,7 +54,8 @@ export class CreateSaleOrderComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private offerService: OfferService) { }
+    private offerService: OfferService,
+    private modalService: MdbModalService) { }
 
   ngOnInit(): void {
     this.refresh()
@@ -63,15 +63,21 @@ export class CreateSaleOrderComponent implements OnInit {
     this.activeBarcode = false;
   }
 
+  limpiar(){
+
+  }
 
   refresh() {
     this.subscription.add(
       this.customerService.getCustomers().subscribe({
         next: (response: Customer[]) => {
           this.customers = response;
-          this.ocultarTB = true;
-          this.mostrarTB = false;
+          this.ocultar = true;
+          this.mostrar = false;
           this.filterCustomer = '';
+          this.messageName = '';
+          this.messageBarcode = '';
+          this.products = [];      
         },
         error: () => {
           Swal.fire({
@@ -82,6 +88,10 @@ export class CreateSaleOrderComponent implements OnInit {
         },
       }),
     );
+  }
+
+  openModalCustomer() {
+    this.modalRef = this.modalService.open(CreateCustomerComponent)
   }
 
 
@@ -106,8 +116,8 @@ export class CreateSaleOrderComponent implements OnInit {
 
   onSelectionChange(customer: Customer) {
     this.selectedCustomer = customer;
-    this.ocultarTB = false;
-    this.mostrarTB = true;
+    this.ocultar = false;
+    this.mostrar = true;
   }
 
 
@@ -173,15 +183,20 @@ export class CreateSaleOrderComponent implements OnInit {
   onSelectionChange2(item: Product): Boolean {
     this.selectedItem = item;
     this.offerService.getOfferByProduct(item.id, this.selectedCustomer.healthInsurancePlan.id).subscribe({
-      next: (offer: OfferStock) =>{
-        this.offer=offer;
+      next: (offer: OfferStock) => {
+        this.offer = offer;
       },
-      error: () =>{
+      error: () => {
         alert('error al obtener las ofertas')
       }
     });
-    this.change= true;
+    this.change = true;
     return this.change;
+  }
+
+  onSelectionChange3(offer: OfferStock) {
+    this.selectedOffer = offer;
+
   }
 
 }
