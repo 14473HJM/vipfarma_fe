@@ -16,6 +16,7 @@ export class ListProductsComponent implements OnInit {
   private subscription = new Subscription();
   selectProd = {} as Product;
   filterProduct: string = '';
+  transformTrueOrFalse: string='';
   public page: number;
 
 
@@ -29,7 +30,7 @@ export class ListProductsComponent implements OnInit {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  
+
   getProducts(){
     this.subscription.add(
       this.prodService.getAllProducts().subscribe({
@@ -38,7 +39,7 @@ export class ListProductsComponent implements OnInit {
         },
         error: () => {
           Swal.fire({
-            title: 'Error al obtener la lista de clientes de la API',
+            title: 'Error al obtener la lista de Productos de la API',
             icon: 'error',
             confirmButtonText: "Ok",
           });

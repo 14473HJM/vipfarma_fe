@@ -32,11 +32,12 @@ import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
 import { ListProductsComponent } from './products/list-products/list-products.component';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
 import { FilterProductsPipe } from './pipes/filter-products.pipe';
+import { YesNoPipe } from './pipes/yes-no.pipe';
 import { DeleteProductComponent } from './products/delete-product/delete-product.component';
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
 
 import { HelperService } from 'src/services/HelperService';
-import { YesNoPipe } from './pipes/yes-no.pipe';
+
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { YesNoPipe } from './pipes/yes-no.pipe';
     MainComponent,
     ListOfferComponent,
     FilterPipe,
+    YesNoPipe,
     ListDiscountComponent,
     DiscountPipe,
     DespachoComponent,
@@ -68,8 +70,8 @@ import { YesNoPipe } from './pipes/yes-no.pipe';
     AlterProductComponent,
     UploadProductsComponent,
     FilterOrderStockByNumberPipe,
-    FilterProductsPipe,
-    YesNoPipe,
+    FilterProductsPipe
+    
     
     
  ],
