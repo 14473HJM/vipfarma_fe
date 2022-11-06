@@ -31,6 +31,8 @@ import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.compo
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
 import { CustomerPipe } from './pipes/customer.pipe';
+import { HelperService } from 'src/services/HelperService';
+
 
 
 @NgModule({
@@ -61,7 +63,7 @@ import { CustomerPipe } from './pipes/customer.pipe';
     FilterOrderStockByNumberPipe,
     CustomerPipe
  ],
- 
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -74,7 +76,7 @@ import { CustomerPipe } from './pipes/customer.pipe';
     ReactiveFormsModule,
     NgxPaginationModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
