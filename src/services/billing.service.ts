@@ -10,7 +10,7 @@ import { UserService } from './user.service';
 })
 export class BillingService {
 
-  apiUrlBase: string = environment.billBaseUrl;
+  apiUrlBase: string = environment.baseUrl + "/billing/order";
 
   constructor(private http: HttpClient, private userServ : UserService) { }
 

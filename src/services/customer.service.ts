@@ -13,7 +13,7 @@ export class CustomerService {
 
   //customer: Customer= {} as Customer;
 
-  private apiUrlBase: string = environment.customerBaseUrl;
+  private apiUrlBase: string = environment.baseUrl + "/customers";
 
   constructor(private http: HttpClient, private cookies: CookieService, 
     private router: Router) { }

@@ -35,6 +35,7 @@ import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { DeleteProductComponent } from './products/delete-product/delete-product.component';
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
 
+import { HelperService } from 'src/services/HelperService';
 
 
 @NgModule({
@@ -83,7 +84,7 @@ import { AlterProductComponent } from './products/alter-product/alter-product.co
     ReactiveFormsModule,
     NgxPaginationModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

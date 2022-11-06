@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LockerStockDTO } from 'src/dto/LockerStockDTO';
 import { Locker } from 'src/interfaces/Locker';
+import { LockerTransaction } from 'src/interfaces/LockerTransaction';
 import { StockOrder } from 'src/interfaces/StockOrder';
 import { StockOrderItem } from 'src/interfaces/StockOrderItem';
 import { LockerService } from 'src/services/locker.service';
@@ -22,6 +23,7 @@ export class GuardarStockComponent implements OnInit {
   lockerSelected = {} as Locker;
   lockerStocks: LockerStockDTO[];
   public page: number;
+  storedStatus: string = "STORED"; 
 
   constructor(private orderStServ: OrderStockService, private lockServ: LockerService) {
     this.lockerStocks = [ {locker: this.lockerSelected, quantity: 0} ];
@@ -47,6 +49,22 @@ export class GuardarStockComponent implements OnInit {
   }
 
   onSelectionChange(order: StockOrder) {
+    
+    for(let it of order.stockOrderItems) {
+      this.lockServ.getLockersAvailable(it.product.id, it.actualQuantity).subscribe({
+        next: (response : Locker[]) => {
+          it.lockersAvailables = response;
+        },
+        error: () => {
+          Swal.fire({
+            title: 'Error en el Servicio',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
+        },
+      })
+    }
+
     this.selectedOrder = order;
   }
 
@@ -81,6 +99,7 @@ export class GuardarStockComponent implements OnInit {
 
   cancelar() {
     this.selectedOrder = {} as StockOrder;
+    this.getAllReceivedOrders();
   }
 
   /*
@@ -133,47 +152,39 @@ export class GuardarStockComponent implements OnInit {
       }
     });
   }
+  */
 
-  calcularStatus(item: StockOrderItem) {
-    if(item.actualQuantity >= item.requiredQuantity) {
-      item.stockOrderItemStatus = "COMPLETELY_RECEIVED";
-    } else if (item.actualQuantity > 0 && item.actualQuantity < item.requiredQuantity) {
-      item.stockOrderItemStatus = "PARTIALLY_RECEIVED";
-    } else if (item.actualQuantity == 0) {
-      item.stockOrderItemStatus = "NO_RECEIVED";
+  setStatus(status: string) {
+    this.selectedOrder.stockOrderStatus = status;
+    for(let item of this.selectedOrder.stockOrderItems) {
+      item.stockOrderItemStatus = status;
     }
   }
-*/
 
   guardarOrden() {
-
-    for(let item of this.selectedOrder.stockOrderItems) {
-      if(item.receivedQuantity == null || item.rejectedQuantity == null || item.actualQuantity == null) {
-        Swal.fire({
-              title: 'Debe ingresar todos los campos',
-              icon: 'error',
-              confirmButtonText: "Ok",
-            });
-            return;
-      }
-
-      //this.calcularStatus(item);
+    
+    if(!this.checkUbicaciones()) {
+      return;
     }
+    this.setStatus(this.storedStatus);
 
     Swal.fire({
-      title: 'Esta seguro de Registrar la Orden ' + this.selectedOrder.id + ' ??',
+      title: 'Esta seguro de marcar la Orden ' + this.selectedOrder.id + ' como ALMACENADA ??',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Registrar',
+      confirmButtonText: 'Si, Almacenar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.orderStServ.putStatusOrderStock("RECEIVED", this.selectedOrder).subscribe({
+        alert("A GUARDAAAAAAAR !!!!!");
+        alert(this.selectedOrder.toString())
+        /*
+        this.orderStServ.putStatusOrderStock("STORED", this.selectedOrder).subscribe({
           next: () => {
             Swal.fire({
-              title: 'Orden ' + this.selectedOrder.id + ' marcada como RECIBIDA',
+              title: 'Orden ' + this.selectedOrder.id + ' marcada como ALMACENADA',
               icon: 'info',
               confirmButtonText: "Ok",
             });
@@ -188,9 +199,32 @@ export class GuardarStockComponent implements OnInit {
             });
           },
         })
+        */
       }
     });
   }
 
+  checkUbicaciones(): boolean {
+    for(let item of this.selectedOrder.stockOrderItems) {
+
+      var lockerTrans = {} as LockerTransaction;
+      var lockerSel = document.getElementById(item.id.toString()) as HTMLSelectElement | null;
+      if (lockerSel != null) {
+        const value = lockerSel.value;
+        if(item.actualQuantity > 0 && (value == null || value == "")) {
+          Swal.fire({
+            title: 'Debe Seleccionar Locker para almacenar el producto ' + item.product.name,
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
+          return false;
+        } 
+        lockerTrans.lockerId = Number(value);
+        lockerTrans.quantity = item.actualQuantity;
+      }
+      item.lockerTransaction = lockerTrans;
+    }
+    return true;
+  }
   
 }
