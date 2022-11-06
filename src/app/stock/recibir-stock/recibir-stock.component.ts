@@ -39,6 +39,12 @@ export class RecibirStockComponent implements OnInit {
 
   onSelectionChange(order: StockOrder) {
     this.selectedOrder = order;
+
+    for(let it of this.selectedOrder.stockOrderItems) {
+      it.receivedQuantity = it.requiredQuantity;
+      it.rejectedQuantity = 0;
+      it.actualQuantity = it.receivedQuantity - it.rejectedQuantity;
+    }
   }
 
   onDelete(id: number) {

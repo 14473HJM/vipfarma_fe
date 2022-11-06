@@ -1,0 +1,133 @@
+
+<div class="container container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+    		<div class="tile-progress tile-green">
+    			<div class="tile-header">
+    				<h3>ACTIVOS</h3>
+    				<span>Productos a la Venta.</span>
+    			</div>
+    			<div class="tile-progressbar">
+    				<span *ngIf="porcDisponible == 0" data-fill="%" style="width: 0%;"></span>
+                    <span *ngIf="porcDisponible > 0 && porcDisponible < 10" data-fill="%" style="width: 5%;"></span>
+                    <span *ngIf="porcDisponible > 9 && porcDisponible < 20" data-fill="%" style="width: 15%;"></span>
+                    <span *ngIf="porcDisponible > 19 && porcDisponible < 30" data-fill="%" style="width: 25%;"></span>
+                    <span *ngIf="porcDisponible > 29 && porcDisponible < 40" data-fill="%" style="width: 35%;"></span>
+                    <span *ngIf="porcDisponible > 39 && porcDisponible < 50" data-fill="%" style="width: 45%;"></span>
+                    <span *ngIf="porcDisponible > 49 && porcDisponible < 60" data-fill="%" style="width: 55%;"></span>
+                    <span *ngIf="porcDisponible > 59 && porcDisponible < 70" data-fill="%" style="width: 65%;"></span>
+                    <span *ngIf="porcDisponible > 69 && porcDisponible < 80" data-fill="%" style="width: 75%;"></span>
+                    <span *ngIf="porcDisponible > 79 && porcDisponible < 90" data-fill="%" style="width: 85%;"></span>
+                    <span *ngIf="porcDisponible > 89 && porcDisponible < 100" data-fill="%" style="width: 95%;"></span>
+                    <span *ngIf="porcDisponible == 100" data-fill="%" style="width: 99%;"></span>
+    			</div>
+    			<div class="tile-footer">
+    				<h4>
+    					<span class="pct-counter">{{porcDisponible}}</span>%
+    				</h4>
+    				<span>{{totalDisponible}} productos</span>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-sm-3">
+    		<div class="tile-progress tile-cyan">
+    			<div class="tile-header">
+    				<h3>RESERVADOS</h3>
+    				<span>Productos Reservados por Venta.</span>
+    			</div>
+    			<div class="tile-progressbar">
+    				<span data-fill="45.9%" style="width: 45.9%;"></span>
+    			</div>
+    			<div class="tile-footer">
+    				<h4>
+    					<span class="pct-counter">{{porcReservado}}</span>% 
+    				</h4>
+    				<span>{{totalReservado}} productos</span>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-sm-3">
+    		<div class="tile-progress tile-purple">
+    			<div class="tile-header">
+    				<h3>INACTIVOS</h3>
+    				<span>Productos fuera de Venta.</span>
+    			</div>
+    			<div class="tile-progressbar">
+    				<span data-fill="27%" style="width: 27%;"></span>
+    			</div>
+    			<div class="tile-footer">
+    				<h4>
+    					<span class="pct-counter">{{porcInactivo}}</span>% 
+    				</h4>
+    				<span>{{totalInactivo}} productos</span>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-sm-3">
+    		<div class="tile-progress tile-pink">
+    			<div class="tile-header">
+    				<h3>EXPIRADOS</h3>
+    				<span>Productos vencidos.</span>
+    			</div>
+    			<div class="tile-progressbar">
+    				<span data-fill="3%" style="width: 90%;"></span>
+    			</div>
+    			<div class="tile-footer">
+    				<h4>
+    					<span class="pct-counter">{{porcExpirado}}</span>% 
+    				</h4>
+    				<span>{{totalExpirado}} productos</span>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+
+<div class="container">
+    <br>
+    <div class="row g-3">
+        <div class="col">
+            <h3>Listado de Productos por Stock</h3>
+        </div>
+    </div>
+
+<form>
+    <br>
+    <div class="row g-3">
+        <div class="col 1">
+            <input type="text" class="form-control" placeholder="Buscar Productos .... " name="filterProduct" [(ngModel)]="filterProduct">
+        </div>
+    </div>
+</form>
+<br>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cod. Barra</th>
+            <th scope="col">Laboratorio</th>
+            <th scope="col">Cantidad Disponible</th>
+            <th scope="col">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- | filterStockProducts: filterProduct -->
+        <tr *ngFor="let stk of stockProductList | paginate: { itemsPerPage: 10, currentPage: page } ">
+            <td></td>
+            <td>{{stk.stock.product.name}}</td>
+            <td>{{stk.stock.product.barcode}}</td>
+            <td>{{stk.stock.product.laboratory}}</td>
+            <td>{{stk.value}}</td>
+            <td>
+                <div *ngIf="stk.value > 800"  class="text-muted"><span class="badge bg-success text-black fw-bold">OK</span></div>
+                <div *ngIf="stk.value > 300 && stk.value < 900" class="text-muted"><span class="badge bg-secondary text-black fw-bold">Bajo Stock</span></div>
+                <div *ngIf="stk.value > 0 && stk.value < 400" class="text-muted"><span class="badge bg-warning text-black fw-bold">Muy Bajo Stock</span></div>
+                <div *ngIf="stk.value == 0" class="text-muted"><span class="badge bg-danger text-black fw-bold">Sin Stock</span></div>
+            </td>
+        </tr>
+        <br>
+        <br>
+    </tbody>
+</table>
+<pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

@@ -142,7 +142,12 @@
         Disponibilidad por Locker
       </a>
     </li>
-
+    <li>
+      <a href="#" class="nav-link text-dark font-italic" (click)="listProds()">
+        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+        Listado de Productos
+      </a>
+    </li>
   </ul>
 </div>
   </div>
@@ -162,5 +167,6 @@
   <app-list-products *ngIf="isListProducts"></app-list-products>
   <app-upload-products *ngIf="isUploadProducts"></app-upload-products>
   <app-guardar-stock *ngIf="isGuardarStock"> </app-guardar-stock>
+  <app-stock-por-producto *ngIf="isListProds" ></app-stock-por-producto>
 </div>
 <!-- End demo content -->

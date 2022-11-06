@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
@@ -39,6 +40,9 @@ import { AlterProductComponent } from './products/alter-product/alter-product.co
 
 import { HelperService } from 'src/services/HelperService';
 import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component';
+import { StatusMapperPipe } from './pipes/statusMapper.pipe';
+import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
+import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
 
 
 
@@ -64,6 +68,7 @@ import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component
     DiscountPipe,
     DespachoComponent,
     FilterOrderByCustPipe,
+    StatusMapperPipe,
     FilterCustByAttributesPipe,
     RecibirStockComponent,
     GuardarStockComponent,
@@ -71,9 +76,11 @@ import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component
     DeleteProductComponent,
     AlterProductComponent,
     UploadProductsComponent,
+    FilterProductsStockPipe,
     FilterOrderStockByNumberPipe,
     FilterProductsPipe,
-    BarGraphicComponent
+    BarGraphicComponent,
+    StockPorProductoComponent
     
     
     
@@ -89,8 +96,8 @@ import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component
     MdbModalModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgChartsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgChartsModule
   ],
   providers: [CookieService, HelperService, NgChartsConfiguration],
   bootstrap: [AppComponent]

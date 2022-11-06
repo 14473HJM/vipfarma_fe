@@ -25,6 +25,7 @@ export class MainComponent implements OnInit {
   isListProducts:boolean=false;
   isDispoLocker:boolean=false;
   isGuardarStock: boolean = false;
+  isListProds: boolean = false;
 
   constructor(private router: Router, private userServ: UserService) { }
 
@@ -69,6 +70,7 @@ export class MainComponent implements OnInit {
     this.isListProducts=false;
     this.isDispoLocker=false;
     this.isGuardarStock = false;
+    this.isListProds = false;
   }
 
   facturar() {
@@ -130,6 +132,11 @@ export class MainComponent implements OnInit {
   guardarStock() {
     this.cleanFlags();
     this.isGuardarStock = true;
+  }
+
+  listProds() {
+    this.cleanFlags();
+    this.isListProds = true;
   }
 
 }
