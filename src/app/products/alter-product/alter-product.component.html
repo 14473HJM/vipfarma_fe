@@ -16,9 +16,9 @@
             </div>
             <div class="col">
                 <label for="">Laboratorio</label>
-                <select [(ngModel)]="product.laboratory" id="lab" name="laboratory" class="form-select"  placeholder="Laboratorio" aria-label="healthInsurance" >
+                <select [(ngModel)]="laboratorio" id="lab" name="lab" class="form-select"  placeholder="Laboratorio" aria-label="laboratory" (change)="setLaboratory(laboratorio)" >
                     <option  value={{product.laboratory}} selected>{{product.laboratory}}</option>
-                    <option *ngFor="let lab of lab" [ngValue]="lab">
+                    <option *ngFor="let lab of labs" [ngValue]="lab">
                         {{lab.nombre}}
                     </option>
                 </select>

@@ -15,7 +15,8 @@ import Swal from 'sweetalert2';
 export class AlterProductComponent implements OnInit {
 
   product: Product= {} as Product;
-  lab:  Laboratory[];
+  labs:  Laboratory[];
+  laboratorio: Laboratory= {} as Laboratory;
   
   @Input() id: number;
   @Output() onUpdate = new EventEmitter();
@@ -35,13 +36,13 @@ export class AlterProductComponent implements OnInit {
 
   
   getLabs(){
-    this.lab= this.labService.getLaboratories();
+    this.labs= this.labService.getLaboratories();
   }
 
-  setLaboratory(obs: Product["laboratory"])
+  setLaboratory(lab: Laboratory)
   {
     console.log
-    this.product.laboratory=obs
+    this.product.laboratory=lab.nombre
     
   }
 
@@ -86,6 +87,24 @@ export class AlterProductComponent implements OnInit {
       });
       return
     }
+
+    if(this.product.barcode == null){
+      Swal.fire({
+        title: 'Debe ingresar un código de barras',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
+      return
+    }
+
+    if(this.product.price == null){
+      Swal.fire({
+        title: 'Debe ingresar un precio',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
+      return
+    }
     // if(this.product.prescriptionRequired?){
     //   Swal.fire({
     //     title: 'Debe introducir correctamente el domicilio',
@@ -95,7 +114,7 @@ export class AlterProductComponent implements OnInit {
     //   return
     // }
     
-   
+    console.log(this.product)
       this.subscription.add(
         this.productService.postCreateProducts(this.product).subscribe({
           next: () => {

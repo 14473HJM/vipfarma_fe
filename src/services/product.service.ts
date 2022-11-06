@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductService {
 
-  private apiUrlBase: string = environment.uploadProductsBaseUrl;;
+  private apiUrlBase: string = environment.baseUrl+ "/products";
 
   constructor(private http: HttpClient, private cookies: CookieService, 
     private router: Router) { }
@@ -33,6 +33,14 @@ export class ProductService {
   getProduct(id: string): Observable<any>{
     return this.http.get(this.apiUrlBase + "/"+ id);
   }
+
+  // putProduct(id: string): Observable<any>{
+  //   const url = this.apiUrlBase;
+  //   const headers = { 'content-type': 'application/json' };
+  //   const body = JSON.stringify(product);
+  //   return this.http.put(url, body, { 'headers': headers })
+
+  // }
 
   postCreateProducts(product: Product): Observable<any>{
     const url = this.apiUrlBase;
