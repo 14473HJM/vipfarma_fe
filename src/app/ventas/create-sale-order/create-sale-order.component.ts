@@ -106,7 +106,6 @@ export class CreateSaleOrderComponent implements OnInit {
 
   onSelectionChange(customer: Customer) {
     this.selectedCustomer = customer;
-alert(this.selectedCustomer.healthInsurancePlan.id);
     this.ocultarTB = false;
     this.mostrarTB = true;
   }
@@ -153,29 +152,13 @@ alert(this.selectedCustomer.healthInsurancePlan.id);
     }
   }
 
-  onSelectionChange2(item: Product): Boolean {
-    this.selectedItem = item;
-    this.offerService.getOfferByProduct(item.id, this.selectedCustomer.healthInsurancePlan.id).subscribe({
-      next: (offers: OfferStock) =>{
-        console.log(offers);
-        this.offer=offers;
-        console.log(this.offer);
-      },
-      error: () =>{
-        alert('error al obtener las ofertas')
-      }
-    });
-    this.change= true;
-    return this.change;
-  }
-
-
-
   // onSelectionChange2(item: Product): Boolean {
   //   this.selectedItem = item;
   //   this.offerService.getOfferByProduct(item.id, this.selectedCustomer.healthInsurancePlan.id).subscribe({
-  //     next: (offer: OfferStock) =>{
-  //       this.offer=offer;
+  //     next: (offers: OfferStock) =>{
+  //       console.log(offers);
+  //       this.offer=offers;
+  //       console.log(this.offer);
   //     },
   //     error: () =>{
   //       alert('error al obtener las ofertas')
@@ -184,5 +167,21 @@ alert(this.selectedCustomer.healthInsurancePlan.id);
   //   this.change= true;
   //   return this.change;
   // }
+
+
+
+  onSelectionChange2(item: Product): Boolean {
+    this.selectedItem = item;
+    this.offerService.getOfferByProduct(item.id, this.selectedCustomer.healthInsurancePlan.id).subscribe({
+      next: (offer: OfferStock) =>{
+        this.offer=offer;
+      },
+      error: () =>{
+        alert('error al obtener las ofertas')
+      }
+    });
+    this.change= true;
+    return this.change;
+  }
 
 }
