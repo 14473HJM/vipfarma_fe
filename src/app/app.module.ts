@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgChartsModule } from 'ng2-charts';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
@@ -38,6 +39,8 @@ import { AlterProductComponent } from './products/alter-product/alter-product.co
 
 import { HelperService } from 'src/services/HelperService';
 import { StatusMapperPipe } from './pipes/statusMapper.pipe';
+import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
+import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
 
 
 
@@ -71,8 +74,10 @@ import { StatusMapperPipe } from './pipes/statusMapper.pipe';
     DeleteProductComponent,
     AlterProductComponent,
     UploadProductsComponent,
+    FilterProductsStockPipe,
     FilterOrderStockByNumberPipe,
-    FilterProductsPipe
+    FilterProductsPipe,
+    StockPorProductoComponent
     
     
     
@@ -88,7 +93,8 @@ import { StatusMapperPipe } from './pipes/statusMapper.pipe';
     MdbModalModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgChartsModule
   ],
   providers: [CookieService, HelperService],
   bootstrap: [AppComponent]
