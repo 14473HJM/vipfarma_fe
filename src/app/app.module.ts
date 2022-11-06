@@ -37,6 +37,7 @@ import { DeleteProductComponent } from './products/delete-product/delete-product
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
 
 import { HelperService } from 'src/services/HelperService';
+import { StatusMapperPipe } from './pipes/statusMapper.pipe';
 
 
 
@@ -62,6 +63,7 @@ import { HelperService } from 'src/services/HelperService';
     DiscountPipe,
     DespachoComponent,
     FilterOrderByCustPipe,
+    StatusMapperPipe,
     FilterCustByAttributesPipe,
     RecibirStockComponent,
     GuardarStockComponent,
