@@ -196,7 +196,6 @@ export class CreateSaleOrderComponent implements OnInit {
 
   onSelectionChange3(offer: OfferStock) {
     this.selectedOffer = offer;
-
   }
 
 }
