@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChartData } from 'chart.js';
 import { Subscription } from 'rxjs';
+import { BranchOffice } from 'src/interfaces/BranchOffice';
 import { Locker } from 'src/interfaces/Locker';
+import { BranchOfficeService } from 'src/services/branch-office.service';
 import { LockerService } from 'src/services/locker.service';
 import { UserService } from 'src/services/user.service';
 import Swal from 'sweetalert2';
@@ -17,24 +19,27 @@ export class BarGraphicComponent implements OnInit, OnDestroy {
   labels: String[];
   idLocker:number;
   idUser: any;
+  branchs: BranchOffice[];
 
   private subscription = new Subscription();
   
-  // datos: ChartData<'bar', number[], string> = {
-  //   labels: ['Locker1', 'Locker2', 'Locker3'],
-  //   datasets: [
-      
-  //     {
-  //       data: [80, 100, 90, 40],
-  //       label: 'Disponible'
-  //     },
-  //     {
-  //       data: [20, 0, 10, 60],
-  //       label: 'Ocupado'
-  //     }
+ getBranchs(){
+  this.subscription.add(
+    this.branchServ.getAll().subscribe({
+      next: (respuesta: BranchOffice[]) => {
+        this.branchs = respuesta;
+      },
+      error: () => {
+        Swal.fire({
+          title: 'Error al obtener el listado de sucursales',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
+      },
+    })
+  );
 
-  //   ]
-  // }
+ }
 
 
   // con service
@@ -42,7 +47,7 @@ export class BarGraphicComponent implements OnInit, OnDestroy {
   datos: ChartData<'bar'>
 
 
-  constructor( private lockerServ: LockerService, private userServ: UserService) {
+  constructor( private lockerServ: LockerService, private userServ: UserService, private branchServ: BranchOfficeService) {
     
    }
   ngOnDestroy(): void {
@@ -50,6 +55,7 @@ export class BarGraphicComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+   this.getBranchs(); 
    this.idUser = this.userServ.getBranchId();
    console.log(this.idUser)
     this.subscription.add(
