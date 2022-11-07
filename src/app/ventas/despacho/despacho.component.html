@@ -17,7 +17,7 @@
         <tbody>
             <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
-                <th scope="row"> {{ order.id }} </th>
+                <td scope="row"> {{ order.id }} </td>
                 <td>{{ order.createdDate }}</td>
                 <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
                 <td>{{ order.user.userName }}</td>
