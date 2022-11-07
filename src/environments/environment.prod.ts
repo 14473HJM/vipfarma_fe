@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  userBaseUrl: "CHANGME" 
+  userBaseUrl: "CHANGME",
+  baseUrl: "http://localhost:5000",
 };
