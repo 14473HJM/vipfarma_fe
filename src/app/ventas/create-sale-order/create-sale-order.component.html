@@ -48,8 +48,10 @@
             </tr>
         </tbody>
     </table>
-    <button *ngIf="mostrar" type="button" class="btn btn-outline-primary" (click)="obtenerClientes()">Seleccionar otro cliente</button>
-    <button *ngIf="ocultar" type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear cliente</button>
+    <button *ngIf="mostrar" type="button" class="btn btn-outline-primary" (click)="obtenerClientes()">Seleccionar otro
+        cliente</button>
+    <button *ngIf="ocultar" type="button" class="btn btn-outline-primary" (click)="openModalCustomer()">Crear
+        cliente</button>
 </div>
 <br>
 <div class="container" *ngIf="selectedCustomer != null && mostrar">
@@ -97,7 +99,7 @@
                 <td>{{ item.barcode }}</td>
                 <td>{{ item.laboratory }}</td>
                 <td>{{ item.prescription }}</td>
-                <td>{{ item.price }}</td>
+                <td>$ {{ item.price }}</td>
             </tr>
         </tbody>
     </table>
@@ -117,22 +119,25 @@
                 </tr>
             </thead>
             <tbody>
+                <tr *ngFor="let offer of offers"></tr>
                 <tr>
                     <td>{{ offer.product.name }}</td>
                     <td>{{ offer.stock }}</td>
                     <td>{{ offer.healthInsurance.name }}</td>
                     <td>{{ offer.healthInsurancePlan.name }}</td>
-                    <td>{{ offer.product.price }}</td>
+                    <td>$ {{ offer.product.price }}</td>
                     <td>{{ offer.discountValue }} %</td>
-                    <td><input [(ngModel)]="cant" (change)="calcular(cant)" type="number" name="cantidad" id="cantidad" min="0" ></td>
-                    <td>{{ precioTotal }}</td>
-                    <td><button type="button" class="btn btn-primary" (click)="onSelectionChange3(offer)">Agregar</button></td>
+                    <td><input [(ngModel)]="cant" (change)="calcular(cant)" type="number" name="cantidad" id="cantidad"
+                            min="0"></td>
+                    <td>$ {{ precioTotal }}</td>
+                    <td><button type="button" class="btn btn-primary"
+                            (click)="onSelectionChange3(offer, cant)">Agregar</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-   
-    <div class="container" *ngIf="click == true" >
+
+    <div class="container" *ngIf="click == true">
         <br>
         <h5>Orden de venta</h5>
         <br>
@@ -145,30 +150,30 @@
                     <th scope="col">Precio</th>
                     <th scope="col">Acción</th>
                 </tr>
-            </thead>       
+            </thead>
             <tbody>
                 <tr *ngFor="let item of itemsOffer; let i = index">
-                    <td>{{ i}} - {{cant }} </td>
-                    <td>{{ item.product.barcode }}</td>    
+                    <td>{{ cantprod[i] }} </td>
+                    <td>{{ item.product.barcode }}</td>
                     <td>{{ item.product.name }}</td>
-                    <td>{{ item.finalPrice }}</td>
+                    <td>$ {{ item.finalPrice }}</td>
                     <td>
                         <button type="button" class="btn btn-outline-secondary" (click)="onDelete(i)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
-                            class="bi bi-trash" viewBox="0 0 16 16">
-                            <path
-                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
-                            </path>
-                        </svg>
-                        <i class="visually-hidden">Button</i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
+                                </path>
+                            </svg>
+                            <i class="visually-hidden">Button</i>
                         </button>
                     </td>
             </tbody>
         </table>
-    
+
         <div class="row mt-3">
             <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0"></div>
-    
+
             <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
                 <div class="row my-2">
                     <div class="col-7 text-right"></div>
@@ -176,7 +181,7 @@
                         <span class="text-120 text-secondary-d1"></span>
                     </div>
                 </div>
-    
+
                 <div class="row my-2">
                     <div class="col-7 text-right"></div>
                     <div class="col-5">
@@ -189,20 +194,22 @@
                         <h5>Total de Orden de venta: $</h5>
                     </div>
                     <div class="col-3">
-                        <span class="text-50 text-success-d3 opacity-2"> 
-                            <h5>{{ totalOdenVenta }}</h5> 
+                        <span class="text-50 text-success-d3 opacity-2">
+                            <h5>{{ totalOdenVenta }}</h5>
                         </span>
                     </div>
                 </div>
                 <hr>
             </div>
         </div>
-        <button class="btn btn-primary align-right" type="submit" (click)="generarSaleOrderItems()">Generar orden</button>
+        <button class="btn btn-primary align-right" type="submit" (click)="generarSaleOrderItems()">Generar
+            orden</button>
     </div>
     <br>
+
     <br>
 </div>
 
 
-    <!--<pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+<!--<pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
  -->
