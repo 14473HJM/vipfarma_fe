@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { Observable } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
 import { Product } from 'src/interfaces/Product';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  apiUrlBase: string = "http://localhost:8080";
+  apiUrlBase: string = environment.baseUrl;
 
   constructor(private http: HttpClient, private cookies: CookieService, 
     private router: Router) { }

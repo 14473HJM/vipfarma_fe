@@ -16,6 +16,13 @@ import { Product } from 'src/interfaces/Product';
 import { OfferStock } from 'src/interfaces/OfferStock';
 import { OfferService } from 'src/services/offer.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { SaleOrderItems } from 'src/interfaces/sale-order-items';
+import { BranchOffice } from 'src/interfaces/BranchOffice';
+import { UserService } from 'src/services/user.service';
+import { BranchOfficeService } from 'src/services/branch-office.service';
+import { borderRightStyle } from 'html2canvas/dist/types/css/property-descriptors/border-style';
+import { OrderItem } from 'src/interfaces/order-item';
+import { isNgContent } from '@angular/compiler';
 
 @Component({
   selector: 'app-create-sale-order',
@@ -24,6 +31,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 })
 export class CreateSaleOrderComponent implements OnInit {
 
+  branchoffice = {} as BranchOffice[];
   customers = {} as Customer[];
   ocultar: boolean = true;
   mostrar: boolean = false;
@@ -39,12 +47,23 @@ export class CreateSaleOrderComponent implements OnInit {
   activeName: boolean = false;
   activeBarcode: boolean = false;
   products: Product[] = [];
+  product = {} as Product;
   offers: OfferStock[] = [];
   offer: OfferStock = {} as OfferStock;
   change: Boolean = false;
+  click: Boolean = false;
   modalSwitch: boolean = false;
   selectedItem = {} as Product;
-  selectedOffer = {} as OfferStock;
+  itemsOffer: OfferStock[] = [];
+  selOffer = {} as OfferStock;
+  cant: number = 1;
+  precioTotal: number;
+  precioUnitario: number;
+  totalOdenVenta: number;
+  usu: string;
+  orderItems: OrderItem[] = [];
+  orderItem = {} as OrderItem;
+  prescription: string;
 
   private subscription = new Subscription();
 
@@ -55,19 +74,18 @@ export class CreateSaleOrderComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     private offerService: OfferService,
-    private modalService: MdbModalService) { }
+    private modalService: MdbModalService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
-    this.refresh()
+    this.obtenerClientes();
+    this.obtenerUsuario();
     this.activeName = true;
     this.activeBarcode = false;
+    this.totalOdenVenta = 0;
   }
 
-  limpiar(){
-
-  }
-
-  refresh() {
+  obtenerClientes() {
     this.subscription.add(
       this.customerService.getCustomers().subscribe({
         next: (response: Customer[]) => {
@@ -75,9 +93,8 @@ export class CreateSaleOrderComponent implements OnInit {
           this.ocultar = true;
           this.mostrar = false;
           this.filterCustomer = '';
-          this.messageName = '';
-          this.messageBarcode = '';
-          this.products = [];      
+          this.clean();
+          this.products = [];
         },
         error: () => {
           Swal.fire({
@@ -94,32 +111,11 @@ export class CreateSaleOrderComponent implements OnInit {
     this.modalRef = this.modalService.open(CreateCustomerComponent)
   }
 
-
-  // saveOrder() {
-  //   this.saleOderService.createSaleOrder(this.saleOrder).subscribe({
-  //     next: () => {
-  //       Swal.fire({
-  //         title: 'Orden creada correctamente',
-  //         icon: 'success',
-  //         confirmButtonText: "Ok",
-  //       });
-  //     },
-  //     error: () => {
-  //       Swal.fire({
-  //         title: 'Error al intentar crear la orden de venta',
-  //         icon: 'error',
-  //         confirmButtonText: "Ok",
-  //       });
-  //     }
-  //   })
-  // }
-
   onSelectionChange(customer: Customer) {
     this.selectedCustomer = customer;
     this.ocultar = false;
     this.mostrar = true;
   }
-
 
   activateName() {
     this.activeName = true;
@@ -133,58 +129,84 @@ export class CreateSaleOrderComponent implements OnInit {
     this.messageName = '';
   }
 
+  clean() {
+    this.messageName = '';
+    this.messageBarcode = '';
+    this.cant = 1;
+  }
+
+
   searchProducts() {
     if (this.messageName !== '' && this.activeName == true) {
       this.messageName.toLowerCase();
       this.productService.getSearchedByName(this.messageName).subscribe({
         next: (products: Product[]) => {
-          console.log(products);
           this.products = products;
+
+          for (let i = 0; i < this.products.length; i++) {
+            const list = this.products[i];
+            if (list.prescriptionRequired == true) {
+              this.products[i].prescription = "Si";
+            } else {
+              this.products[i].prescription = "No";
+            }
+          }
+
         },
         error: () => {
-          alert('error al obtener los productos')
+          Swal.fire({
+            title: 'Error al obtener los productos por Nombre',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         }
       });
     }
     else if (this.messageBarcode !== '' && this.activeBarcode == true) {
       this.productService.getSearchedByCodebar(this.messageBarcode).subscribe({
         next: (products: Product[]) => {
-          console.log(products)
           this.products = products;
         },
         error: () => {
-          alert('error al obtener los productos')
+          Swal.fire({
+            title: 'Error al obtener los productos por Código de barras',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         }
       });
     }
     else {
-      alert("Debe ingresar parametro de busqueda en el campo seleccionado")
+      Swal.fire({
+        title: 'Debe ingresar parametro de búsqueda en el campo seleccionado',
+        icon: 'warning',
+        confirmButtonText: "Ok",
+      });
     }
   }
-
-  // onSelectionChange2(item: Product): Boolean {
-  //   this.selectedItem = item;
-  //   this.offerService.getOfferByProduct(item.id, this.selectedCustomer.healthInsurancePlan.id).subscribe({
-  //     next: (offers: OfferStock) =>{
-  //       console.log(offers);
-  //       this.offer=offers;
-  //       console.log(this.offer);
-  //     },
-  //     error: () =>{
-  //       alert('error al obtener las ofertas')
-  //     }
-  //   });
-  //   this.change= true;
-  //   return this.change;
-  // }
-
 
 
   onSelectionChange2(item: Product): Boolean {
     this.selectedItem = item;
     this.offerService.getOfferByProduct(item.id, this.selectedCustomer.healthInsurancePlan.id).subscribe({
-      next: (offer: OfferStock) => {
-        this.offer = offer;
+      next: (respuesta: OfferStock) => {
+        this.offer = respuesta;
+        if (respuesta.finalPrice == null) {
+          this.offer.finalPrice = this.selectedItem.price;
+        }
+        if (respuesta.discountValue == null) {
+          this.offer.discountValue = 0;
+        } else {
+          this.offer.discountValue = respuesta.discountValue * 100;
+        }
+        if (this.offer.discountValue != null && this.offer.finalPrice != null) {
+          this.precioUnitario = (this.offer.finalPrice - (this.offer.finalPrice * (this.offer.discountValue) / 100));
+        } else {
+          this.offer.discountValue = 0;
+        }
+        this.precioTotal = this.precioUnitario * 1;
+        this.clean();
+
       },
       error: () => {
         alert('error al obtener las ofertas')
@@ -195,7 +217,88 @@ export class CreateSaleOrderComponent implements OnInit {
   }
 
   onSelectionChange3(offer: OfferStock) {
-    this.selectedOffer = offer;
+    this.offer.finalPrice = this.precioTotal;
+    this.totalOdenVenta += this.precioTotal;
+    this.itemsOffer.push(offer);
+    this.orderItem.offer = offer;
+    this.orderItem.quantity = this.cant;
+    this.orderItem.unitaryPrice = this.selectedItem.price;
+    if (this.offer.discountValue != 0 && this.offer.discountValue != null) {
+      this.orderItem.discountAmount = this.offer.discountValue
+    }
+    this.orderItem.totalPrice = this.precioTotal;
+    this.orderItems.push(this.orderItem);
+    this.click = true;
+    this.change = false;
+    this.precioTotal = 0;
+    this.clean();
+  }
+
+  onDelete(i: number) {
+    this.itemsOffer.splice(i, 1);
+    if(this.itemsOffer.length < i+1){
+      this.totalOdenVenta = 0;
+    }
+
+  }
+
+  calcular(cant: number) {
+    this.precioTotal = this.precioUnitario * cant;
+  }
+  
+  obtenerUsuario() {
+    this.usu = this.userService.getToken()
+    this.subscription.add(
+      this.userService.getUser(this.usu).subscribe({
+        next: (response: User) => {
+          this.user = response;
+        },
+        error: () => {
+          Swal.fire({
+            title: 'Error al obtener el usuario',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
+        },
+      }),
+    );
+  }
+
+  generarSaleOrderItems() {
+    this.saleOrder.customer = this.selectedCustomer;
+    this.saleOrder.user = this.user;
+    this.saleOrder.branchOffice = this.user.branchOffice;
+    this.saleOrder.totalAmount = this.totalOdenVenta;
+    this.saleOrder.saleOrderItems = this.orderItems;
+
+    Swal.fire({
+      title: '¿Desea generar la orden de venta?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.saleOderService.createSaleOrder(this.saleOrder).subscribe({
+          next: () => {
+            Swal.fire({
+              title: 'Orden generada correctamente',
+              icon: 'success',
+              confirmButtonText: "Ok",
+            });
+          },
+          error: () => {
+            Swal.fire({
+              title: 'Error en el Servicio',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
+          },
+        })
+      }
+    })
   }
 
 }
