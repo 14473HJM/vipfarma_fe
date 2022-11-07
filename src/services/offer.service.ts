@@ -9,13 +9,19 @@ import { OfferStock } from 'src/interfaces/OfferStock';
   providedIn: 'root'
 })
 export class OfferService {
-  private apiUrlBase: string = environment.baseUrl + "/stocks/offers";
-  filterProducts='';
+  private apiUrlBase: string = environment.baseUrl + "/stock/offer";
+  filterProducts = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getOffer(): Observable<OfferStock[]> {
     return this.http.get<OfferStock[]>(this.apiUrlBase);
   }
-  
+
+  getOfferByProduct(idProd: number, idPlan: number): Observable<OfferStock> {
+    let branch = 1001;
+    //let branch= llamada a localStorage
+    return this.http.get<OfferStock>(this.apiUrlBase + "?branchOfficeId=" + branch + "&productId=" + idProd + "&planId=" + idPlan);
+  }
+
 }
