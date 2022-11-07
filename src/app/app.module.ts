@@ -21,6 +21,7 @@ import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
 import { MainComponent } from './home/main/main.component';
 import { ListOfferComponent } from './reports/list-offer/list-offer.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { FilterInvoice } from './pipes/filterInvoice';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
@@ -41,6 +42,7 @@ import { HelperService } from 'src/services/HelperService';
 import { StatusMapperPipe } from './pipes/statusMapper.pipe';
 import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
 import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
+import { ListInvoiceComponent } from './reports/list-invoice/list-invoice.component';
 
 
 
@@ -61,6 +63,7 @@ import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
     MainComponent,
     ListOfferComponent,
     FilterPipe,
+    FilterInvoice,
     YesNoPipe,
     ListDiscountComponent,
     DiscountPipe,
@@ -77,7 +80,8 @@ import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
     FilterProductsStockPipe,
     FilterOrderStockByNumberPipe,
     FilterProductsPipe,
-    StockPorProductoComponent
+    StockPorProductoComponent,
+    ListInvoiceComponent
     
     
     

@@ -1,0 +1,54 @@
+<br>
+<h3>Listado de Facturas por Fechas </h3>
+<br>
+<br>
+
+
+
+<div class="container row">
+    <div class="col-2"></div>
+    <div class="col-auto"><label>Desde</label></div>
+    <div class="col-3">
+        <input type="text" class="form-control" name="filterInvoiceSince" placeholder="Desde..." [(ngModel)]="since">
+    </div>
+    <div class="col-auto"><label>Hasta</label></div>
+    <div class="col-3">
+        <input type="text" class="form-control" name="filterInvoiceUntil" placeholder="Hasta..." [(ngModel)]="until">
+    </div>
+</div>
+<br>
+<div class="container">
+<table id="listado" class="table table-hover text-center">
+    <thead class="table-info">
+        <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Usuario Creador</th>
+            <th scope="col">Precio</th>
+            <th scope="col">cae</th>
+            <th scope="col">accion</th>
+          </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let list of bill">    
+            
+            <td>{{ list.createdDate }}</td>
+            <td>{{ list.customer?.name + " " + list.customer?.lastName }}</td>
+            <td>{{ list.user?.userName }}</td>
+            <td>{{ list.totalAmount }}</td>
+            <td>{{ list.cae }}</td>
+            <td><button class="btn btn-primary" (click)="descargar()" >Descargar</button></td>
+           
+        </tr>
+      </tbody>
+
+    <tbody>
+      
+    </tbody>
+  </table>
+  <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+  
+  
+</div>
