@@ -27,6 +27,7 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
 import { FilterOrderByCustPipe } from './pipes/filterOrderByCustomer';
 import { FilterCustByAttributesPipe } from './pipes/filterCustByAttributes';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartData } from 'chart.js'
 import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
@@ -37,7 +38,6 @@ import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
 import { DeleteProductComponent } from './products/delete-product/delete-product.component';
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
-
 import { HelperService } from 'src/services/HelperService';
 import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component';
 import { StatusMapperPipe } from './pipes/statusMapper.pipe';
@@ -94,6 +94,7 @@ import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
     CommonModule,
     ReactiveFormsModule,
     MdbModalModule,
+  
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule,

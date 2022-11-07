@@ -20,8 +20,8 @@ export class LockerService {
         (this.apiLockerBaseUrl + "?productId=" + id + "&availability=" + quant);
   }
 
-  getLockersByBranch(): Observable<Locker[]>{
-    let id = this.userServ.getBranchId();
+  getLockersByBranch(id: any): Observable<Locker[]>{
+    //var id = this.userServ.getBranchId();
     return this.http.get<Locker[]>(this.apiLockerBaseUrl + "?branchOfficeId=" + id);
   }
 
