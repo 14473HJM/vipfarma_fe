@@ -66,6 +66,8 @@ export class CreateSaleOrderComponent implements OnInit {
   orderItem = {} as OrderItem;
   prescription: string;
   refresh: number;
+  cantprod: number[]=[];
+  cantidades: number;
 
   private subscription = new Subscription();
 
@@ -223,7 +225,11 @@ export class CreateSaleOrderComponent implements OnInit {
 
       },
       error: () => {
-        alert('error al obtener las ofertas')
+        Swal.fire({
+          title: 'No hay stock de ese producto',
+          icon: 'info',
+          confirmButtonText: "Ok",
+        });
       }
     });
     this.change = true;
@@ -231,18 +237,21 @@ export class CreateSaleOrderComponent implements OnInit {
   }
   
 
-  onSelectionChange3(offer: OfferStock) {
+  onSelectionChange3(offer: OfferStock, cant: number) {
     this.offer.finalPrice = this.precioTotal;
     this.totalOdenVenta += this.precioTotal;
     this.itemsOffer.push(offer);
+    this.cantprod.push(this.cant);
     this.orderItem.offer = offer;
-    this.orderItem.quantity = this.cant;
+    // this.orderItem.quantity = this.cant;
+    this.orderItem.quantity= this.cantidades;
     this.orderItem.unitaryPrice = this.selectedItem.price;
     if (this.offer.discountValue != 0 && this.offer.discountValue != null) {
       this.orderItem.discountAmount = this.offer.discountValue
     }
     this.orderItem.totalPrice = this.precioTotal;
     this.orderItems.push(this.orderItem);
+  
     this.click = true;
     this.change = false;
     this.precioTotal = 0;
@@ -259,6 +268,7 @@ export class CreateSaleOrderComponent implements OnInit {
 
   calcular(cant: number) {
     this.precioTotal = this.precioUnitario * cant;
+    this.cantidades=cant;
   }
   
   obtenerUsuario() {
@@ -303,6 +313,7 @@ export class CreateSaleOrderComponent implements OnInit {
               icon: 'success',
               confirmButtonText: "Ok",
             });
+            this.ngOnInit();
           },
           error: () => {
             Swal.fire({
