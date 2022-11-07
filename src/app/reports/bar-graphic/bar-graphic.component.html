@@ -9,10 +9,16 @@
 </div>
 <br>
 <div class="col-3">
-    <select id="selectLab" class="form-select">
-        <option></option>
+    <select id="selectBranch" class="form-select" name="branchId" [(ngModel)]="idUser">
+        <option *ngFor="let branch of branchs" [ngValue]="branch.id">{{branch.name}}</option>
     </select>
 
+    <!-- <select class="form-select" name="marcaId" [(ngModel)]="orden.marcaId">
+        <option *ngFor="let mar of marca" [ngValue]="mar.id">
+            {{ mar.nombre }}
+        </option>
+    </select> -->
+    
 </div>
 </div>
 <br>
