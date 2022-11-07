@@ -43,7 +43,7 @@ export class ListInvoiceComponent implements OnInit {
         let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
         let position = 0;  
         pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-        pdf.save('reporteDescuentos.pdf'); // Generated PDF   
+        pdf.save('reporteFactura.pdf'); // Generated PDF   
       });
     } 
   }

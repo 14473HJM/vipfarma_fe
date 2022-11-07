@@ -25,8 +25,8 @@
             <th scope="col">Cliente</th>
             <th scope="col">Usuario Creador</th>
             <th scope="col">Precio</th>
-            <th scope="col">cae</th>
-            <th scope="col">accion</th>
+            <th scope="col">CAE</th>
+            <!-- <th scope="col">accion</th> -->
           </tr>
     </thead>
     <tbody>
@@ -36,9 +36,8 @@
             <td>{{ list.createdDate }}</td>
             <td>{{ list.customer?.name + " " + list.customer?.lastName }}</td>
             <td>{{ list.user?.userName }}</td>
-            <td>{{ list.totalAmount }}</td>
+            <td>{{ "$" + list.totalAmount }}</td>
             <td>{{ list.cae }}</td>
-            <td><button class="btn btn-primary" (click)="descargar()" >Descargar</button></td>
            
         </tr>
       </tbody>
@@ -48,8 +47,11 @@
     </tbody>
   </table>
   <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
-
+  <br>
+  <br>
+  <button class="btn btn-primary" (click)="descargar()" >Descargar</button>
   
+
   
 </div>
 
