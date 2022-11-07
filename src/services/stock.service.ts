@@ -18,4 +18,9 @@ export class StockService {
     let brOfId = this.userServ.getBranchId();
     return this.http.get<StockSummary[]>(this.apiBaseUrl + "?stockStatus=" + status);
   }
+
+  getOrderSummaries(): Observable<StockSummary[]> {
+    let brOfId = this.userServ.getBranchId();
+    return this.http.get<StockSummary[]>(this.apiBaseUrl + "/group");
+  }
 }

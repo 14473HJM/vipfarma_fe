@@ -93,8 +93,10 @@ export class CreateCustomerComponent implements OnInit {
      this.customer.healthInsurancePlan=obs.availablePlans[0]
      // console.log(obs.availablePlans[0]);
 
-    }else{
-      this.customer.healthInsurancePlan.name="sin";
+    }else {
+      let plan = {} as healthInsurancePlan;
+      plan.name = "sin";
+      this.customer.healthInsurancePlan = plan;
       this.sinobs=0;
     }
     

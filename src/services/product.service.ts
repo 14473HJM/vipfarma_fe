@@ -13,6 +13,7 @@ export class ProductService {
 
   private apiUrlBase: string = environment.baseUrl+ "/products";
 
+
   constructor(private http: HttpClient, private cookies: CookieService, 
     private router: Router) { }
 

@@ -81,10 +81,7 @@ import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
     FilterProductsPipe,
     BarGraphicComponent,
     StockPorProductoComponent
-    
-    
-    
- ],
+   ],
  
   imports: [
     BrowserModule,
