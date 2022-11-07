@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NgChartsModule } from 'ng2-charts';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
@@ -27,6 +27,8 @@ import { DespachoComponent } from './ventas/despacho/despacho.component';
 import { FilterOrderByCustPipe } from './pipes/filterOrderByCustomer';
 import { FilterCustByAttributesPipe } from './pipes/filterCustByAttributes';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartData } from 'chart.js'
+import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
@@ -37,6 +39,7 @@ import { YesNoPipe } from './pipes/yes-no.pipe';
 import { DeleteProductComponent } from './products/delete-product/delete-product.component';
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
 import { HelperService } from 'src/services/HelperService';
+import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component';
 import { StatusMapperPipe } from './pipes/statusMapper.pipe';
 import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
 import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
@@ -76,6 +79,7 @@ import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
     FilterProductsStockPipe,
     FilterOrderStockByNumberPipe,
     FilterProductsPipe,
+    BarGraphicComponent,
     StockPorProductoComponent
    ],
  
@@ -87,12 +91,13 @@ import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
     CommonModule,
     ReactiveFormsModule,
     MdbModalModule,
+  
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule,
     NgChartsModule
   ],
-  providers: [CookieService, HelperService],
+  providers: [CookieService, HelperService, NgChartsConfiguration],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

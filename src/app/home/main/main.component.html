@@ -9,7 +9,8 @@
     <h1 *ngIf="isVerClientes" class="display-4 font-weight-bold text-center">CLIENTES</h1>
     <h1 *ngIf="refreshListOffer" class="display-4 font-weight-bold">LISTADO DE PRECIOS</h1>
     <h1 *ngIf="refreshListDiscount" class="display-4 font-weight-bold">LISTADO DE DESCUENTOS</h1>
-    <h1 *ngIf="isListProducts || isListProds" class="display-4 font-weight-bold">LISTADO DE PRODUCTOS</h1>
+    <h1 *ngIf="isDispoLocker" class="display-4 font-weight-bold">DISPONIBILIDAD DE LOCKER</h1>
+    <h1 *ngIf="isListProducts" class="display-4 font-weight-bold">LISTADO DE PRODUCTOS</h1>
     <h1 *ngIf="isUploadProducts" class="display-4 font-weight-bold">INGRESAR PRODUCTOS</h1>
   </div>
 </div>
@@ -136,6 +137,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic" (click)="dispoLocker()">
+        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+        Disponibilidad por Locker
+      </a>
+    </li>
+    <li>
       <a href="#" class="nav-link text-dark font-italic" (click)="listProds()">
         <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
         Listado de Productos
@@ -157,6 +164,7 @@
   <app-despacho *ngIf="isDespacho"></app-despacho>
   <app-list-customer *ngIf="isVerClientes"></app-list-customer>
   <app-recibir-stock *ngIf="isRecibirStock"></app-recibir-stock>
+  <app-bar-graphic *ngIf="isDispoLocker" ></app-bar-graphic>
   <app-list-products *ngIf="isListProducts"></app-list-products>
   <app-upload-products *ngIf="isUploadProducts"></app-upload-products>
   <app-guardar-stock *ngIf="isGuardarStock"> </app-guardar-stock>
