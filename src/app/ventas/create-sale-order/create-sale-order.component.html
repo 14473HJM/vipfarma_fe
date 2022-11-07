@@ -99,7 +99,8 @@
                 <td>{{ item.barcode }}</td>
                 <td>{{ item.laboratory }}</td>
                 <td>{{ item.prescription }}</td>
-                <td>$ {{ item.price }}</td>
+                <td>{{ item.price | currency: '$ '}}</td>
+
             </tr>
         </tbody>
     </table>
@@ -125,13 +126,11 @@
                     <td>{{ offer.stock }}</td>
                     <td>{{ offer.healthInsurance.name }}</td>
                     <td>{{ offer.healthInsurancePlan.name }}</td>
-                    <td>$ {{ offer.product.price }}</td>
-                    <td>{{ offer.discountValue }} %</td>
-                    <td><input [(ngModel)]="cant" (change)="calcular(cant)" type="number" name="cantidad" id="cantidad"
-                            min="0"></td>
-                    <td>$ {{ precioTotal }}</td>
-                    <td><button type="button" class="btn btn-primary"
-                            (click)="onSelectionChange3(offer, cant)">Agregar</button></td>
+                    <td>{{ offer.product.price | currency: '$ '}}</td>
+                    <td>{{ offer.discountValue | percent: '2.0-2'}} %</td>
+                    <td><input [(ngModel)]="cant" (change)="calcular(cant)" type="number" name="cantidad" id="cantidad" min="1"></td>
+                    <td>{{ precioTotal | currency: '$ '}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)="onSelectionChange3(offer, cant)">Agregar</button></td>
                 </tr>
             </tbody>
         </table>
@@ -139,7 +138,7 @@
 
     <div class="container" *ngIf="click == true">
         <br>
-        <h5>Orden de venta</h5>
+        <h5>Órden de venta</h5>
         <br>
         <table class="table">
             <thead class="thead-dark">
@@ -156,7 +155,7 @@
                     <td>{{ cantprod[i] }} </td>
                     <td>{{ item.product.barcode }}</td>
                     <td>{{ item.product.name }}</td>
-                    <td>$ {{ item.finalPrice }}</td>
+                    <td>{{ item.finalPrice | currency: '$ '}}</td>
                     <td>
                         <button type="button" class="btn btn-outline-secondary" (click)="onDelete(i)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
@@ -191,11 +190,13 @@
                 <hr>
                 <div class="row my-2 align-items-right bgc-primary-l3 p-2">
                     <div class="col-9 text-right">
-                        <h5>Total de Orden de venta: $</h5>
+                        <h5>Total de Orden de venta: </h5>
                     </div>
                     <div class="col-3">
-                        <span class="text-50 text-success-d3 opacity-2">
-                            <h5>{{ totalOdenVenta }}</h5>
+
+                        <span class="text-50 text-success-d3 opacity-2"> 
+                            <h5>{{ totalOdenVenta | currency: '$ '}}</h5> 
+
                         </span>
                     </div>
                 </div>
