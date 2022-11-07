@@ -215,6 +215,7 @@ export class CreateSaleOrderComponent implements OnInit {
     this.change = true;
     return this.change;
   }
+  
 
   onSelectionChange3(offer: OfferStock) {
     this.offer.finalPrice = this.precioTotal;

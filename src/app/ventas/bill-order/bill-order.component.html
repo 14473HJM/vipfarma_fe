@@ -3,8 +3,8 @@
     <br>
     <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar órdenes por Cliente..." [(ngModel)]="filterCustomer">
     <br>
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-hover text-center">
+      <thead class="table-info">
             <tr>
                 <th scope="col"></th>
                 <th scope="col">#</th>
@@ -18,7 +18,7 @@
         <tbody>
             <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
-                <th scope="row"> {{ order.id }} </th>
+                <td scope="row"> {{ order.id }} </td>
                 <td>{{ order.createdDate }}</td>
                 <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
                 <td>{{ order.user.userName }}</td>
@@ -36,6 +36,7 @@
                     </button>
                   </div>
                 </td>
+              </tr>
         </tbody>
     </table>
     <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

@@ -22,4 +22,6 @@ export class BillingService {
     return this.http.post<Bill>(this.apiUrlBase + "/" + id + "?preview=" + preview, comando);
   }
 
+
+
 }
