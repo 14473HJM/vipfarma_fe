@@ -23,6 +23,7 @@ import { BranchOfficeService } from 'src/services/branch-office.service';
 import { borderRightStyle } from 'html2canvas/dist/types/css/property-descriptors/border-style';
 import { OrderItem } from 'src/interfaces/order-item';
 import { isNgContent } from '@angular/compiler';
+import { HelperService } from 'src/services/HelperService';
 
 @Component({
   selector: 'app-create-sale-order',
@@ -64,6 +65,7 @@ export class CreateSaleOrderComponent implements OnInit {
   orderItems: OrderItem[] = [];
   orderItem = {} as OrderItem;
   prescription: string;
+  refresh: number;
 
   private subscription = new Subscription();
 
@@ -75,7 +77,8 @@ export class CreateSaleOrderComponent implements OnInit {
     private productService: ProductService,
     private offerService: OfferService,
     private modalService: MdbModalService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private helper: HelperService) { }
 
   ngOnInit(): void {
     this.obtenerClientes();
@@ -83,6 +86,17 @@ export class CreateSaleOrderComponent implements OnInit {
     this.activeName = true;
     this.activeBarcode = false;
     this.totalOdenVenta = 0;
+    this.refreshCustomer()
+  }
+
+  refreshCustomer(){
+    this.obtenerClientes()
+    this.helper.customMessage.subscribe(num => {
+      this.refresh=num
+      if(num==2){
+        this.obtenerClientes();
+      }
+    });
   }
 
   obtenerClientes() {
