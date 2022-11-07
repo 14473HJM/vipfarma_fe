@@ -36,7 +36,6 @@ import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
 import { DeleteProductComponent } from './products/delete-product/delete-product.component';
 import { AlterProductComponent } from './products/alter-product/alter-product.component';
-
 import { HelperService } from 'src/services/HelperService';
 import { StatusMapperPipe } from './pipes/statusMapper.pipe';
 import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
@@ -78,10 +77,7 @@ import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
     FilterOrderStockByNumberPipe,
     FilterProductsPipe,
     StockPorProductoComponent
-    
-    
-    
- ],
+   ],
  
   imports: [
     BrowserModule,
