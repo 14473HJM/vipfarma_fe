@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Subscription } from 'rxjs';
@@ -6,13 +6,20 @@ import { Customer } from 'src/interfaces/Customer';
 import { CustomerService } from 'src/services/customer.service';
 import Swal from 'sweetalert2';
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
+import { HelperService } from 'src/services/HelperService';
+
 
 @Component({
   selector: 'app-list-customer',
   templateUrl: './list-customer.component.html',
-  styleUrls: ['./list-customer.component.css']
+  styleUrls: ['./list-customer.component.css'],
+  entryComponents: [ CreateCustomerComponent ]
 })
-export class ListCustomerComponent implements OnInit {
+export class ListCustomerComponent implements OnInit{
+
+  @ViewChild(CreateCustomerComponent) 
+  private listadoCustomer: CreateCustomerComponent;
+
 
   listado: Customer[]= {} as Customer[];
   private subscription = new Subscription();
@@ -20,14 +27,29 @@ export class ListCustomerComponent implements OnInit {
   modalRef: MdbModalRef<CreateCustomerComponent> | null = null;
   filterCustomer: string = '';
   public page: number;
+  agregar: boolean=false;
+
+  refresh: number;
+  editrefresh: number;
 
   constructor(private router: Router, 
     private customerService: CustomerService, 
-    private modalService: MdbModalService) { }
+    private modalService: MdbModalService,
+    private helper: HelperService) { }
+
+
 
   ngOnInit(): void {
     this.getCustomer()
+    this.helper.customMessage.subscribe(num => {
+      this.refresh=num
+      if(num==2){
+        this.getCustomer();
+      }
+    });
+
   }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -54,8 +76,9 @@ export class ListCustomerComponent implements OnInit {
     );
   }
 
+
   alterCustomer(cust: Customer){
-    console.log(cust)
+   // console.log(cust)
     //this.router.navigate(['altercostumber', id]);
     this.selectCust = cust;
   }

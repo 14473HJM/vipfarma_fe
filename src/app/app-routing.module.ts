@@ -14,6 +14,9 @@ import { ListDiscountComponent } from './reports/list-discount/list-discount.com
 import { CreateSaleOrderComponent } from './ventas/create-sale-order/create-sale-order.component';
 import { SearchProductsComponent } from './products/search-products/search-products.component';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
+import { ListProductsComponent } from './products/list-products/list-products.component';
+import { DeleteProductComponent } from './products/delete-product/delete-product.component';
+import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -26,10 +29,12 @@ const routes: Routes = [
   { path: 'altercostumber/:id', component: AlterCustomerComponent  },
   { path: "facturar", component: BillOrderComponent },
   { path: "reportes/list-offer", component: ListOfferComponent},
+  { path: "products/list-products", component: ListProductsComponent},
   { path: "reportes/list-discount", component: ListDiscountComponent},
   { path: "searchProd", component: SearchProductsComponent },
+  { path: "deleteProd", component: DeleteProductComponent},
   { path: "uploadProd", component: UploadProductsComponent},
-
+  { path: "stock", component: StockPorProductoComponent}
 ];
 
 @NgModule({

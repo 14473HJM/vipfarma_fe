@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/interfaces/User';
 import { UserService } from 'src/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main',
@@ -21,7 +22,9 @@ export class MainComponent implements OnInit {
   isVerClientes: boolean = false;
   isRecibirStock: boolean = false;
   isUploadProducts: boolean=false;
+  isListProducts:boolean=false;
   isGuardarStock: boolean = false;
+  isListProds: boolean = false;
 
   constructor(private router: Router, private userServ: UserService) { }
 
@@ -31,16 +34,20 @@ export class MainComponent implements OnInit {
   }
 
   logOut() {
-    const result: boolean = confirm(
-      '¿Está seguro que quiere cerrar sesión?'
-    );
-
-
-    
-    if(result) {
-      this.userServ.setToken("", "", "", "");
-      this.router.navigate(['login']);
-    }
+    Swal.fire({
+      title: '¿Está seguro que quiere cerrar sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.userServ.setToken("", "", "", "");
+        this.router.navigate(['login']);
+      }
+    })
   }
 
   setUserLogged() {
@@ -59,7 +66,9 @@ export class MainComponent implements OnInit {
     this.isRecibirStock = false;
     this.isSell=false;
     this.isUploadProducts=false;
+    this.isListProducts=false;
     this.isGuardarStock = false;
+    this.isListProds = false;
   }
 
   facturar() {
@@ -106,11 +115,21 @@ export class MainComponent implements OnInit {
   uploadProducts(){
     this.cleanFlags();
     this.isUploadProducts=true;
-
   }
+
+  listProducts(){
+    this.cleanFlags();
+    this.isListProducts=true;
+  }
+
   guardarStock() {
     this.cleanFlags();
     this.isGuardarStock = true;
+  }
+
+  listProds() {
+    this.cleanFlags();
+    this.isListProds = true;
   }
 
 }

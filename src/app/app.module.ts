@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgChartsModule } from 'ng2-charts';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
@@ -29,8 +30,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
+import { ListProductsComponent } from './products/list-products/list-products.component';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
-import { CustomerPipe } from './pipes/customer.pipe';
+import { FilterProductsPipe } from './pipes/filter-products.pipe';
+import { YesNoPipe } from './pipes/yes-no.pipe';
+import { DeleteProductComponent } from './products/delete-product/delete-product.component';
+import { AlterProductComponent } from './products/alter-product/alter-product.component';
+import { HelperService } from 'src/services/HelperService';
+import { StatusMapperPipe } from './pipes/statusMapper.pipe';
+import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
+import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
+
 
 
 @NgModule({
@@ -50,17 +60,24 @@ import { CustomerPipe } from './pipes/customer.pipe';
     MainComponent,
     ListOfferComponent,
     FilterPipe,
+    YesNoPipe,
     ListDiscountComponent,
     DiscountPipe,
     DespachoComponent,
     FilterOrderByCustPipe,
+    StatusMapperPipe,
     FilterCustByAttributesPipe,
     RecibirStockComponent,
     GuardarStockComponent,
+    ListProductsComponent,
+    DeleteProductComponent,
+    AlterProductComponent,
     UploadProductsComponent,
+    FilterProductsStockPipe,
     FilterOrderStockByNumberPipe,
-    CustomerPipe
- ],
+    FilterProductsPipe,
+    StockPorProductoComponent
+   ],
  
   imports: [
     BrowserModule,
@@ -72,9 +89,10 @@ import { CustomerPipe } from './pipes/customer.pipe';
     MdbModalModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgChartsModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

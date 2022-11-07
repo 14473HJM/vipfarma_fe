@@ -5,6 +5,7 @@ import { Laboratory } from 'src/interfaces/Laboratory';
 import { Product } from 'src/interfaces/Product';
 import { LaboratoryService } from 'src/services/laboratory.service';
 import { ProductService } from 'src/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-upload-products',
@@ -31,13 +32,49 @@ export class UploadProductsComponent implements OnInit {
 
 
   saveProduct() {
-    this.saveProd.postCreateProducts(this.createProds).subscribe({
-          next: () => {
-            alert("Producto ingresado con éxito");
-          },
-          error: () => {
-            alert("Error al ingresar producto");
-          }
-        })
-    }
+    Swal.fire({
+      
+      title: '¿Desea ingresar el producto?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.subscription.add(
+          this.saveProd.postCreateProducts(this.createProds).subscribe({
+            next: () => {
+              Swal.fire({
+                title: 'Producto ingresado correctamente',
+                icon: 'success',
+                confirmButtonText: "Ok",
+              });
+              
+            },
+            error: () => {
+              Swal.fire({
+                title: 'Error al ingresar Producto',
+                icon: 'error',
+                confirmButtonText: "Ok",
+              });
+            },
+          })
+        )
+      }
+    });
+  }
+
+
+    
+    // this.saveProd.postCreateProducts(this.createProds).subscribe({
+    //       next: () => {
+    //         alert("Producto ingresado con éxito");
+    //       },
+    //       error: () => {
+    //         alert("Error al ingresar producto");
+    //       }
+    //     })
+    // }
 }
