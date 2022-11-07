@@ -7,21 +7,21 @@ export class FilterProductsStockPipe implements PipeTransform {
 
   transform(value: any, arg : any ):any {
 
-    const products = [];
+    const stocks = [];
     if(value.length===0 || arg===''){
         return value;
     }
     
-    for (const s of value){
-      if (s.stock.product.name.toLowerCase().indexOf(arg.toLowerCase())>-1 
-            || (s.stock.product.barcode).toString().indexOf(arg.toLowerCase())>-1
-            || s.stock.product.laboratory.toLowerCase().indexOf(arg.toLowerCase())>-1) {
+    for (const stk of value){
+      if (stk.stock.product.name.toLowerCase().indexOf(arg.toLowerCase())>-1 
+            || (stk.stock.product.barcode).toString().indexOf(arg.toLowerCase())>-1
+            || stk.stock.product.laboratory.toLowerCase().indexOf(arg.toLowerCase())>-1) {
               
-              products.push(s);
+              stocks.push(stk);
       }
     }
     
-    return products;
+    return stocks;
   }
 
 }
