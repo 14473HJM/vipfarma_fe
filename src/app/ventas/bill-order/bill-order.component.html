@@ -104,9 +104,9 @@
                   <th scope="row"> {{item.id}}  </th>
                   <td> {{item.labelInvoice}} </td>
                   <td> {{item.quantity}} </td>
-                  <td> {{item.unitaryPrice}} </td>
+                  <td> {{item.unitaryPrice | currency:'$'}} </td>
                   <td> {{item.discountAmount}} </td>
-                  <td> {{item.totalPrice}} </td>
+                  <td> {{item.totalPrice | currency:'$'}} </td>
                 </tr>
               </tbody>
             </table>
