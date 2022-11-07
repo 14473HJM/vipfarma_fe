@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Bill } from 'src/interfaces/Bill';
 import { BillService } from 'src/services/bill.service';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,8 +31,21 @@ export class ListInvoiceComponent implements OnInit {
 
   }
 
-  descargar(){
-
+  descargar() {
+    var data = document.getElementById('listado');
+    if(data !== null) {
+      html2canvas(data).then(canvas => {  
+        // Few necessary setting options  
+        let imgWidth = 208;   
+        let imgHeight = canvas.height * imgWidth / canvas.width;  
+  
+        const contentDataURL = canvas.toDataURL('image/png')  
+        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
+        let position = 0;  
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+        pdf.save('reporteDescuentos.pdf'); // Generated PDF   
+      });
+    } 
   }
 
   getBill(){
