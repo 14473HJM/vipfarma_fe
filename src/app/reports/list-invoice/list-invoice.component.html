@@ -9,7 +9,7 @@
     <div class="col-2"></div>
     <div class="col-auto"><label>Desde</label></div>
     <div class="col-3">
-        <input type="date" class="form-control" name="filterInvoiceSince" placeholder="Desde..." [(ngModel)]="since">
+        <input type="date" autocomplete="off" class="form-control" name="filterInvoiceSince" placeholder="Desde..." [(ngModel)]="since">
     </div>
     <div class="col-auto"><label>Hasta</label></div>
     <div class="col-3">
@@ -31,7 +31,7 @@
     </thead>
     <tbody>
 
-        <tr *ngFor="let list of bill">    
+        <tr *ngFor="let list of bill | FilterInvoice: since: until | paginate: { itemsPerPage: 10, currentPage: page }">    
             
             <td>{{ list.createdDate }}</td>
             <td>{{ list.customer?.name + " " + list.customer?.lastName }}</td>
@@ -52,3 +52,6 @@
   
   
 </div>
+
+
+    
