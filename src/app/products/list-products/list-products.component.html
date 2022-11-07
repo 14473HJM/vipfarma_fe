@@ -29,7 +29,7 @@
             <td>{{prod.barcode}}</td>
             <td>{{prod.laboratory}}</td>
             <td>{{prod.prescriptionRequired | yesNo}}</td>
-            <td>{{prod.price}}</td>
+            <td>{{prod.price | currency: '$'}}</td>
             <td>
                 <div class="btn-group">
                     <button type="button" class="btn btn-outline-secondary" (click)="alterProduct(prod)">
