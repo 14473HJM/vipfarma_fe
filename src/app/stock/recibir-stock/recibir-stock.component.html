@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="hide==false">
     <div class="row g-3">
         <div class="col">
             <h3>Ordenes de Compra</h3>
@@ -10,7 +10,9 @@
     <form action="">
         <div class="row g-3">
             <div class="col 1">
-                <input type="text" class="form-control" placeholder="Buscar Ordenes por Nro..." 
+
+                
+                <input type="text" class="form-control" placeholder="Buscar Ordenes por Nro..."
                         name="filterOrderStock" [(ngModel)]="filterOrderStock">
             </div>
         </div>
@@ -57,13 +59,14 @@
 <br>
 <br>
 
-<div class="container container-fluid " *ngIf="selectedOrder.id != null">
+
+<div class="container container-fluid " *ngIf="hide==true">
     <h3>Detalle Orden {{selectedOrder.id}}</h3>
     <br>
     <table class="table table-hover text-center">
         <thead class="table-info">
             <tr>
-                <th scope="col">Cód.</th>
+                <th scope="col">Cod.</th>
                 <th scope="col">Producto</th>
                 <th scope="col">Cód. Barra</th>
                 <th scope="col">Estado</th>
