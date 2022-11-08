@@ -11,8 +11,11 @@
         <div class="row g-3">
             <div class="col 1">
 
-                
-                <input type="text" class="form-control" placeholder="Buscar Ordenes por Nro..."
+
+
+                <input type="text" class="form-control" placeholder="Buscar Ordenes por Nro..." 
+
+
                         name="filterOrderStock" [(ngModel)]="filterOrderStock">
             </div>
         </div>
@@ -61,6 +64,9 @@
 
 
 <div class="container container-fluid " *ngIf="hide==true">
+
+
+
     <h3>Detalle Orden {{selectedOrder.id}}</h3>
     <br>
     <table class="table table-hover text-center">

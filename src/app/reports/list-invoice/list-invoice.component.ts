@@ -21,6 +21,8 @@ export class ListInvoiceComponent implements OnInit {
   until: Date;
   offers: string[]=[];
   bill: Bill[]= {} as Bill[];
+  preview = {} as Bill;
+  hide: boolean=false;
 
   constructor(private billService: BillService) { 
 
@@ -30,6 +32,25 @@ export class ListInvoiceComponent implements OnInit {
     this.getBill();
 
   }
+
+  onSelection(id: string) {
+    //this.selectedOrder = order;
+    console.log(id);
+    this.hide=true;
+
+    this.billService.getBill(id).subscribe({
+      next: (response: Bill) => {
+        this.preview = response;
+      },
+      error: () => {
+        Swal.fire({
+          title: 'Error en el Servicio',
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
+      },
+    })
+}
 
   descargar() {
     var data = document.getElementById('listado');
@@ -67,3 +88,6 @@ export class ListInvoiceComponent implements OnInit {
   }
 
 }
+
+
+
