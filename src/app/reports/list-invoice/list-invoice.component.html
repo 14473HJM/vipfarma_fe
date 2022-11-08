@@ -25,7 +25,6 @@
             <th scope="col">Cliente</th>
             <th scope="col">Usuario Creador</th>
             <th scope="col">Precio</th>
-            <th scope="col">CAE</th>
             <!-- <th scope="col">accion</th> -->
           </tr>
     </thead>
@@ -36,9 +35,7 @@
             <td>{{ list.createdDate | date: 'dd/MM/yyyy'}}</td>
             <td>{{ list.customer?.name + " " + list.customer?.lastName }}</td>
             <td>{{ list.user?.userName }}</td>
-
             <td>{{ list.totalAmount | currency: '$ '}}</td>
-            <td>{{ list.cae }}</td>
            
         </tr>
       </tbody>

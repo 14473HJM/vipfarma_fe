@@ -15,7 +15,7 @@
 <div class="container col-5 text-center">
     <label class="text-center">Ingrese el código de barras</label>
     <br>
-    <input type="number" class="form-control float-left" [(ngModel)]="createProds.barcode" placeholder="Código" >
+    <input type="number" class="form-control float-left" [(ngModel)]="createProds.barcode" placeholder="Código" min="0">
     <!-- [(ngModel)]="filterDiscounts"     -->
 </div>
 </div>
@@ -35,7 +35,7 @@
 <div class="container col-5 text-center">
     <label class="text-center">Ingrese el precio</label>
     <br>
-    <input type="number" class="form-control" [(ngModel)]="createProds.price" placeholder="$" >
+    <input type="number" class="form-control" [(ngModel)]="createProds.price" placeholder="$"  min="0">
     <!-- [(ngModel)]="filterDiscounts"     -->
 </div>
 </div>
