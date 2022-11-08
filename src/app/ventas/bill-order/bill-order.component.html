@@ -105,7 +105,7 @@
                   <td> {{item.labelInvoice}} </td>
                   <td> {{item.quantity}} </td>
                   <td> {{item.unitaryPrice | currency:'$'}} </td>
-                  <td> {{item.discountAmount | percent: '2.0-2'}} </td>
+                  <td> {{item.discountAmount}} </td>
                   <td> {{item.totalPrice | currency:'$'}} </td>
                 </tr>
               </tbody>
@@ -116,7 +116,7 @@
             </div>
             <div class="col-xl-3">
               <ul class="list-unstyled">
-                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> $ {{preview.totalAmount | currency: '$ '}} </li>
+                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> {{preview.totalAmount | currency: '$ '}} </li>
                 <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Descuento </span>$ 0</li>
               </ul>
               <p class="text-black float-start"><span class="text-black me-3"> Total: </span><span
