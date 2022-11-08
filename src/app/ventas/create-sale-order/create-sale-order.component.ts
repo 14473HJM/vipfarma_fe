@@ -147,6 +147,7 @@ export class CreateSaleOrderComponent implements OnInit {
       this.messageName.toLowerCase();
       this.productService.getSearchedByName(this.messageName).subscribe({
         next: (products: Product[]) => {
+          
           this.products = products;
 
           for (let i = 0; i < this.products.length; i++) {
@@ -175,7 +176,7 @@ export class CreateSaleOrderComponent implements OnInit {
         },
         error: () => {
           Swal.fire({
-            title: 'Error al obtener los productos por Código de barras',
+            title: 'Debe ingresar el código del producto en forma exacta',
             icon: 'error',
             confirmButtonText: "Ok",
           });
@@ -184,7 +185,7 @@ export class CreateSaleOrderComponent implements OnInit {
     }
     else {
       Swal.fire({
-        title: 'Debe ingresar parametro de búsqueda en el campo seleccionado',
+        title: 'Debe ingresar parámetro de búsqueda en el campo seleccionado',
         icon: 'warning',
         confirmButtonText: "Ok",
       });
