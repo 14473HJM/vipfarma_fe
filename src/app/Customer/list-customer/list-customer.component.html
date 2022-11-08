@@ -58,7 +58,7 @@
     <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 
 
-    <button type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear cliente</button>
+    <button type="button" class="btn btn-outline-primary" (click)="openModalCustomer()" >Crear Cliente</button>
 
     <app-alter-customer *ngIf="selectCust.id != null"
         [id]="selectCust.id" (onUpdate)="getCustomer()" >
