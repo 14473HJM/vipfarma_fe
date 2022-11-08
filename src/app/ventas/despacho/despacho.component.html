@@ -17,11 +17,11 @@
         <tbody>
             <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
-                <th scope="row"> {{ order.id }} </th>
-                <td>{{ order.createdDate }}</td>
+                <td scope="row"> {{ order.id }} </td>
+                <td>{{ order.createdDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
                 <td>{{ order.user.userName }}</td>
-                <td>{{ order.totalAmount }}</td>
+                <td>{{ order.totalAmount | currency: '$ '}}</td>
         </tbody>
     </table>
     <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
@@ -52,10 +52,10 @@
                 <td>{{ item.stocks[0].locker.rack.id}} </td>
                 <td>{{ item?.offer?.product?.name }} </td>
                 <td>{{ item?.offer?.product?.barcode }}</td>
-                <td>{{ item.unitaryPrice }}</td>
+                <td>{{ item.unitaryPrice | currency: '$ '}}</td>
                 <td>{{ item.quantity }}</td>
-                <td>{{ item.discountAmount }}</td>
-                <td>{{ item.totalPrice }}</td>
+                <td>{{ item.discountAmount | percent: '2.0-2'}}</td>
+                <td>{{ item.totalPrice | currency: '$ '}}</td>
         </tbody>
     </table>
 
@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-5">
                     <span class="text-50 text-success-d3 opacity-2"> 
-                        <b> {{orderDetail.totalAmount}} </b> </span>
+                        <b> {{orderDetail.totalAmount | currency: '$ '}} </b> </span>
                 </div>
             </div>
         </div>

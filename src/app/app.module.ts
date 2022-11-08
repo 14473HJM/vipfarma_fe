@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
@@ -20,17 +21,31 @@ import { BillOrderComponent } from './ventas/bill-order/bill-order.component';
 import { MainComponent } from './home/main/main.component';
 import { ListOfferComponent } from './reports/list-offer/list-offer.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { FilterInvoice } from './pipes/filterInvoice';
 import { ListDiscountComponent } from './reports/list-discount/list-discount.component';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { DespachoComponent } from './ventas/despacho/despacho.component';
 import { FilterOrderByCustPipe } from './pipes/filterOrderByCustomer';
 import { FilterCustByAttributesPipe } from './pipes/filterCustByAttributes';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartData } from 'chart.js'
+import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { RecibirStockComponent } from './stock/recibir-stock/recibir-stock.component';
 import { GuardarStockComponent } from './stock/guardar-stock/guardar-stock.component';
 import { FilterOrderStockByNumberPipe } from './pipes/filterOrderStockByNumber';
+import { ListProductsComponent } from './products/list-products/list-products.component';
 import { UploadProductsComponent } from './products/upload-products/upload-products.component';
+import { FilterProductsPipe } from './pipes/filter-products.pipe';
+import { YesNoPipe } from './pipes/yes-no.pipe';
+import { DeleteProductComponent } from './products/delete-product/delete-product.component';
+import { AlterProductComponent } from './products/alter-product/alter-product.component';
 import { HelperService } from 'src/services/HelperService';
+import { BarGraphicComponent } from './reports/bar-graphic/bar-graphic.component';
+import { StatusMapperPipe } from './pipes/statusMapper.pipe';
+import { StockPorProductoComponent } from './reports/stock-por-producto/stock-por-producto.component';
+import { FilterProductsStockPipe } from './pipes/filter-products-stock.pipe';
+import { ListInvoiceComponent } from './reports/list-invoice/list-invoice.component';
+
 
 
 @NgModule({
@@ -50,16 +65,28 @@ import { HelperService } from 'src/services/HelperService';
     MainComponent,
     ListOfferComponent,
     FilterPipe,
+    FilterInvoice,
+    YesNoPipe,
     ListDiscountComponent,
     DiscountPipe,
     DespachoComponent,
     FilterOrderByCustPipe,
+    StatusMapperPipe,
     FilterCustByAttributesPipe,
     RecibirStockComponent,
     GuardarStockComponent,
+    ListProductsComponent,
+    DeleteProductComponent,
+    AlterProductComponent,
     UploadProductsComponent,
-    FilterOrderStockByNumberPipe
- ],
+    FilterProductsStockPipe,
+    FilterOrderStockByNumberPipe,
+    FilterProductsPipe,
+    StockPorProductoComponent,
+    ListInvoiceComponent,
+    BarGraphicComponent,
+    StockPorProductoComponent
+   ],
  
   imports: [
     BrowserModule,
@@ -69,11 +96,13 @@ import { HelperService } from 'src/services/HelperService';
     CommonModule,
     ReactiveFormsModule,
     MdbModalModule,
+  
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgChartsModule
   ],
-  providers: [CookieService, HelperService],
+  providers: [CookieService, HelperService, NgChartsConfiguration],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

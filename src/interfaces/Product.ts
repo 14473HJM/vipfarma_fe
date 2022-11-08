@@ -6,5 +6,6 @@ export interface Product{
     barcode?: number;
     laboratory?: string;
     prescriptionRequired?: boolean;
+    prescription?: string;
     price: number;
 }

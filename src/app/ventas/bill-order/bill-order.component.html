@@ -3,8 +3,8 @@
     <br>
     <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar órdenes por Cliente..." [(ngModel)]="filterCustomer">
     <br>
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-hover text-center">
+      <thead class="table-info">
             <tr>
                 <th scope="col"></th>
                 <th scope="col">#</th>
@@ -18,11 +18,11 @@
         <tbody>
             <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
                 <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
-                <th scope="row"> {{ order.id }} </th>
-                <td>{{ order.createdDate }}</td>
+                <td scope="row"> {{ order.id }} </td>
+                <td>{{ order.createdDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
                 <td>{{ order.user.userName }}</td>
-                <td>{{ order.totalAmount }} </td>
+                <td>{{ order.totalAmount | currency: '$ '}} </td>
                 <td> 
                   <div class="btn-group">
                     <button type="button" class="btn btn-outline-secondary" (click)="eliminar(order.id)">
@@ -36,6 +36,7 @@
                     </button>
                   </div>
                 </td>
+              </tr>
         </tbody>
     </table>
     <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
@@ -101,11 +102,11 @@
               <tbody>
                 <tr *ngFor="let item of preview.items">
                   <th scope="row"> {{item.id}}  </th>
-                  <td> {{item.offer?.product?.name}} </td>
+                  <td> {{item.labelInvoice}} </td>
                   <td> {{item.quantity}} </td>
-                  <td> {{item.unitaryPrice}} </td>
-                  <td> {{item.discountAmount}} </td>
-                  <td> {{item.totalPrice}} </td>
+                  <td> {{item.unitaryPrice | currency:'$'}} </td>
+                  <td> {{item.discountAmount | percent: '2.0-2'}} </td>
+                  <td> {{item.totalPrice | currency:'$'}} </td>
                 </tr>
               </tbody>
             </table>
@@ -115,11 +116,11 @@
             </div>
             <div class="col-xl-3">
               <ul class="list-unstyled">
-                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> $ {{preview.totalAmount}} </li>
+                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> $ {{preview.totalAmount | currency: '$ '}} </li>
                 <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Descuento </span>$ 0</li>
               </ul>
               <p class="text-black float-start"><span class="text-black me-3"> Total: </span><span
-                  style="font-size: 25px;">$ {{preview.totalAmount}} </span></p>
+                  style="font-size: 25px;">{{preview.totalAmount | currency: '$ '}} </span></p>
             </div>
             <div>
                 Código de Autorización Electrónico: {{ preview.cae }}
