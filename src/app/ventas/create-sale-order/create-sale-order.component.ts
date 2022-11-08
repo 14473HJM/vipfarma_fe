@@ -1,28 +1,20 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Customer } from 'src/interfaces/Customer';
 import { SaleOrder } from 'src/interfaces/sale-order';
 import { User } from 'src/interfaces/User';
 import { CustomerService } from 'src/services/customer.service';
 import { SaleOrderService } from 'src/services/sale-order.service';
-import { Router } from '@angular/router';
 import { CreateCustomerComponent } from '../../Customer/create-customer/create-customer.component';
-import { SearchProductsComponent } from 'src/app/products/search-products/search-products.component';
 import { ProductService } from 'src/services/product.service';
 import Swal from 'sweetalert2';
-import { FormControl } from '@angular/forms';
 import { Product } from 'src/interfaces/Product';
 import { OfferStock } from 'src/interfaces/OfferStock';
 import { OfferService } from 'src/services/offer.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { SaleOrderItems } from 'src/interfaces/sale-order-items';
 import { BranchOffice } from 'src/interfaces/BranchOffice';
 import { UserService } from 'src/services/user.service';
-import { BranchOfficeService } from 'src/services/branch-office.service';
-import { borderRightStyle } from 'html2canvas/dist/types/css/property-descriptors/border-style';
 import { OrderItem } from 'src/interfaces/order-item';
-import { isNgContent } from '@angular/compiler';
 import { HelperService } from 'src/services/HelperService';
 
 @Component({
@@ -63,7 +55,7 @@ export class CreateSaleOrderComponent implements OnInit {
   totalOdenVenta: number;
   usu: string;
   orderItems: OrderItem[] = [];
-  orderItem = {} as OrderItem;
+  
   prescription: string;
   refresh: number;
   cantprod: number[]=[];
@@ -74,8 +66,6 @@ export class CreateSaleOrderComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private saleOderService: SaleOrderService,
-    private route: ActivatedRoute,
-    private router: Router,
     private productService: ProductService,
     private offerService: OfferService,
     private modalService: MdbModalService,
@@ -238,19 +228,19 @@ export class CreateSaleOrderComponent implements OnInit {
   
 
   onSelectionChange3(offer: OfferStock, cant: number) {
+    var orderItem = {} as OrderItem;
     this.offer.finalPrice = this.precioTotal;
     this.totalOdenVenta += this.precioTotal;
     this.itemsOffer.push(offer);
     this.cantprod.push(this.cant);
-    this.orderItem.offer = offer;
-    // this.orderItem.quantity = this.cant;
-    this.orderItem.quantity= this.cantidades;
-    this.orderItem.unitaryPrice = this.selectedItem.price;
+    orderItem.offer = offer;
+    orderItem.quantity = cant;
+    orderItem.unitaryPrice = this.selectedItem.price;
     if (this.offer.discountValue != 0 && this.offer.discountValue != null) {
-      this.orderItem.discountAmount = this.offer.discountValue
+      orderItem.discountAmount = this.offer.discountValue
     }
-    this.orderItem.totalPrice = this.precioTotal;
-    this.orderItems.push(this.orderItem);
+    orderItem.totalPrice = this.precioTotal;
+    this.orderItems.push(orderItem);
   
     this.click = true;
     this.change = false;
