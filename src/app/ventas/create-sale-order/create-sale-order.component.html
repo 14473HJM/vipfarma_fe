@@ -127,7 +127,7 @@
                     <td>{{ offer.healthInsurance.name }}</td>
                     <td>{{ offer.healthInsurancePlan.name }}</td>
                     <td>{{ offer.product.price | currency: '$ '}}</td>
-                    <td>{{ offer.discountValue | percent: '2.0-2'}} %</td>
+                    <td>{{ offer.discountValue | currency: '$ ' }}</td>
                     <td><input [(ngModel)]="cant" (change)="calcular(cant)" type="number" name="cantidad" id="cantidad" min="1"></td>
                     <td>{{ precioTotal | currency: '$ '}}</td>
                     <td><button type="button" class="btn btn-primary" (click)="onSelectionChange3(offer, cant)">Agregar</button></td>
