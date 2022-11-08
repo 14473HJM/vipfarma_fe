@@ -15,6 +15,7 @@ export class RecibirStockComponent implements OnInit {
   selectedOrder = {} as StockOrder;
   filterOrderStock: string = "";
   public page: number;
+  hide:boolean=false;
 
   constructor(private orderStServ: OrderStockService) { }
 
@@ -39,6 +40,7 @@ export class RecibirStockComponent implements OnInit {
 
   onSelectionChange(order: StockOrder) {
     this.selectedOrder = order;
+    this.hide=true;
 
     for(let it of this.selectedOrder.stockOrderItems) {
       it.receivedQuantity = it.requiredQuantity;
@@ -119,6 +121,7 @@ export class RecibirStockComponent implements OnInit {
               icon: 'info',
               confirmButtonText: "Ok",
             });
+            this.hide=false;
             this.getAllPendingOrders();
             this.selectedOrder = {} as StockOrder;
           },
@@ -166,6 +169,7 @@ export class RecibirStockComponent implements OnInit {
               icon: 'info',
               confirmButtonText: "Ok",
             });
+            this.hide=false;
             this.getAllPendingOrders();
             this.selectedOrder = {} as StockOrder;
           },
