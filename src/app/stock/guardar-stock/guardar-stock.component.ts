@@ -100,8 +100,8 @@ export class GuardarStockComponent implements OnInit {
     this.setStatus(this.storedStatus);
 
     Swal.fire({
-      title: 'Esta seguro de marcar la Orden ' + this.selectedOrder.id + ' como ALMACENADA ??',
-      icon: 'warning',
+      title: '¿Está seguro de marcar la Orden ' + this.selectedOrder.id + ' como ALMACENADA ??',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -113,7 +113,7 @@ export class GuardarStockComponent implements OnInit {
           next: () => {
             Swal.fire({
               title: 'Orden ' + this.selectedOrder.id + ' marcada como ALMACENADA',
-              icon: 'info',
+              icon: 'success',
               confirmButtonText: "Ok",
             });
             this.getAllReceivedOrders();
@@ -141,7 +141,7 @@ export class GuardarStockComponent implements OnInit {
         if(item.actualQuantity > 0 && (value == null || value == "")) {
           Swal.fire({
             title: 'Debe Seleccionar Locker para almacenar el producto ' + item.product.name,
-            icon: 'error',
+            icon: 'warning',
             confirmButtonText: "Ok",
           });
           return false;

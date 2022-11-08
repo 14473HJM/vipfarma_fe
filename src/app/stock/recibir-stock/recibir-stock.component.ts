@@ -51,8 +51,8 @@ export class RecibirStockComponent implements OnInit {
 
   onDelete(id: number) {
     Swal.fire({
-      title: 'Seguro desea Cancelar la Orden ' + id + ' ??',
-      icon: 'warning',
+      title: '¿Seguro desea Cancelar la Orden ' + id + '?',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -105,8 +105,8 @@ export class RecibirStockComponent implements OnInit {
 
   reject(id : number) {
     Swal.fire({
-      title: 'Seguro desea Devolver la Orden ' + id + ' ??',
-      icon: 'warning',
+      title: '¿Seguro desea Devolver la Orden ' + id + '?',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -153,8 +153,8 @@ export class RecibirStockComponent implements OnInit {
     }
 
     Swal.fire({
-      title: 'Esta seguro de Registrar la Orden ' + this.selectedOrder.id + ' ??',
-      icon: 'warning',
+      title: '¿Está seguro de Registrar la Orden ' + this.selectedOrder.id + '?',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',

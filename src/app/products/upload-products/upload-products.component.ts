@@ -45,7 +45,7 @@ export class UploadProductsComponent implements OnInit {
     if(this.createProds.name==null || this.createProds.name==""){
       Swal.fire({
         title: 'Debe ingresar el nombre del producto',
-        icon: 'error',
+        icon: 'warning',
         confirmButtonText: "Ok",
       });
       return;
@@ -54,7 +54,7 @@ export class UploadProductsComponent implements OnInit {
     if(this.createProds.barcode==null || this.createProds.barcode==0){
       Swal.fire({
         title: 'Debe ingresar el código del producto',
-        icon: 'error',
+        icon: 'warning',
         confirmButtonText: "Ok",
       });
       return;
@@ -63,7 +63,7 @@ export class UploadProductsComponent implements OnInit {
     if(this.createProds.laboratory==null || this.createProds.laboratory==""){
       Swal.fire({
         title: 'Debe seleccionar el nombre del laboratorio del producto',
-        icon: 'error',
+        icon: 'warning',
         confirmButtonText: "Ok",
       });
       return;
@@ -72,7 +72,7 @@ export class UploadProductsComponent implements OnInit {
     if(this.createProds.price==null || this.createProds.price==0){
       Swal.fire({
         title: 'Debe ingresar el precio del producto',
-        icon: 'error',
+        icon: 'warning',
         confirmButtonText: "Ok",
       });
       return;
@@ -83,7 +83,7 @@ export class UploadProductsComponent implements OnInit {
     Swal.fire({
       
       title: '¿Desea ingresar el producto?',
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
