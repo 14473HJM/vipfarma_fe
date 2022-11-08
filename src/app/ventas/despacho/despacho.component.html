@@ -40,10 +40,7 @@
                 <th scope="col">Rack</th>
                 <th scope="col">Producto</th>
                 <th scope="col">Cód. Barra</th>
-                <th scope="col">Precio Unitario</th>
                 <th scope="col">Cantidad</th>
-                <th scope="col">Descuento</th>
-                <th scope="col">Total</th>
             </tr>
         </thead>       
         <tbody>
@@ -52,10 +49,7 @@
                 <td>{{ item.stocks[0].locker.rack.id}} </td>
                 <td>{{ item?.offer?.product?.name }} </td>
                 <td>{{ item?.offer?.product?.barcode }}</td>
-                <td>{{ item.unitaryPrice | currency: '$ '}}</td>
                 <td>{{ item.quantity }}</td>
-                <td>{{ item.discountAmount | percent: '2.0-2'}}</td>
-                <td>{{ item.totalPrice | currency: '$ '}}</td>
         </tbody>
     </table>
 
