@@ -15,6 +15,7 @@ export class DespachoComponent implements OnInit {
   orderDetail = {} as SaleOrder;
   filterCustomer: string = '';
   public page: number;
+  hide: boolean=false;
 
   constructor(private saleOrderSrv : SaleOrderService) { }
 
@@ -38,6 +39,7 @@ export class DespachoComponent implements OnInit {
   }
 
   onSelectionChange(order: SaleOrder) {
+    this.hide=true;
     this.selectedOrder = order;
 
     this.saleOrderSrv.getOrderById(this.selectedOrder.id).subscribe({
@@ -52,6 +54,10 @@ export class DespachoComponent implements OnInit {
         });
       },
     })
+  }
+  cancelar(){
+    this.hide=false;
+    this.ngOnInit();
   }
 
   despachar() {
@@ -72,6 +78,7 @@ export class DespachoComponent implements OnInit {
               icon: 'success',
               confirmButtonText: "Ok",
             });
+            this.hide=false;
             this.refresh();
             this.selectedOrder = {} as SaleOrder;
           },

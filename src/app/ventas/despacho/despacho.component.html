@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="hide==false">
     <h3>Ordernes de Venta Facturadas</h3>
     <br>
     <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar Ordenes por Cliente..." [(ngModel)]="filterCustomer">
@@ -30,7 +30,7 @@
 <br>
 <br>
 
-<div class="container container-fluid " *ngIf="selectedOrder.id != null">
+<div class="container container-fluid " *ngIf="hide==true">
     <h3>Detalle Orden {{selectedOrder.id}}</h3>
     <br>
     <table class="table">
@@ -82,7 +82,15 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary align-right" type="submit" (click)="despachar()">Despachar</button>
+
+
+            <button class="btn btn-primary align-right" type="submit" (click)="despachar()">Despachar</button>
+
+
+            <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+
+
+
 </div>
 
 
