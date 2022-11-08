@@ -9,7 +9,7 @@
             </div>
         </div>
     </form>
-
+    <br>
 
     <table class="table table-hover text-center">
         <thead class="table-info">
@@ -25,7 +25,7 @@
         </thead>
         <tbody *ngIf="ocultar">
             <tr
-                *ngFor="let customer of customers | FilterCustByAttributes: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
+                *ngFor="let customer of customers | FilterCustByAttributes: filterCustomer | paginate: { itemsPerPage: 5, currentPage: page } ">
                 <td><input id="radio" name="customers" type="radio" value="selectedCustomer"
                         (change)="onSelectionChange(customer)" /></td>
                 <td>{{customer.name + ' ' + customer.lastName}}</td>
@@ -48,6 +48,7 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls *ngIf="ocultar"  class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
     <button *ngIf="mostrar" type="button" class="btn btn-outline-primary" (click)="obtenerClientes()">Seleccionar otro
         cliente</button>
     <button *ngIf="ocultar" type="button" class="btn btn-outline-primary" (click)="openModalCustomer()">Crear
@@ -72,7 +73,7 @@
                     <input class="form-check-input mt-0" name="search" id="check2" value="codebar" type="radio"
                         (click)="activateBarcode()" aria-label="Radio button for following text input">
                     <label for="">&nbsp;Código de Barras&nbsp;&nbsp;</label>
-                    <input type="text" [disabled]="!activeBarcode" [(ngModel)]="messageBarcode">
+                    <input type="number" [disabled]="!activeBarcode" [(ngModel)]="messageBarcode" min="0">
                 </div>
             </div>
             <div class="col-2 px-3">
