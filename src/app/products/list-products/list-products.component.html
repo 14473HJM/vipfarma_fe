@@ -1,6 +1,10 @@
+<div class="container">
 <div class="row g-3" *ngIf="hide==false">
     <div class="col">
         <h3>Listado de Productos</h3>
+    </div>
+    <div class="col-auto">
+        <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
     </div>
 </div>
 <form *ngIf="hide==false">
@@ -61,3 +65,4 @@
     <div *ngIf="hide==true">
         <button type="button" class="btn btn-danger text-capitalize" (click)="cancelar()">Cancelar</button>
     </div>
+</div>
