@@ -53,7 +53,7 @@ export class UploadProductsComponent implements OnInit {
     }
     if(this.createProds.barcode==null || this.createProds.barcode==0){
       Swal.fire({
-        title: 'Debe ingresar el codigo del producto',
+        title: 'Debe ingresar el código del producto',
         icon: 'error',
         confirmButtonText: "Ok",
       });
@@ -62,7 +62,7 @@ export class UploadProductsComponent implements OnInit {
     }
     if(this.createProds.laboratory==null || this.createProds.laboratory==""){
       Swal.fire({
-        title: 'Debe ingresar el nombre del laboratorio del producto',
+        title: 'Debe seleccionar el nombre del laboratorio del producto',
         icon: 'error',
         confirmButtonText: "Ok",
       });
@@ -115,14 +115,4 @@ export class UploadProductsComponent implements OnInit {
   }
 
 
-    
-    // this.saveProd.postCreateProducts(this.createProds).subscribe({
-    //       next: () => {
-    //         alert("Producto ingresado con éxito");
-    //       },
-    //       error: () => {
-    //         alert("Error al ingresar producto");
-    //       }
-    //     })
-    // }
 }
