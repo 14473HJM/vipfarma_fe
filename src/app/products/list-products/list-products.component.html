@@ -1,18 +1,18 @@
-<div class="row g-3">
+<div class="row g-3" *ngIf="hide==false">
     <div class="col">
         <h3>Listado de Productos</h3>
     </div>
 </div>
-<form>
+<form *ngIf="hide==false">
     <br>
     <div class="row g-3">
         <div class="col 1">
-            <input type="text" class="form-control" placeholder="Buscar Productos .... " name="filterProduct"[(ngModel)]="filterProduct">
+            <input type="text" class="form-control" placeholder="Buscar Productos..." name="filterProduct"[(ngModel)]="filterProduct">
         </div>
     </div>
 </form>
 <br>
-<table class="table table-striped">
+<table class="table table-striped" *ngIf="hide==false">
     <thead>
         <tr>
             <th scope="col">Producto</th>
@@ -24,7 +24,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let prod of products | filterProducts: filterProduct | paginate: { itemsPerPage: 10, currentPage: page }">
+        <tr *ngFor="let prod of products | filterProducts: filterProduct | paginate: { itemsPerPage: 5, currentPage: page }">
             <td>{{prod.name}}</td>
             <td>{{prod.barcode}}</td>
             <td>{{prod.laboratory}}</td>
@@ -54,10 +54,10 @@
 
 <!--button type="button" class="btn btn-outline-primary" >Crear producto</button-->
 
-<app-alter-product *ngIf="selectProd.id != null"
+<app-alter-product *ngIf="hide==true"
         [id]="selectProd.id" (onUpdate)="getProducts()">
     </app-alter-product>
 <br>
-    <div *ngIf="selectProd.id != null">
+    <div *ngIf="hide==true">
         <button type="button" class="btn btn-danger text-capitalize" (click)="cancelar()">Cancelar</button>
     </div>

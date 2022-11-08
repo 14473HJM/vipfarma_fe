@@ -6,6 +6,7 @@ import { Product } from 'src/interfaces/Product';
 import { LaboratoryService } from 'src/services/laboratory.service';
 import { ProductService } from 'src/services/product.service';
 import Swal from 'sweetalert2';
+import { HelperService } from 'src/services/HelperService';
 
 @Component({
   selector: 'app-alter-product',
@@ -17,22 +18,28 @@ export class AlterProductComponent implements OnInit {
   product: Product= {} as Product;
   labs:  Laboratory[];
   laboratorio: Laboratory= {} as Laboratory;
+  refresh: number;
+  editrefresh: number;
   
   @Input() id: number;
   @Output() onUpdate = new EventEmitter();
 
   private subscription = new Subscription();
 
-  constructor(private productService: ProductService, private labService: LaboratoryService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private productService: ProductService, private helper: HelperService, private labService: LaboratoryService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getProduct();
     this.getLabs();
+    this.helper.changeMessage(this.editrefresh=1)
+    this.helper.customMessage.subscribe(num => this.refresh = num);
+    
     
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    
   }
 
   
@@ -124,6 +131,7 @@ export class AlterProductComponent implements OnInit {
               confirmButtonText: "Ok",
             });
             this.onUpdate.emit();
+            this.helper.changeMessage(this.editrefresh=2);
           },
           error: () => {
             Swal.fire({

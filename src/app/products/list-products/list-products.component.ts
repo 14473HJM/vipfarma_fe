@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { Product } from 'src/interfaces/Product';
 import { ProductService } from 'src/services/product.service';
 import Swal from 'sweetalert2';
+import { HelperService } from 'src/services/HelperService';
+
 
 @Component({
   selector: 'app-list-products',
@@ -18,13 +20,25 @@ export class ListProductsComponent implements OnInit {
   filterProduct: string = '';
   transformTrueOrFalse: string='';
   public page: number;
+  hide:boolean=false;
+
+  refresh: number;
+  editrefresh: number;
 
 
   constructor(private router: Router, 
-    private prodService: ProductService,) { }
+    private prodService: ProductService,
+    private helper: HelperService
+    ) { }
 
   ngOnInit(): void {
     this.getProducts();
+    this.helper.customMessage.subscribe(num => {
+      this.refresh=num
+      if(num==2){
+       this.hide=false;
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -49,13 +63,13 @@ export class ListProductsComponent implements OnInit {
   }
 
   alterProduct(prod: Product){
-    console.log(prod)
-    //this.router.navigate(['altercostumber', id]);
+    this.hide=true;
     this.selectProd = prod;
   }
 
   cancelar() {
     this.selectProd = {} as Product;
+    this.hide=false;
     this.getProducts();
   }
 

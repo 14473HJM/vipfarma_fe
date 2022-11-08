@@ -24,6 +24,15 @@ export class UploadProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLabs();
+    this.createProds = {} as Product;
+    
+  }
+
+  refresh(){
+    this.createProds.name="";
+    this.createProds.barcode=0
+    this.createProds.laboratory="";
+    this.createProds.price=0
   }
 
   getLabs(){
@@ -32,6 +41,45 @@ export class UploadProductsComponent implements OnInit {
 
 
   saveProduct() {
+
+    if(this.createProds.name==null || this.createProds.name==""){
+      Swal.fire({
+        title: 'Debe ingresar el nombre del producto',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return;
+
+    }
+    if(this.createProds.barcode==null || this.createProds.barcode==0){
+      Swal.fire({
+        title: 'Debe ingresar el código del producto',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return;
+
+    }
+    if(this.createProds.laboratory==null || this.createProds.laboratory==""){
+      Swal.fire({
+        title: 'Debe seleccionar el nombre del laboratorio del producto',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return;
+
+    }
+    if(this.createProds.price==null || this.createProds.price==0){
+      Swal.fire({
+        title: 'Debe ingresar el precio del producto',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return;
+
+    }
+
+
     Swal.fire({
       
       title: '¿Desea ingresar el producto?',
@@ -51,7 +99,7 @@ export class UploadProductsComponent implements OnInit {
                 icon: 'success',
                 confirmButtonText: "Ok",
               });
-              
+              this.ngOnInit();
             },
             error: () => {
               Swal.fire({
@@ -67,14 +115,4 @@ export class UploadProductsComponent implements OnInit {
   }
 
 
-    
-    // this.saveProd.postCreateProducts(this.createProds).subscribe({
-    //       next: () => {
-    //         alert("Producto ingresado con éxito");
-    //       },
-    //       error: () => {
-    //         alert("Error al ingresar producto");
-    //       }
-    //     })
-    // }
 }
