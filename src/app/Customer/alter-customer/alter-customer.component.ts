@@ -27,6 +27,10 @@ export class AlterCustomerComponent implements OnInit {
     this.getHealthInsurance();
   }
 
+  ngOnChanges(): void {
+    this.ngOnInit();
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
