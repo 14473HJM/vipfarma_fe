@@ -75,7 +75,7 @@ export class SearchProductsComponent implements OnInit {
     }
     else {
       Swal.fire({
-        title: 'Debe ingresar parametro de búsqueda en el campo seleccionado',
+        title: 'Debe ingresar parámetro de búsqueda en el campo seleccionado',
         icon: 'warning',
         confirmButtonText: "Ok",
       });

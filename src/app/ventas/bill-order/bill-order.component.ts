@@ -97,8 +97,8 @@ export class BillOrderComponent implements OnInit {
 
   eliminar(id : number) {
     Swal.fire({
-      title: 'Seguro desea Borrar la Orden ' + id + ' ??',
-      icon: 'warning',
+      title: '¿Seguro desea Borrar la Orden ' + id + '?',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -109,7 +109,7 @@ export class BillOrderComponent implements OnInit {
         this.saleOrderSrv.changeStatus(id, "CLOSED").subscribe({
           next: () => {
             Swal.fire({
-              title: 'Orden ' + id + ' Borrada !!',
+              title: 'Orden ' + id + ' Borrada',
               icon: 'info',
               confirmButtonText: "Ok",
             });

@@ -165,7 +165,7 @@ export class CreateCustomerComponent implements OnInit {
               if(list.identification==this.controldni){
                 this.existsDNI=true;
                 Swal.fire({
-                  title: 'Ya existe una persona cargada con ese dni',
+                  title: 'Ya existe una persona cargada con ese DNI',
                   icon: 'warning',
                   confirmButtonText: "Ok",
                 });
@@ -201,7 +201,7 @@ export class CreateCustomerComponent implements OnInit {
         },
           error: () => {
             Swal.fire({
-              title: 'Error al validar los datos del dni',
+              title: 'Error al validar los datos del DNI',
               icon: 'error',
               confirmButtonText: "Ok",
             });

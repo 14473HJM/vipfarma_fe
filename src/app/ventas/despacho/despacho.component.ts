@@ -62,7 +62,7 @@ export class DespachoComponent implements OnInit {
 
   despachar() {
     Swal.fire({
-      title: 'Marcar Orden ' + this.selectedOrder.id + ' como DESPACHADA ??',
+      title: '¿Marcar Orden ' + this.selectedOrder.id + ' como DESPACHADA?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -74,7 +74,7 @@ export class DespachoComponent implements OnInit {
         this.saleOrderSrv.changeStatus(this.selectedOrder.id, "DELIVERED").subscribe({
           next: (response : SaleOrder) => {
             Swal.fire({
-              title: 'Orden No ' + this.selectedOrder.id + ' se despacho correctamente !',
+              title: 'Orden No ' + this.selectedOrder.id + ' se despacho correctamente',
               icon: 'success',
               confirmButtonText: "Ok",
             });
