@@ -1,7 +1,7 @@
 <div class="container">
         <div class="row g-3">
             <div class="col">
-                <h3>Órdenes de Compra Recibidas</h3>
+                <h3>Ordenes de Compra Recibidas</h3>
             </div>
             <div class="col-auto">
                 <img src="../../assets/logito.png" alt="">
@@ -10,20 +10,20 @@
     <form action="">
         <div class="row g-3">
             <div class="col 1">
-                <input type="text" class="form-control" placeholder="Buscar Órdenes por Nro .... " 
+                <input type="text" class="form-control" placeholder="Buscar Ordenes por Nro... " 
                         name="filterOrderStock" [(ngModel)]="filterOrderStock">
             </div>
         </div>
     </form>
     <br>
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-hover text-center">
+        <thead class="table-info">
             <tr>
                 <th scope="col"></th>
                 <th scope="col">#</th>
-                <th scope="col">Órden de Compra #</th>
+                <th scope="col">Orden de Compra #</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Warehouse</th>
+                <th scope="col">Depósito</th>
             </tr>
         </thead>       
         <tbody>
@@ -46,8 +46,8 @@
 <div class="container container-fluid " *ngIf="selectedOrder.id != null">
     <h3>Detalle Orden {{selectedOrder.id}}</h3>
     <br>
-    <table class="table">
-        <thead class="thead-dark">
+    <table class="table table-hover text-center">
+        <thead class="table-info">
             <tr>
                 <th scope="col">Cód</th>
                 <th scope="col">Producto</th>
