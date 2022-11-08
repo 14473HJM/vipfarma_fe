@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Customer } from 'src/interfaces/Customer';
 import { SaleOrder } from 'src/interfaces/sale-order';
 import { User } from 'src/interfaces/User';
@@ -228,24 +228,51 @@ export class CreateSaleOrderComponent implements OnInit {
   
 
   onSelectionChange3(offer: OfferStock, cant: number) {
-    var orderItem = {} as OrderItem;
-    this.offer.finalPrice = this.precioTotal;
-    this.totalOdenVenta += this.precioTotal;
-    this.itemsOffer.push(offer);
-    this.cantprod.push(this.cant);
-    orderItem.offer = offer;
-    orderItem.quantity = cant;
-    orderItem.unitaryPrice = this.selectedItem.price;
-    if (this.offer.discountValue != 0 && this.offer.discountValue != null) {
-      orderItem.discountAmount = this.offer.discountValue
+    var existItem : number = this.existOfferInDetail(offer.product.id);
+    if(existItem < 0) {
+      var orderItem = {} as OrderItem;
+      this.offer.finalPrice = this.precioTotal;
+      this.totalOdenVenta += this.precioTotal;
+      this.itemsOffer.push(offer);
+      this.cantprod.push(this.cant);
+      orderItem.offer = offer;
+      orderItem.quantity = cant;
+      orderItem.unitaryPrice = this.selectedItem.price;
+      if (this.offer.discountValue != 0 && this.offer.discountValue != null) {
+        orderItem.discountAmount = this.offer.discountValue
+      }
+      orderItem.totalPrice = this.precioTotal;
+      this.orderItems.push(orderItem);
+    } else {
+      this.offer.finalPrice = this.precioTotal;
+      this.totalOdenVenta += this.precioTotal;
+      this.cantprod[existItem] = this.cantprod[existItem] + this.cant;
+      for(let so of this.orderItems) {
+        if(so.offer.product.id == offer.product.id) {
+          if (this.offer.discountValue != 0 && this.offer.discountValue != null) {
+            so.discountAmount += this.offer.discountValue
+          }
+          so.quantity += cant;
+          so.totalPrice += this.precioTotal;
+        }
+      }
     }
-    orderItem.totalPrice = this.precioTotal;
-    this.orderItems.push(orderItem);
   
     this.click = true;
     this.change = false;
     this.precioTotal = 0;
     this.clean();
+  }
+
+  existOfferInDetail(num: number) : number {
+    let index = 0;
+    for(let offer of this.itemsOffer) {
+      if(offer.product.id == num) {
+        return index;
+      }
+      index++;
+    }
+    return -1;
   }
 
   onDelete(i: number) {
