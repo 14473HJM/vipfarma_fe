@@ -1,27 +1,38 @@
 <br>
 <div class="container">
-<h3>Disponibilidad por Locker</h3>
-</div>
+<div class="row g-3">
+    <div class="col">
+        <h3>Disponibilidad por Locker</h3> 
+    </div>
+    <div class="col-auto">
+        <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
+    </div>
+    <hr>
+
+
+
 <br>
 <div>
-<div class="col-3">
-<label class="text-center">Sucursal</label>
-</div>
-<br>
-<div class="col-3">
-    <select id="selectBranch" class="form-select" name="branchId" [(ngModel)]="idUser">
-        <option *ngFor="let branch of branchs" [ngValue]="branch.id">{{branch.name}}</option>
-    </select>
+    <div class="col-3">
+        <label class="text-center">Sucursal</label>
+    </div>
+    <br>
+    <div class="col-3">
+        <select id="selectBranch" class="form-select" name="branchId" [(ngModel)]="idUser">
+            <option *ngFor="let branch of branchs" [ngValue]="branch.id">{{branch.name}}</option>
+        </select>
 
-    <!-- <select class="form-select" name="marcaId" [(ngModel)]="orden.marcaId">
+        <!-- <select class="form-select" name="marcaId" [(ngModel)]="orden.marcaId">
         <option *ngFor="let mar of marca" [ngValue]="mar.id">
             {{ mar.nombre }}
         </option>
     </select> -->
-    
-</div>
+
+    </div>
 </div>
 <br>
 <canvas baseChart type="bar" [data]="datos">
 
 </canvas>
+</div>
+</div>
