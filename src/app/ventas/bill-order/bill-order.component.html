@@ -12,7 +12,7 @@
                 <th scope="col">Cliente</th>
                 <th scope="col">Usuario Creador</th>
                 <th scope="col">Total</th>
-                <th scope="col"></th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>       
         <tbody>
@@ -76,7 +76,7 @@
                 <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                     class="fw-bold">No #:</span> {{ bill.id }} </li>
                 <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="fw-bold">Fecha: </span> {{ preview.createdDate }} </li>
+                    class="fw-bold">Fecha: </span> {{ preview.createdDate | date: 'dd/MM/yyyy' }} </li>
                 <li *ngIf="bill.id != null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                       class="me-1 fw-bold">Estado:</span><span class="badge bg-info text-black fw-bold">
                       Pagado</span></li>

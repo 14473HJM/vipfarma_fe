@@ -78,8 +78,7 @@ export class ListCustomerComponent implements OnInit{
 
 
   alterCustomer(cust: Customer){
-   // console.log(cust)
-    //this.router.navigate(['altercostumber', id]);
+    this.cancelar();
     this.selectCust = cust;
   }
 
