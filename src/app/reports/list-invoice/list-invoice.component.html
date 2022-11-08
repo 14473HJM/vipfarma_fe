@@ -1,11 +1,15 @@
-<br>
-<h3>Listado de Facturas por Fechas </h3>
-<br>
-<br>
+
+<div *ngIf="hide==false">
+    <br>
+    <h3>Listado de Facturas por Fechas </h3>
+    <br>
+    <br>
+
+</div>
 
 
 
-<div class="container row">
+<div class="container row" *ngIf="hide==false" >
     <div class="col-2"></div>
     <div class="col-auto"><label>Desde</label></div>
     <div class="col-3">
@@ -18,7 +22,7 @@
 </div>
 <br>
 <div class="container">
-<table id="listado" class="table table-hover text-center">
+<table id="listado" class="table table-hover text-center" *ngIf="hide==false">
     <thead class="table-info">
         <tr>
             <th scope="col">Fecha</th>
@@ -36,7 +40,7 @@
             <td>{{ list.customer?.name + " " + list.customer?.lastName }}</td>
             <td>{{ list.user?.userName }}</td>
             <td>{{ list.totalAmount | currency: '$ '}}</td>
-            <th><button class="btn btn-primary" (click)="onSelection(list.id)" >Visualizar</button></th>
+            <th><button class="btn btn-primary" (click)="onSelection(list.id, list.totalAmount)" >Visualizar</button></th>
         </tr>
       </tbody>
 
@@ -44,16 +48,13 @@
       
     </tbody>
   </table>
-  <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+  <pagination-controls class="text-center" *ngIf="hide==false" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
   <br>
   <br>
-  <button class="btn btn-primary" (click)="descargar()" >Descargar</button>
+<!--   <button class="btn btn-primary" (click)="descargar()" >Descargar</button> -->
   
 </div>
 
-
-<h3 *ngIf="hide==true" >Vista Previa de Factura</h3>
-<br>
 <div id="invoice" *ngIf="hide==true"  class="card">
     <div class="card-body">
       <div class="container mb-5 mt-3">
@@ -123,15 +124,15 @@
             <div class="col-xl-8">
             </div>
             <div class="col-xl-3">
-              <ul class="list-unstyled">
+<!--               <ul class="list-unstyled">
                 <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> {{preview.totalAmount | currency: '$ '}} </li>
                 <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Descuento </span>$ 0</li>
-              </ul>
+              </ul> -->
               <p class="text-black float-start"><span class="text-black me-3"> Total: </span><span
-                  style="font-size: 25px;">{{preview.totalAmount | currency: '$ '}} </span></p>
+                  style="font-size: 25px;">{{ "$" + totalfac }} </span></p>
             </div>
             <div>
-                Código de Autorización Electrónico: {{ preview.cae }}
+                Código de Autorización Electrónico: {{ cae }}
             </div>
           </div>
           <hr>
@@ -144,7 +145,11 @@
       </div>
     </div>
   </div>
-  <br>
+  <div *ngIf="hide==true">
+    <button  type="button" class="btn btn-primary text-capitalize" (click)="pdf()">Descargar Factura</button>
+    <button type="button" class="btn btn-secondary text-capitalize" (click)="cancelar()">Cancelar</button>
+  </div>
+
 
 
 

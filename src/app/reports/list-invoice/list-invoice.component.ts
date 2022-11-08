@@ -23,6 +23,8 @@ export class ListInvoiceComponent implements OnInit {
   bill: Bill[]= {} as Bill[];
   preview = {} as Bill;
   hide: boolean=false;
+  totalfac: number;
+  cae: number;
 
   constructor(private billService: BillService) { 
 
@@ -30,13 +32,16 @@ export class ListInvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBill();
+  
 
   }
 
-  onSelection(id: string) {
+  onSelection(id: string, total: number) {
     //this.selectedOrder = order;
     console.log(id);
     this.hide=true;
+    this.totalfac=total;
+    this.setCae();
 
     this.billService.getBill(id).subscribe({
       next: (response: Bill) => {
@@ -50,6 +55,7 @@ export class ListInvoiceComponent implements OnInit {
         });
       },
     })
+    
 }
 
   descargar() {
@@ -69,12 +75,16 @@ export class ListInvoiceComponent implements OnInit {
     } 
   }
 
+  setCae(){
+    this.cae=Math.floor(Math.random() * 151555121686721);
+  
+  }
+
   getBill(){
     this.subscription.add(
       this.billService.getBills().subscribe({
         next: (respuesta: Bill[]) => {
-          this.bill = respuesta;
-          console.log(this.bill[0])            
+          this.bill = respuesta;      
         },
         error: () => {
           Swal.fire({
@@ -87,6 +97,27 @@ export class ListInvoiceComponent implements OnInit {
     );
   }
 
+  pdf() {
+    var data = document.getElementById('invoice');
+    if(data !== null) {
+      html2canvas(data).then(canvas => {  
+        // Few necessary setting options  
+        let imgWidth = 208;   
+        let imgHeight = canvas.height * imgWidth / canvas.width;  
+  
+        const contentDataURL = canvas.toDataURL('image/png')  
+        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
+        let position = 0;  
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+        pdf.save('invoice' + '_' + this.preview.id + '.pdf'); // Generated PDF   
+      });
+    }
+    this.hide=false;
+  }
+  
+  cancelar(){
+    this.hide=false;
+  }
 }
 
 
