@@ -1,12 +1,14 @@
 <div class="container" *ngIf="hide==false">
-    <div class="col">
-        <h3>Ordernes de Venta Facturadas</h3>
+    <div class="row g-3">
+        <div class="col">
+            <h3>Ordenes de Venta Facturadas</h3>
+        </div>
+        <div class="col-auto">
+            <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
+        </div>
     </div>
-    <!-- <div class="col-auto">
-        <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
-    </div> -->
-    <br>
-    <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar Ordenes por Cliente..." [(ngModel)]="filterCustomer">
+    <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar Ordenes por Cliente..."
+        [(ngModel)]="filterCustomer">
     <br>
     <table class="table table-hover text-center">
         <thead class="table-info">
@@ -18,10 +20,12 @@
                 <th scope="col">Cajero</th>
                 <th scope="col">Total</th>
             </tr>
-        </thead>       
+        </thead>
         <tbody>
-            <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
-                <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
+            <tr
+                *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
+                <td><input id="radio" name="order" type="radio" value="selectedOrder"
+                        (change)="onSelectionChange(order)" /></td>
                 <td scope="row"> {{ order.id }} </td>
                 <td>{{ order.createdDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
@@ -29,15 +33,19 @@
                 <td>{{ order.totalAmount | currency: '$ '}}</td>
         </tbody>
     </table>
-    <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior"
+        nextLabel="Siguiente"></pagination-controls>
 </div>
-
-<br>
-<br>
-
 <div class="container container-fluid " *ngIf="hide==true">
-    <h3>Detalle Orden {{selectedOrder.id}}</h3>
-    <br>
+    <div class="row g-3">
+        <div class="col">
+            <h3>Detalle Orden {{selectedOrder.id}}</h3>
+        </div>
+        <div class="col-auto">
+            <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
+        </div>
+    </div>
+    <hr>
     <table class="table table-hover text-center">
         <thead class="table-info">
             <tr>
@@ -47,7 +55,7 @@
                 <th scope="col">Cód. Barra</th>
                 <th scope="col">Cantidad</th>
             </tr>
-        </thead>       
+        </thead>
         <tbody>
             <tr *ngFor="let item of orderDetail.saleOrderItems">
                 <td>{{ item.stocks[0].locker.id}} </td>
@@ -78,10 +86,10 @@
 
             <div class="row my-2 align-items-right bgc-primary-l3 p-2">
                 <div class="col-7 text-right">
-                    Total de Orden: 
+                    Total de Orden:
                 </div>
                 <div class="col-5">
-                    <span class="text-50 text-success-d3 opacity-2"> 
+                    <span class="text-50 text-success-d3 opacity-2">
                         <b> {{orderDetail.totalAmount | currency: '$ '}} </b> </span>
                 </div>
             </div>
@@ -89,16 +97,11 @@
     </div>
 
 
-            <button class="btn btn-primary align-right" type="submit" (click)="despachar()">Despachar</button>
+    <button class="btn btn-primary align-right" type="submit" (click)="despachar()">Despachar</button>
 
 
-            <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
 
 
 
 </div>
-
-
-
-
-

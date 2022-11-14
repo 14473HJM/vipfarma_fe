@@ -59,16 +59,17 @@
 
 </div>
 
-<br>
-<br>
 
 
 <div class="container container-fluid " *ngIf="hide==true">
-
-
-
-    <h3>Detalle Orden {{selectedOrder.id}}</h3>
-    <br>
+    <div class="row g-3">
+        <div class="col">
+            <h3>Detalle Orden {{selectedOrder.id}}</h3>
+        </div>
+        <div class="col-auto">
+          <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
+        </div>
+      </div>
     <table class="table table-hover text-center">
         <thead class="table-info">
             <tr>

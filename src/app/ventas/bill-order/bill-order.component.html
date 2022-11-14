@@ -1,171 +1,182 @@
 <div class="container">
   <div class="row g-3">
     <div class="col">
-        <h3>Ordenes de Venta</h3>
+      <h3>Ordenes de Venta</h3>
     </div>
     <div class="col-auto">
-        <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
+      <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
     </div>
+  </div>
+
+  <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar ordenes por Cliente..."
+    [(ngModel)]="filterCustomer">
+  <br>
+  <table class="table table-hover text-center">
+    <thead class="table-info">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">#</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Usuario Creador</th>
+        <th scope="col">Total</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
+        <td><input id="radio" name="order" type="radio" value="selectedOrder" (change)="onSelectionChange(order)" />
+        </td>
+        <td scope="row"> {{ order.id }} </td>
+        <td>{{ order.createdDate | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
+        <td>{{ order.user.userName }}</td>
+        <td>{{ order.totalAmount | currency: '$ '}} </td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary" (click)="eliminar(order.id)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash3"
+                viewBox="0 0 16 16">
+                <path
+                  d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
+                </path>
+              </svg>
+              <i class="visually-hidden">Button</i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+  </pagination-controls>
 </div>
-    <br>
-    <input type="text" class="form-control col-md-12" name="filterCustomer" placeholder="Buscar ordenes por Cliente..." [(ngModel)]="filterCustomer">
-    <br>
-    <table class="table table-hover text-center">
-      <thead class="table-info">
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">#</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Usuario Creador</th>
-                <th scope="col">Total</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>       
-        <tbody>
-            <tr *ngFor="let order of saleOrder | filterOrderByCustomer: filterCustomer | paginate: { itemsPerPage: 10, currentPage: page } ">
-                <td><input id="radio" name="order" type="radio" value="selectedOrder"(change)="onSelectionChange(order)" /></td>
-                <td scope="row"> {{ order.id }} </td>
-                <td>{{ order.createdDate | date: 'dd/MM/yyyy'}}</td>
-                <td>{{ order.customer.lastName }}, {{ order.customer.name }}</td>
-                <td>{{ order.user.userName }}</td>
-                <td>{{ order.totalAmount | currency: '$ '}} </td>
-                <td> 
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-outline-secondary" (click)="eliminar(order.id)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
-                                class="bi bi-trash3" viewBox="0 0 16 16">
-                            <path
-                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
-                            </path>
-                        </svg>
-                        <i class="visually-hidden" >Button</i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-        </tbody>
-    </table>
-    <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
-</div>
 <br>
 <br>
 <br>
-<h3 *ngIf="selectedOrder.id != null" >Vista Previa de Factura</h3>
+<h3 *ngIf="selectedOrder.id != null">Vista Previa de Factura</h3>
 <br>
 <div id="invoice" *ngIf="selectedOrder.id != null" class="card">
-    <div class="card-body">
-      <div class="container mb-5 mt-3">
-        <div class="row d-flex align-items-baseline">
-          <div class="col-xl-9">
-            <p style="color: #7e8d9f;font-size: 20px;">Factura <strong>No #: {{ bill.id }}</strong></p>
+  <div class="card-body">
+    <div class="container mb-5 mt-3">
+      <div class="row d-flex align-items-baseline">
+        <div class="col-xl-9">
+          <p style="color: #7e8d9f;font-size: 20px;">Factura <strong>No #: {{ bill.id }}</strong></p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="col-md-12">
+          <div class="text-center">
+            <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
+            <h2 class="pt-0">C</h2>
           </div>
         </div>
-        <div class="container">
-          <div class="col-md-12">
-            <div class="text-center">
-              <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
-              <h2 class="pt-0">C</h2>
-            </div>
+        <div class="row">
+          <div class="col-xl-8">
+            <ul class="list-unstyled">
+              <li class="text-muted">To: <span style="color:#5d9fc5 ;">
+                  {{ preview.customer?.lastName }}, {{ preview.customer?.name}}</span></li>
+              <li class="text-muted"> {{selectedOrder.customer.address }} </li>
+              <li class="text-muted"> Argentina</li>
+            </ul>
           </div>
-          <div class="row">
-            <div class="col-xl-8">
-              <ul class="list-unstyled">
-                <li class="text-muted">To: <span style="color:#5d9fc5 ;">
-                    {{ preview.customer?.lastName }}, {{ preview.customer?.name}}</span></li>
-                <li class="text-muted"> {{selectedOrder.customer.address }} </li>
-                <li class="text-muted"> Argentina</li>
-              </ul>
-            </div>
-            <div class="col-xl-4">
-              <p class="text-muted">  <h3> FARMAVIP </h3>
-              <ul class="list-unstyled">
-                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="fw-bold">No #:</span> {{ bill.id }} </li>
-                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="fw-bold">Fecha: </span> {{ preview.createdDate | date: 'dd/MM/yyyy' }} </li>
-                <li *ngIf="bill.id != null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                      class="me-1 fw-bold">Estado:</span><span class="badge bg-info text-black fw-bold">
-                      Pagado</span></li>
-                <li *ngIf="bill.id == null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="me-1 fw-bold">Estado:</span><span class="badge bg-warning text-black fw-bold">
-                    Pendiente Pago</span></li>
-              </ul>
-            </div>
+          <div class="col-xl-4">
+            <p class="text-muted">
+            <h3> FARMAVIP </h3>
+            <ul class="list-unstyled">
+              <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">No
+                  #:</span> {{ bill.id }} </li>
+              <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">Fecha:
+                </span> {{ preview.createdDate | date: 'dd/MM/yyyy' }} </li>
+              <li *ngIf="bill.id != null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                  class="me-1 fw-bold">Estado:</span><span class="badge bg-info text-black fw-bold">
+                  Pagado</span></li>
+              <li *ngIf="bill.id == null" class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                  class="me-1 fw-bold">Estado:</span><span class="badge bg-warning text-black fw-bold">
+                  Pendiente Pago</span></li>
+            </ul>
           </div>
-  
-          <div class="row my-2 mx-1 justify-content-center">
-            <table class="table table-striped table-borderless">
-              <thead style="background-color:#84B0CA ;" class="text-white">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Producto</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Precio Unitario</th>
-                  <th scope="col">Descuento</th>
-                  <th scope="col">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of preview.items">
-                  <th scope="row"> {{item.id}}  </th>
-                  <td> {{item.labelInvoice}} </td>
-                  <td> {{item.quantity}} </td>
-                  <td> {{item.unitaryPrice | currency:'$'}} </td>
-                  <td> {{item.discountAmount}} </td>
-                  <td> {{item.totalPrice | currency:'$'}} </td>
-                </tr>
-              </tbody>
-            </table>
+        </div>
+
+        <div class="row my-2 mx-1 justify-content-center">
+          <table class="table table-striped table-borderless">
+            <thead style="background-color:#84B0CA ;" class="text-white">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Descuento</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of preview.items">
+                <th scope="row"> {{item.id}} </th>
+                <td> {{item.labelInvoice}} </td>
+                <td> {{item.quantity}} </td>
+                <td> {{item.unitaryPrice | currency:'$'}} </td>
+                <td> {{item.discountAmount}} </td>
+                <td> {{item.totalPrice | currency:'$'}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-xl-8">
           </div>
-          <div class="row">
-            <div class="col-xl-8">
-            </div>
-            <div class="col-xl-3">
-              <ul class="list-unstyled">
-                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> {{preview.totalAmount | currency: '$ '}} </li>
-                <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Descuento </span>$ 0</li>
-              </ul>
-              <p class="text-black float-start"><span class="text-black me-3"> Total: </span><span
-                  style="font-size: 25px;">{{preview.totalAmount | currency: '$ '}} </span></p>
-            </div>
-            <div>
-                Código de Autorización Electrónico: {{ preview.cae }}
-            </div>
+          <div class="col-xl-3">
+            <ul class="list-unstyled">
+              <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span> {{preview.totalAmount |
+                currency: '$ '}} </li>
+              <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Descuento </span>$ 0</li>
+            </ul>
+            <p class="text-black float-start"><span class="text-black me-3"> Total: </span><span
+                style="font-size: 25px;">{{preview.totalAmount | currency: '$ '}} </span></p>
           </div>
-          <hr>
-          <div class="row">
-            <div class="col-xl-10">
-              <p>Gracias por su compra!!</p>
-            </div>
+          <div>
+            Código de Autorización Electrónico: {{ preview.cae }}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xl-10">
+            <p>Gracias por su compra!!</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<br>
+<div *ngIf="selectedOrder.id != null">
+  <h5>Elija Forma de Pago: </h5>
   <br>
-  <div *ngIf="selectedOrder.id != null" >
-    <h5>Elija Forma de Pago: </h5>
-    <br>
-    <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios1" value="a" [(ngModel)]="apply">
-    <label class="form-check-label" for="exampleRadios1">
+  <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios1" value="a"
+    [(ngModel)]="apply">
+  <label class="form-check-label" for="exampleRadios1">
     Efectivo
-    </label>
+  </label>
   <br>
-  <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios2" value="b"  [(ngModel)]="apply">
-    <label class="form-check-label" for="exampleRadios2">
+  <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios2" value="b"
+    [(ngModel)]="apply">
+  <label class="form-check-label" for="exampleRadios2">
     Tarjeta de Crédito
-    </label>
+  </label>
   <br>
-  <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios3" value="c"  [(ngModel)]="apply">
-    <label class="form-check-label" for="exampleRadios3">
+  <input class="form-check-input mx-2" type="radio" name="exampleRadios" id="exampleRadios3" value="c"
+    [(ngModel)]="apply">
+  <label class="form-check-label" for="exampleRadios3">
     Tarjeta de Débito
-    </label>
-  </div>
-   <br>
-   <br>
-  <div *ngIf="selectedOrder.id != null">
-    <button *ngIf="bill.id == null" type="button" class="btn btn-primary text-capitalize" (click)="facturar()" [disabled]="!apply" >Facturar</button>
-    <button *ngIf="bill.id != null" type="button" class="btn btn-primary text-capitalize" (click)="pdf()">Descargar Factura</button>
-    <button type="button" class="btn btn-danger text-capitalize" (click)="cancelar()">Cancelar</button>
-  </div>
+  </label>
+</div>
+<br>
+<br>
+<div *ngIf="selectedOrder.id != null">
+  <button *ngIf="bill.id == null" type="button" class="btn btn-primary text-capitalize" (click)="facturar()"
+    [disabled]="!apply">Facturar</button>
+  <button *ngIf="bill.id != null" type="button" class="btn btn-primary text-capitalize" (click)="pdf()">Descargar
+    Factura</button>
+  <button type="button" class="btn btn-danger text-capitalize" (click)="cancelar()">Cancelar</button>
+</div>

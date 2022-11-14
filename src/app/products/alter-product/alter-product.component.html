@@ -2,27 +2,27 @@
     <br>
     <div class="row g-3">
         <div class="col">
-            <h3>Modificar Producto {{id}} </h3> 
+            <h3>Modificar Producto {{id}} </h3>
         </div>
         <div class="col-auto">
             <img class="p-1" style="width: 70px;" src="../../assets/logito.png" alt="">
         </div>
-        
-    <hr>
     </div>
-    
+
 
     <hr>
     <form>
         <div class="row g-5">
             <div class="col">
                 <label for="">Producto</label>
-                <input [(ngModel)]="product.name"  name="name" type="text" id="inputName" class="form-control" placeholder="Producto" aria-label="name">
+                <input [(ngModel)]="product.name" name="name" type="text" id="inputName" class="form-control"
+                    placeholder="Producto" aria-label="name">
             </div>
             <div class="col">
                 <label for="">Laboratorio</label>
-                <select [(ngModel)]="laboratorio" id="lab" name="lab" class="form-select"  placeholder="Laboratorio" aria-label="laboratory" (change)="setLaboratory(laboratorio)" >
-                    <option  value={{product.laboratory}} selected>{{product.laboratory}}</option>
+                <select [(ngModel)]="laboratorio" id="lab" name="lab" class="form-select" placeholder="Laboratorio"
+                    aria-label="laboratory" (change)="setLaboratory(laboratorio)">
+                    <option value={{product.laboratory}} selected>{{product.laboratory}}</option>
                     <option *ngFor="let lab of labs" [ngValue]="lab">
                         {{lab.nombre}}
                     </option>
@@ -30,19 +30,22 @@
             </div>
             <div class="col">
                 <label for="">Código de barras</label>
-                <input type="number" [(ngModel)]="product.barcode" id="barcode" name="barcode" class="form-control" placeholder="Código de barras" aria-label="barcode">
+                <input type="number" [(ngModel)]="product.barcode" id="barcode" name="barcode" class="form-control"
+                    placeholder="Código de barras" aria-label="barcode">
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-4">
                 <label for="">Precio</label>
-                <input type="number" id="price" [(ngModel)]="product.price" name="price" class="form-control" placeholder="Precio" aria-label="price">
+                <input type="number" id="price" [(ngModel)]="product.price" name="price" class="form-control"
+                    placeholder="Precio" aria-label="price">
             </div>
             <div class="col-4">
                 <div class="container text-center">
-                    <label class="text-center">¿Requiere Preescripción?</label>  
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"[(ngModel)]="product.prescriptionRequired">
+                    <label class="text-center">¿Requiere Preescripción?</label>
+                    <input class="form-check-input mx-3" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="product.prescriptionRequired">
                     <br>
                 </div>
             </div>
@@ -52,7 +55,7 @@
 
             <div class="col">
                 <div class="row">
-                    
+
                     <div class="col-auto">
                         <button type="button" class="btn btn-outline-primary" (click)="save()">Guardar</button>
                     </div>
@@ -63,5 +66,4 @@
         </div>
     </form>
 
-  </div>
-
+</div>

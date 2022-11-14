@@ -53,7 +53,7 @@
         <br>
     </tbody>
 </table>
-<pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+<pagination-controls *ngIf="hide==false" class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 
 
 <!--button type="button" class="btn btn-outline-primary" >Crear producto</button-->
@@ -62,7 +62,7 @@
         [id]="selectProd.id" (onUpdate)="getProducts()">
     </app-alter-product>
 <br>
-    <div *ngIf="hide==true">
+    <div *ngIf="hide==false">
         <button type="button" class="btn btn-danger text-capitalize" (click)="cancelar()">Cancelar</button>
     </div>
 </div>
