@@ -64,7 +64,7 @@ export class BillOrderComponent implements OnInit {
 
   facturar() {
     Swal.fire({
-      title: 'Seguro desea Facturar la Orden ' + this.selectedOrder.id + ' ??',
+      title: '¿Seguro desea Facturar la Orden ' + this.selectedOrder.id + '?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -76,7 +76,7 @@ export class BillOrderComponent implements OnInit {
         this.billSrv.billOrder(this.selectedOrder.id, false).subscribe({
           next: (response: Bill) => {
             Swal.fire({
-              title: 'Orden ' + this.selectedOrder.id + ' Facturada !!',
+              title: 'Orden ' + this.selectedOrder.id + ' Facturada',
               icon: 'success',
               confirmButtonText: "Ok",
             });

@@ -100,7 +100,7 @@ export class GuardarStockComponent implements OnInit {
     this.setStatus(this.storedStatus);
 
     Swal.fire({
-      title: '¿Está seguro de marcar la Orden ' + this.selectedOrder.id + ' como ALMACENADA ??',
+      title: '¿Está seguro de marcar la Orden ' + this.selectedOrder.id + ' como ALMACENADA?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
